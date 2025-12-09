@@ -1,0 +1,119 @@
+  @media (max-width: 480px) {
+                    .kim_jestesmy, .treningi, .contact-section {
+                        padding: 30px;
+                    }
+
+                    .title {
+                        font-size: 20px;
+                    }
+                    .drop_menu .content {
+                        width: 250px;
+                        right: 0;
+                        font-size: 20px;
+                    }
+                    .drop_menu button.menu_icon {
+                        width: 30px;
+                        height: 30px;
+                    }
+                    .subtitle {
+                        font-size: 12px;
+                    }
+                    .heading {
+                        font-size: 24px;
+                    }
+                    .kim_jestesmy p, .treningi p, .contact-info p {
+                        font-size: 16px;
+                    }
+                    .kim_jestesmy h2{
+                        font-size: 34px;
+                    }
+
+                    .left_photo img, .right_photo img {
+                        width: 100%;
+                        height: auto;
+                    }
+                    .l_overlay-text {
+                        position: absolute;
+                        top: 40%; /* Pozycjonowanie tekstu na obrazie */
+                        left: 40%; /* Szerokość tekstu */
+                        transform: translate(-50%, -50%);
+                        color: white;
+                        font-size: 14px;
+                        text-shadow: 2px 2px 5px black;
+                        opacity: 0;
+                        transition: opacity 0.5s ease;
+                        pointer-events: none; /* Domyślnie wyłączamy interaktywność */
+                        max-width: 90%; /* Umożliwia szerszy tekst */
+                        white-space: normal; /* Umożliwia łamanie wierszy */
+                        max-height: 300px; /* Ustala maksymalną wysokość tekstu */
+                        overflow: hidden; /* Ukrywa tekst, który wykracza poza maksymalną wysokość */
+                        text-overflow: ellipsis; /* Dodaje wielokropek, gdy tekst jest zbyt długi */
+                    }
+
+                    .r_overlay-text {
+                        position: absolute;
+                        top: 50%; /* Pozycjonowanie tekstu na obrazie */
+                        left: 40%; /* Szerokość tekstu */
+                        transform: translate(-50%, -50%);
+                        color: white;
+                        font-size: 14px;
+                        text-shadow: 2px 2px 5px black;
+                        opacity: 0;
+                        transition: opacity 0.5s ease;
+                        pointer-events: none; /* Domyślnie wyłączamy interaktywność */
+                        max-width: 90%; /* Umożliwia szerszy tekst */
+                        white-space: normal; /* Umożliwia łamanie wierszy */
+                        max-height: 300px; /* Ustala maksymalną wysokość tekstu */
+                        overflow: hidden; /* Ukrywa tekst, który wykracza poza maksymalną wysokość */
+                        text-overflow: ellipsis; /* Dodaje wielokropek, gdy tekst jest zbyt długi */
+                     }
+
+                    .contact-section .contact-info p {
+                        font-size: 14px;
+                    }
+                    .read-more-button {
+                        display: none;
+                    }
+
+                    #map h2 {
+                        font-size: 36px; /* Zmień na dowolny rozmiar */
+                        font-weight: bold; /* Opcjonalne: wzmocnij tekst */
+                        text-align: center; /* Opcjonalne: wyrównaj do środka */
+                        margin-bottom: 15px; /* Dostosuj odstęp od elementów poniżej */
+                    }
+                    #map p {
+                        font-size: 16px; /* Zmień na dowolny rozmiar */
+                        text-align: center; /* Opcjonalne: wyrównaj do środka */
+                        margin-bottom: 15px; /* Dostosuj odstęp od elementów poniżej */
+                    }
+                    #map iframe {
+                        width: 45%;
+                    }
+                    .contact-section {
+                        text-align: center; /* Wyśrodkowanie tekstu */
+                        border-radius: 8px; /* Zaokrąglenie rogów */
+                        max-width: 100%; /* Ograniczenie szerokości sekcji */
+                    }
+
+                    .more {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 20px;
+                    }
+                    .photo-container {
+                        position: relative;
+                        width: 90%;
+                        height: 100%;
+                        overflow: hidden;
+                        border-radius: 10px;
+                        border: 2px solid white;
+                    }
+                    .photo-container img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+
+                    }

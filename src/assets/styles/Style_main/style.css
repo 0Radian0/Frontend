@@ -1,0 +1,644 @@
+
+
+.Top_menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    margin-top: -5px;
+    height: auto;
+    text-align: center;
+}
+
+.Top_menu ul {
+    padding: 10px;
+    margin: 0;
+    font-weight: bold;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.Top_menu ul li a {
+    background-color: #003432;
+    color: white;
+    padding: 10px 35px;
+    text-decoration: none;
+    display: inline-block;
+    border: 2px solid white;
+    border-radius: 5px;
+    border-color: black;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.Top_menu ul li a:hover {
+    background-color: #0b595b;
+    border-color: #ffffff;
+}
+
+
+.drop_menu {
+    display: inline-block;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.drop_menu button.menu_icon {
+    width: 180px;
+    height: 55px;
+    background-image: url("../../images/menu.png");
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+.drop_menu .content {
+    display: none;
+    font-size: 30px;
+    position: absolute;
+    background-color: rgba(53, 54, 59, 0.9);
+    width: 500px;
+    top: 50px;
+    right: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: none;
+    /* Ukrywamy zawartość początkowo */
+    opacity: 0;
+    /* Menu jest niewidoczne */
+    transition: visibility 0s 1s, opacity 1s ease-in-out;
+    /* Opóźnienie widoczności */
+}
+
+.drop_menu:hover .content {
+    display: block;
+    /* Menu staje się widoczne */
+    opacity: 1;
+    transition: opacity 1s ease-in-out, display 0s;
+}
+
+.drop_menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 20px 15px;
+    border-bottom: 1px solid #333;
+}
+
+.drop_menu a:hover {
+    background-color: orange;
+}
+
+.drop_menu .content:hover {
+    visibility: visible;
+    /* Menu pozostaje widoczne po najechaniu */
+    opacity: 1;
+}
+
+
+
+.user-payment-info .latest-payment {
+    /*aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*/
+    background-color: #003432;
+    /* Dopasowanie do nawigacji */
+    color: white;
+    padding: 20px;
+    /* Zwiększenie przestrzeni wewnętrznej */
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 80%;
+    /* Dopasowanie do szerokości strony */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Dodanie cienia */
+    max-width: 45%;
+}
+
+.user-payment-info h3 {
+    text-align: center;
+    font-size: 28px;
+    color: #ffffff;
+}
+
+
+.user-payment-info .toggle-button {
+    background-color: rgba(53, 54, 59, 0.9);
+    /* Dopasowanie do nawigacji */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    /* Ustawienie na absolutną pozycję */
+    top: -10px;
+    /* Przeniesienie przycisku trochę wyżej */
+    left: 50%;
+    /* Ustawienie na szerokości środka strony */
+    transform: translateX(-50%);
+    /* Wycentrowanie przycisku względem środka */
+}
+
+
+
+.user-payment-info .toggle-button:hover {
+    background-color: orange;
+    /* Wyróżnienie przycisku */
+    text-align: center;
+}
+
+.user-payment-info .payment-history {
+    background-color: grey;
+    /* Dopasowanie do nawigacji */
+    color: white;
+    padding: 20px;
+    /* Zwiększenie przestrzeni wewnętrznej */
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 80%;
+    /* Dopasowanie do szerokości strony */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    /* Dodanie cienia */
+    max-width: 45%;
+    overflow-y: auto;
+    /* Włącza przewijanie w pionie */
+    max-height: 200px;
+    /* Określa maksymalną wysokość sekcji */
+}
+
+.user-payment-info .payment-history ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-payment-info .payment-history li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    /* Zmiana wielkości czcionki */
+}
+
+.user-payment-info .payment-history li:last-child {
+    border-bottom: none;
+}
+
+.user-payment-info .payment-history li p {
+    margin: 5px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Styl dla przycisku "Zwiń historię płatności" */
+.user-payment-info .toggle-button {
+    font-size: 18px;
+    /* Zwiększenie rozmiaru czcionki */
+    letter-spacing: 2px;
+}
+
+
+.contact-section {
+    background-color: #003432;
+    color: white;
+    padding-bottom: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin: auto;
+    max-width: 55%;
+}
+
+.contact-section h2 {
+    font-family: "Copperplate Gothic";
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.contact-info p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* ======= Kontener główny ======= */
+.trainings-container {
+    background-color: #003432;
+    /* głęboki ciemny turkus */
+    color: #ffffff;
+    padding: 30px 20px;
+    margin: 20px auto;
+    border-radius: 12px;
+    max-width: 900px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ======= Nagłówki ======= */
+.trainings-container h1,
+.trainings-container h2 {
+    font-family: "Copperplate Gothic", sans-serif;
+    color: #ffffff;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* ======= React Calendar ======= */
+.react-calendar {
+    background-color: #012f2d;
+    border: 1px solid #024c48;
+    border-radius: 12px;
+    padding: 10px;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Widoki kalendarza */
+.react-calendar__viewContainer {
+    width: 100%;
+}
+
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.react-calendar__navigation button {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.react-calendar__navigation button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Widok miesięczny */
+.react-calendar__month-view__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-transform: uppercase;
+    color: #ccc;
+    font-weight: bold;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.react-calendar__month-view__days {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+/* Widoki roczne / dekadowe / stuletnie */
+.react-calendar__year-view__months,
+.react-calendar__decade-view__years,
+.react-calendar__century-view__decades {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+/* Kafelki */
+.react-calendar__tile {
+    background: transparent;
+    color: white;
+    border-radius: 8px;
+    padding: 12px 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    box-sizing: border-box;
+}
+
+.react-calendar__tile:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+}
+
+.react-calendar__tile--now {
+    background: #ffffffa4 !important;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+/* Dni z treningami */
+.has-training {
+    background-color: #b36b00 !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+.has-training:hover {
+    background-color: #d28100 !important;
+    cursor: pointer;
+}
+
+/* ======= Sekcja szczegółów ======= */
+.training-details {
+    margin-top: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.training-details h3 {
+    font-family: "Copperplate Gothic", serif;
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+}
+
+.training-item {
+    background: rgba(255, 255, 255, 0.05);
+    margin: 12px 0;
+    padding: 12px 14px;
+    border-left: 4px solid #b36b00;
+    border-radius: 8px;
+}
+
+.training-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ======= Filtry, tabele i przyciski (opcjonalnie dla reszty sekcji) ======= */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.filters label {
+    font-weight: 600;
+}
+
+.filters select {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #005757;
+    color: #fff;
+    transition: all 0.2s ease;
+}
+
+.filters select:hover {
+    background-color: #007b7b;
+}
+
+/* Tabela treningów */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+}
+
+thead {
+    background-color: #aa7b2f;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/*FRONTPANEL BUTTON*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    th,
+    td {
+        font-size: 14px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+
+/* Kalendarz */
+
+/* === KONTENER === */
+.calendar-container {
+    background-color: rgba(0, 52, 50, 0.95);
+    color: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    font-family: "Segoe UI", sans-serif;
+}
+
+.calendar-container h2 {
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+    text-align: center;
+    font-family: "Copperplate Gothic", serif;
+    font-size: 32px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+/* === REACT-CALENDAR PODSTAWA === */
+.react-calendar {
+    background-color: #012f2d;
+    border: 1px solid #024c48;
+    border-radius: 12px;
+    padding: 10px;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ustawienia wspólne dla wszystkich widoków */
+.react-calendar__viewContainer {
+    width: 100%;
+}
+
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.react-calendar__navigation button {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+.react-calendar__navigation button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* === Widok miesięczny === */
+.react-calendar__month-view__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-transform: uppercase;
+    color: #ccc;
+    font-weight: bold;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.react-calendar__month-view__days {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+/* === Widoki roczne / dekadowe / stuletnie === */
+.react-calendar__year-view__months,
+.react-calendar__decade-view__years,
+.react-calendar__century-view__decades {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+/* === Kafelki === */
+.react-calendar__tile {
+    background: transparent;
+    color: white;
+    border-radius: 8px;
+    padding: 12px 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    box-sizing: border-box;
+}
+
+.react-calendar__tile:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+}
+
+.react-calendar__tile--now {
+    background: #0f615d8f !important;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+/* === Dni z treningami === */
+.has-training {
+    background-color: #b36b00 !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+.has-training:hover {
+    background-color: #d28100 !important;
+    cursor: pointer;
+}
+
+/* === Sekcja szczegółów === */
+.training-details {
+    margin-top: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.training-details h3 {
+    font-family: "Copperplate Gothic", serif;
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+}
+
+.training-item {
+    background: rgba(255, 255, 255, 0.05);
+    margin: 12px 0;
+    padding: 12px 14px;
+    border-left: 4px solid #b36b00;
+    border-radius: 8px;
+}
+
+.training-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}

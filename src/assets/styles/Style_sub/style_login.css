@@ -1,0 +1,95 @@
+body {
+    font-family: Arial, sans-serif;
+
+}
+
+
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-form label {
+    font-size: 18px;
+    text-align: left;
+}
+
+.login-form input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: #1a1a1a;
+    color: white;
+    transition: border-color 0.3s ease;
+}
+
+.login-form input:focus {
+    border-color: orange;
+    outline: none;
+}
+
+.login-form button {
+    background-color: #8b4513;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #b5651d;
+}
+
+.login-footer {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.login-footer a {
+    color: orange;
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}
+/* Styl dla stopki */
+.footer {
+    background-color: #003432; /* Tło stopki */
+    color: white; /* Kolor tekstu */
+    text-align: center; /* Wyśrodkowanie tekstu */
+    padding: 20px 0; /* Odstępy wewnętrzne */
+    font-size: 16px; /* Rozmiar czcionki */
+    position: relative; /* Pozycjonowanie */
+    bottom: 0; /* Stopka na dole strony */
+    width: 100%; /* Szerokość na 100% */
+    margin-top: 20px; /* Odstęp od innych elementów */
+}
+
+/* Linki w stopce */
+.footer a {
+    color: orange; /* Kolor linków */
+    text-decoration: none; /* Brak podkreślenia */
+}
+
+.footer a:hover {
+    text-decoration: underline; /* Podkreślenie linków przy najechaniu */
+}
+
+/* Styl dla akapitu w stopce */
+.footer p {
+    margin: 5px 0; /* Odstępy między akapitami */
+}
+
+
+
+.navbar .nav-link {
+    font-size: 22px;    /* większy tekst */
+    margin-right: 20px; /* odstępy między przyciskami */
+}

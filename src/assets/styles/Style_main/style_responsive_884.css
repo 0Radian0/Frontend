@@ -1,0 +1,109 @@
+
+@media (max-width: 884px) {
+.read-more-button {
+    display: none;
+}
+
+.title {
+font-size: 30px;
+}
+.kim_jestesmy, .treningi, .contact-section {
+    padding: 40px;
+}
+.subtitle {
+    font-size: 20px;
+}
+
+.kim_jestesmy p, .treningi p, .contact-info p {
+    font-size: 24px;
+}
+.kim_jestesmy h2{
+    font-size: 34px;
+}
+
+.Container_zdj_1 {
+    padding: 0;
+}
+ .drop_menu .content {
+    width: 100%;
+    right: 0;
+    font-size: 20px;
+    width: 250px;
+}
+.drop_menu button.menu_icon {
+    width: 40px;
+    height: 40px;
+}
+.Top_menu {
+    text-align: center;
+    padding: 10px 0;
+}
+.Top_menu ul {
+    display: none;
+}
+.left_photo, .right_photo {
+    flex-basis: 100%;
+}
+.l_overlay-text {
+    position: absolute;
+    top: 50%; /* Pozycjonowanie tekstu na obrazie */
+    left: 40%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 26px;
+    text-shadow: 2px 2px 5px black;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* Domyślnie wyłączamy interaktywność */
+    max-width: 90%; /* Umożliwia szerszy tekst */
+    white-space: normal; /* Umożliwia łamanie wierszy */
+    overflow: hidden; /* Ukrywa tekst, który wykracza poza maksymalną wysokość */
+    text-overflow: ellipsis; /* Dodaje wielokropek, gdy tekst jest zbyt długi */
+}
+
+.r_overlay-text {
+    position: absolute;
+    top: 50%; /* Pozycjonowanie tekstu na obrazie */
+    left: 40%; /* Szerokość tekstu */
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 26px;
+    text-shadow: 2px 2px 5px black;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none; /* Domyślnie wyłączamy interaktywność */
+    max-width: 90%; /* Umożliwia szerszy tekst */
+    white-space: normal; /* Umożliwia łamanie wierszy */
+    overflow: hidden; /* Ukrywa tekst, który wykracza poza maksymalną wysokość */
+    text-overflow: ellipsis; /* Dodaje wielokropek, gdy tekst jest zbyt długi */
+}
+
+
+.heading {
+    font-size: 30px;
+}
+
+#map iframe {
+    width: 45%;
+    max-height: 300px;
+}
+
+#map h2 {
+    font-size: 36px; /* Zmień na dowolny rozmiar */
+    font-weight: bold; /* Opcjonalne: wzmocnij tekst */
+    text-align: center; /* Opcjonalne: wyrównaj do środka */
+    margin-bottom: 15px; /* Dostosuj odstęp od elementów poniżej */
+}
+#map p {
+    font-size: 24px; /* Zmień na dowolny rozmiar */
+    text-align: center; /* Opcjonalne: wyrównaj do środka */
+    margin-bottom: 15px; /* Dostosuj odstęp od elementów poniżej */
+}
+
+
+.contact-section {
+    text-align: center; /* Wyśrodkowanie tekstu */
+    border-radius: 8px; /* Zaokrąglenie rogów */
+    max-width: 100%; /* Ograniczenie szerokości sekcji */
+}
+}

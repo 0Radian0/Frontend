@@ -1,0 +1,140 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+export default function RegisterForm() {
+  const [formData, setFormData] = useState({
+    login: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    confirmPassword: "",
+    acceptedTerms: false
+  });
+
+  const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    // Walidacja
+    if (!formData.acceptedTerms) {
+      setError("Musisz zaakceptować regulamin");
+      return;
+    }
+    if (formData.password !== formData.confirmPassword) {
+      setError("Hasła nie są takie same");
+      return;
+    }
+
+    // Przygotowanie danych do backendu
+    const payload = {
+      login: formData.login,
+      email: formData.email,
+      name: formData.firstName,
+      surname: formData.lastName,
+      password: formData.password
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Wystąpił błąd rejestracji");
+        return;
+      }
+
+      if (data.success) {
+        setSuccessMessage(data.message);
+        setTimeout(() => navigate("/Login"), 3000); // Przekierowanie po sukcesie
+      }
+    } catch (err) {
+      setError("Wystąpił niespodziewany błąd");
+    }
+  };
+
+  return (
+    <form className="register-form" onSubmit={handleRegister}>
+      <label>Login</label>
+      <input
+        type="text"
+        value={formData.login}
+        onChange={(e) => setFormData({ ...formData, login: e.target.value })}
+        required
+        placeholder="Wprowadź login"
+      />
+
+      <label>Email</label>
+      <input
+        type="email"
+        value={formData.email}
+        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        required
+        placeholder="Wprowadź email"
+      />
+
+      <div className="name-row">
+        <div className="name-field">
+          <label>Imię</label>
+          <input
+            type="text"
+            value={formData.firstName}
+            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+            required
+            placeholder="Imię"
+          />
+        </div>
+        <div className="name-field">
+          <label>Nazwisko</label>
+          <input
+            type="text"
+            value={formData.lastName}
+            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+            required
+            placeholder="Nazwisko"
+          />
+        </div>
+      </div>
+
+      <label>Hasło</label>
+      <input
+        type="password"
+        value={formData.password}
+        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+        required
+        placeholder="Hasło"
+      />
+
+      <label>Powtórz hasło</label>
+      <input
+        type="password"
+        value={formData.confirmPassword}
+        onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+        required
+        placeholder="Powtórz hasło"
+      />
+
+      {error && <p className="register-error">{error}</p>}
+      {successMessage && <p className="success-message">{successMessage}. Przekierowanie...</p>}
+
+      <div className="register-actions">
+        <button type="submit" className="register-btn">Zarejestruj się</button>
+        <label className="terms-label">
+          <input
+            type="checkbox"
+            checked={formData.acceptedTerms}
+            onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
+          />
+          Przeczytałem i akceptuję regulamin
+        </label>
+      </div>
+    </form>
+  );
+}

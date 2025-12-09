@@ -1,0 +1,80 @@
+ /* Styl responsywny */
+                @media (max-width: 1024px) {
+                .drop_menu .content {
+                    width: 100%;
+                    right: 0;
+                    font-size: 20px;
+                    width: 500px;
+                                }
+                .drop_menu button.menu_icon {
+                    width: 70px;
+                    height: 70px;
+                }
+                 /* Dostosowanie nawigacji */
+                .kim_jestesmy, .treningi, .contact-section {
+                    padding: 60px;
+                }
+                .Container_zdj_1 {
+                    padding: 0;
+                }
+
+                .title {
+                    font-size: 48px;
+                }
+                .subtitle {
+                    font-size: 20px;
+                }
+                /* Dostosowanie zdjęć */
+                .Container_zdj_1 {
+                    flex-direction: column;
+                    padding: 20px;
+                }
+                .l_overlay-text {
+                    position: absolute;
+                    top: 40%; /* Pozycjonowanie tekstu na obrazie */
+                    left: 40%; /* Szerokość tekstu */
+                    transform: translate(-50%, -50%);
+                    color: white;
+                    font-size: 24px;
+                    text-shadow: 2px 2px 5px black;
+                    opacity: 0;
+                    transition: opacity 0.5s ease;
+                    pointer-events: none; /* Domyślnie wyłączamy interaktywność */
+                    max-width: 60%; /* Umożliwia szerszy tekst */
+                    white-space: normal; /* Umożliwia łamanie wierszy */
+                    overflow: hidden; /* Ukrywa tekst, który wykracza poza maksymalną wysokość */
+                    text-overflow: ellipsis; /* Dodaje wielokropek, gdy tekst jest zbyt długi */
+                }
+
+                r_overlay-text {
+                    position: absolute;
+                    top: 40%; /* Pozycjonowanie tekstu na obrazie */
+                    left: 40%; /* Szerokość tekstu */
+                    transform: translate(-50%, -50%);
+                    color: white;
+                    font-size: 24px;
+                    text-shadow: 2px 2px 5px black;
+                    opacity: 0;
+                    transition: opacity 0.5s ease;
+                    pointer-events: none; /* Domyślnie wyłączamy interaktywność */
+                    max-width: 60%; /* Umożliwia szerszy tekst */
+                    white-space: normal; /* Umożliwia łamanie wierszy */
+                    overflow: hidden; /* Ukrywa tekst, który wykracza poza maksymalną wysokość */
+                    text-overflow: ellipsis; /* Dodaje wielokropek, gdy tekst jest zbyt długi */
+                }
+                .kim_jestesmy p, .treningi p, .contact-info p {
+                    font-size: 32px;
+                }
+
+                .heading {
+                    font-size: 40px;
+                }
+                .read-more-button {
+                    display: none;
+                }
+                contact-section {
+                    text-align: center; /* Wyśrodkowanie tekstu */
+                    border-radius: 8px; /* Zaokrąglenie rogów */
+                    max-width: 100%; /* Ograniczenie szerokości sekcji */
+                                }
+                }
