@@ -29,7 +29,7 @@ export default function ApplicationForm() {
         try {
             const API_URL = process.env.REACT_APP_API_URL; // zmienna środowiskowa
 
-            const res = await fetch(`${API_URL}/users/send-email`, {
+            const res = await fetch(`${API_URL}/auth/users/send-email`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
