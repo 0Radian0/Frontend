@@ -121,19 +121,9 @@ aria-label="Toggle navigation"
         </li>
 
         {/* Kontakt / Regulamin */}
-            <li className="nav-item ms-lg-3">
-            <Link
-              to="/appForm"
-              className="btn btn-primary px-4"
-              onClick={() => {
-                setOpenMenu(null);
-                setMobileMenuOpen(false);
-              }}
-            >
-              Kontakt
-            </Link>
+        <li className="nav-item">
+          <a className="nav-link" href="https://szermierka.pollub.pl/kontakt">Kontakt</a>
         </li>
-
         <li className="nav-item">
           <a className="nav-link" href="https://szermierka.pollub.pl/regulamin">Regulamin</a>
         </li>
