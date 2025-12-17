@@ -21,6 +21,7 @@ export default function Login() {
 
     // Logika logowania
     const handleLogin = async (e) => {
+        
         e.preventDefault();
         setError(null);
         setSuccessMessage(null);
@@ -92,6 +93,8 @@ export default function Login() {
             )}
 
             <form className="login-form" onSubmit={handleLogin}>
+
+                
                 <label htmlFor="email">E-mail</label>
                 <input
                     type="email"
