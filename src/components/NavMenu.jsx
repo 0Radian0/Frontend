@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+
 
 export default function Navbar() {
 const [openMenu, setOpenMenu] = useState(null);
@@ -118,9 +121,19 @@ aria-label="Toggle navigation"
         </li>
 
         {/* Kontakt / Regulamin */}
-        <li className="nav-item">
-          <a className="nav-link" href="https://szermierka.pollub.pl/kontakt">Kontakt</a>
+            <li className="nav-item ms-lg-3">
+            <Link
+              to="/appForm"
+              className="btn btn-primary px-4"
+              onClick={() => {
+                setOpenMenu(null);
+                setMobileMenuOpen(false);
+              }}
+            >
+              Kontakt
+            </Link>
         </li>
+
         <li className="nav-item">
           <a className="nav-link" href="https://szermierka.pollub.pl/regulamin">Regulamin</a>
         </li>
