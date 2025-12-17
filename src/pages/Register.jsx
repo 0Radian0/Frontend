@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { fetchAPI } from "../../config/api"; // ✅ Import API config
+import { fetchAPI } from "../config/api"; // ✅ Import API config
 
 export default function RegisterForm() {
     const [formData, setFormData] = useState({
