@@ -95,83 +95,165 @@ export default function ApplicationForm() {
     }
 
     return (
-        <div className="container py-4">
-            <div className="row g-4">
-                <div className="col-12">
-                    <h2 className="text-center mb-4">Formularz Kontaktowy</h2>
-                    
-                    {error && (
-                        <div className="alert alert-danger" role="alert">
-                            {error}
-                        </div>
-                    )}
-                    
-                    {successMessage && (
-                        <div className="alert alert-success" role="alert">
-                            {successMessage}
-                        </div>
-                    )}
+    <div className="container py-4">
+        <div className="row g-4">
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="name" className="form-label">Imię i nazwisko</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id="name"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                disabled={loading}
-                                required
-                            />
-                        </div>
+            {/* LEWA KOLUMNA */}
+            <div className="col-lg-6">
+                <div className="card shadow-sm h-100">
+                    <div className="card-body premium-left">
 
-                        <div className="mb-3">
-                            <label htmlFor="email" className="form-label">Email</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                disabled={loading}
-                                required
-                            />
-                        </div>
+                        <h3 className="mb-3">
+                            Jesteśmy gotowi pomóc <i className="fas fa-paw text-primary"></i>
+                        </h3>
+                        <p className="text-muted mb-4">
+                            Masz pytanie? Chcesz zapisać się na zajęcia? Skontaktuj się z nami!
+                        </p>
 
-                        <div className="mb-3">
-                            <label htmlFor="content" className="form-label">Wiadomość</label>
-                            <textarea
-                                className="form-control"
-                                id="content"
-                                name="content"
-                                rows="5"
-                                value={formData.content}
-                                onChange={handleChange}
-                                disabled={loading}
-                                required
-                            ></textarea>
-                        </div>
+                        <div className="row row-cols-2 g-3 premium-grid">
 
-                        <button 
-                            type="submit" 
-                            className="btn btn-primary w-100"
-                            disabled={loading}
-                        >
-                            {loading ? (
-                                <>
-                                    <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                                    Wysyłanie...
-                                </>
-                            ) : (
-                                'Wyślij wiadomość'
-                            )}
-                        </button>
-                    </form>
+                            <div className="col">
+                                <a
+                                    href="mailto:szermierka.historyczna@gmail.com"
+                                    className="info-box p-3 d-block text-decoration-none text-dark"
+                                >
+                                    <h5><i className="fas fa-envelope text-primary me-2"></i>Email</h5>
+                                    <p className="text-muted small m-0">
+                                        szermierka.historyczna@gmail.com
+                                    </p>
+                                </a>
+                            </div>
+
+                            <div className="col">
+                                <a
+                                    href="https://szermierka.pollub.pl/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="info-box p-3 d-block text-decoration-none text-dark"
+                                >
+                                    <h5><i className="fas fa-globe text-primary me-2"></i>Strona</h5>
+                                    <p className="text-muted small m-0">
+                                        szermierka.pollub.pl
+                                    </p>
+                                </a>
+                            </div>
+
+                            <div className="col">
+                                <div className="info-box p-3">
+                                    <h5><i className="fas fa-map-marker-alt text-primary me-2"></i>Lokalizacja</h5>
+                                    <p className="text-muted small m-0">
+                                        Nadbystrzycka 36 C
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="col">
+                                <div className="info-box p-3">
+                                    <h5><i className="fas fa-share-alt text-primary me-2"></i>Social media</h5>
+                                    <p className="text-muted small m-0">
+                                        <a
+                                            href="https://www.facebook.com/GFHLublin"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-decoration-none me-2"
+                                        >
+                                            Facebook
+                                        </a>
+                                        ·
+                                        <a
+                                            href="https://www.instagram.com/grupa_fechtunku_historycznegoigsh=MWhrY2M1cjM4MGx5Zw=="
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-decoration-none ms-2"
+                                        >
+                                            Instagram
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            {/* PRAWA KOLUMNA */}
+            <div className="col-lg-6">
+                <div className="card shadow-sm h-100">
+                    <div className="card-body premium-right">
+
+                        <h2 className="h4 mb-3">Formularz kontaktowy</h2>
+
+                        {error && (
+                            <div className="alert alert-danger">{error}</div>
+                        )}
+
+                        {successMessage && (
+                            <div className="alert alert-success">{successMessage}</div>
+                        )}
+
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-3">
+                                <label className="form-label">Imię i nazwisko</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    disabled={loading}
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="form-label">Email</label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    disabled={loading}
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="form-label">Treść wiadomości</label>
+                                <textarea
+                                    className="form-control"
+                                    name="content"
+                                    rows="5"
+                                    value={formData.content}
+                                    onChange={handleChange}
+                                    disabled={loading}
+                                    required
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="btn btn-primary w-100"
+                                disabled={loading}
+                            >
+                                {loading ? (
+                                    <>
+                                        <span className="spinner-border spinner-border-sm me-2"></span>
+                                        Wysyłanie...
+                                    </>
+                                ) : (
+                                    'Wyślij wiadomość'
+                                )}
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
-    );
+    </div>
+);
+
 }
