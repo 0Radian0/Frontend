@@ -136,7 +136,7 @@ export default function RegisterForm() {
 
       <div className="register-actions">
         <button type="submit" className="register-btn" disabled={loading}>
-          {loading ? 'Rejestracja...' : 'Zarejestruj się'}
+          {loading ? 'Rejestracja...' : 'Zarejestruj się'}  
         </button>
         <label className="terms-label">
           <input

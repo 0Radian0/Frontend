@@ -1,48 +1,73 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchAPI } from "../config/api"; // ✅ Import API config
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSendMail = async (e) => {
         e.preventDefault();
-        if (!email.trim()) { setError("Podaj poprawny adres e-mail"); return; }
+        setMessage(null);
+        setError(null);
+
+        if (!email.trim()) {
+            setError("Podaj poprawny adres e-mail");
+            return;
+        }
+
+        setLoading(true);
 
         try {
-            const res = await fetch("http://localhost:5000/api/users/sendForgotPasswordEmail", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            // ✅ Używamy fetchAPI zamiast hardcoded URL
+            const { data } = await fetchAPI('/auth/users/sendForgotPasswordEmail', {
+                method: 'POST',
                 body: JSON.stringify({ email }),
             });
-            const data = await res.json();
-            if (res.ok) {
-                setMessage(data.message || "Na Twój adres e-mail wysłano link do resetu hasła.");
-                setError(null);
-            } else {
-                setError(data.error || "Wystąpił nieznany błąd");
-                setMessage(null);
-            }
-        } catch (e) {
-            console.error("Wystąpił błąd wysyłki maila potwierdzającego zgłoszenie chęci zmiany hasła");
-            setError("Nie udało się wysłać maila na podany e-mail. Sprawdź poprawność wpisanego maila");
+
+            setMessage(data.message || "Na Twój adres e-mail wysłano link do resetu hasła.");
+            setError(null);
+
+        } catch (err) {
+            console.error("❌ Błąd wysyłki maila resetującego:", err);
+            setError(err.message || "Nie udało się wysłać maila. Sprawdź poprawność adresu e-mail.");
             setMessage(null);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <div className="register-container">
             <h1>Nie pamiętasz hasła?</h1>
             <p>Wprowadź adres e-mail, aby otrzymać link do zmiany hasła:</p>
-            <label htmlFor="email"></label>
+            
             <form onSubmit={handleSendMail}>
-                <input type="email" placeholder="Wprowadź adres e-mail" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                <button type="submit">Wyślij link</button>
+                <label htmlFor="email">Adres e-mail</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Wprowadź adres e-mail"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    disabled={loading}
+                    required
+                />
+                
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Wysyłanie...' : 'Wyślij link'}
+                </button>
             </form>
-            {message && <p>{message}</p>}
-            {error && <p>{error}</p>}
+
+            {message && <p className="success-message">{message}</p>}
+            {error && <p className="error-message">{error}</p>}
+
+            <div className="login-footer">
+                <p>Pamiętasz hasło? <span onClick={() => navigate('/login')} style={{cursor: 'pointer', color: '#1a73e8'}}>Zaloguj się</span></p>
+            </div>
         </div>
-    )
+    );
 }
