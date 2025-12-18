@@ -12,7 +12,6 @@ import Location from './pages/Location';
 
 import Menu from './components/Menu';
 import HemaReko from './components/HemaReko';
-import Register from './pages/Register';
 import UsersPanel from './pages/UsersPanel';
 import AdminRoute from "./components/AdminRoute";
 import LoggedUsersRoute from "./components/LoggedUsersRoute";
@@ -64,8 +63,6 @@ function App() {
         {/* Zaimportowane moduły */}
         <Route path="/Login" element={<Login />} />
         <Route path ="/Register" element = {<Login/>}/>
-
-        <Route path="/old-register" element={<Register />} />
 
 
         <Route path="/appForm" element={<NotLoggedUsersRoute><ApplicationForm /></NotLoggedUsersRoute>} />
