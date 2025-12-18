@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchAPI } from "../../config/api"; // ✅ Import API config
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -14,10 +15,13 @@ export default function RegisterForm() {
 
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError("");
+    setSuccessMessage("");
 
     // Walidacja
     if (!formData.acceptedTerms) {
@@ -38,25 +42,25 @@ export default function RegisterForm() {
       password: formData.password
     };
 
+    setLoading(true);
+
     try {
-      const response = await fetch("http://localhost:5000/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      // ✅ Używamy fetchAPI zamiast hardcoded URL
+      const { data } = await fetchAPI('/auth/register', {
+        method: 'POST',
         body: JSON.stringify(payload)
       });
-      const data = await response.json();
-
-      if (!response.ok) {
-        setError(data.message || "Wystąpił błąd rejestracji");
-        return;
-      }
 
       if (data.success) {
         setSuccessMessage(data.message);
-        setTimeout(() => navigate("/Login"), 3000); // Przekierowanie po sukcesie
+        // Przekierowanie po 3 sekundach
+        setTimeout(() => navigate("/login"), 3000);
       }
+
     } catch (err) {
-      setError("Wystąpił niespodziewany błąd");
+      console.error('❌ Błąd rejestracji:', err);
+      setError(err.message || "Wystąpił niespodziewany błąd");
+      setLoading(false);
     }
   };
 
@@ -67,6 +71,7 @@ export default function RegisterForm() {
         type="text"
         value={formData.login}
         onChange={(e) => setFormData({ ...formData, login: e.target.value })}
+        disabled={loading}
         required
         placeholder="Wprowadź login"
       />
@@ -76,6 +81,7 @@ export default function RegisterForm() {
         type="email"
         value={formData.email}
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+        disabled={loading}
         required
         placeholder="Wprowadź email"
       />
@@ -87,6 +93,7 @@ export default function RegisterForm() {
             type="text"
             value={formData.firstName}
             onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+            disabled={loading}
             required
             placeholder="Imię"
           />
@@ -97,6 +104,7 @@ export default function RegisterForm() {
             type="text"
             value={formData.lastName}
             onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+            disabled={loading}
             required
             placeholder="Nazwisko"
           />
@@ -108,6 +116,7 @@ export default function RegisterForm() {
         type="password"
         value={formData.password}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+        disabled={loading}
         required
         placeholder="Hasło"
       />
@@ -117,6 +126,7 @@ export default function RegisterForm() {
         type="password"
         value={formData.confirmPassword}
         onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+        disabled={loading}
         required
         placeholder="Powtórz hasło"
       />
@@ -125,12 +135,15 @@ export default function RegisterForm() {
       {successMessage && <p className="success-message">{successMessage}. Przekierowanie...</p>}
 
       <div className="register-actions">
-        <button type="submit" className="register-btn">Zarejestruj się</button>
+        <button type="submit" className="register-btn" disabled={loading}>
+          {loading ? 'Rejestracja...' : 'Zarejestruj się'}
+        </button>
         <label className="terms-label">
           <input
             type="checkbox"
             checked={formData.acceptedTerms}
             onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
+            disabled={loading}
           />
           Przeczytałem i akceptuję regulamin
         </label>
