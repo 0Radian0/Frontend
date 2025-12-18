@@ -12,7 +12,6 @@ import Location from './pages/Location';
 
 import Menu from './components/Menu';
 import HemaReko from './components/HemaReko';
-import Login1 from './pages/Login';
 import Register from './pages/Register';
 import UsersPanel from './pages/UsersPanel';
 import AdminRoute from "./components/AdminRoute";
