@@ -71,39 +71,6 @@ export default function Menu() {
                     )}
                 </ul>
             </div>
-
-            <div className="drop_menu">
-                <button className="menu_icon"></button>
-                <div className="content">
-                    {location.pathname !== "/" && (
-                        <li><Link to="/">Strona główna</Link></li>
-                    )}
-                    {isLoggedIn && location.pathname !== "/frontPage" && (
-                        <li><Link to="/frontPage">Panel startowy</Link></li>
-
-                    )}
-                    {isLoggedIn && location.pathname !== "/payments" && (
-                        <li><Link to="/payments">Płatności</Link></li>
-
-                    )}
-                    {isLoggedIn && rankID === 1 && location.pathname !== "/UsersPanel" && (
-                        <Link to="/UsersPanel">Panel użytkowników</Link>
-                    )}
-                    {isLoggedIn && location.pathname !== "/trainingsPanel" && (
-                        <li><Link to="/trainingsPanel">Panel treningów</Link></li>
-                    )}
-                    {!isLoggedIn && location.pathname !== "/appForm" && (
-                        <li><Link to="/appForm">Formularz kontaktowy</Link></li>
-                    )}
-
-
-                    {isLoggedIn ? (
-                        <button onClick={handleLogout}>Wyloguj</button>
-                    ) : (
-                        (location.pathname !== "/Login" ? <li><Link to="/Login">Logowanie</Link></li> : <></>)
-                    )}
-                </div>
-            </div>
         </nav>
     );
 }

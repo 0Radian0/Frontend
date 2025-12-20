@@ -59,33 +59,6 @@ body {
 .login-footer a:hover {
     text-decoration: underline;
 }
-/* Styl dla stopki */
-.footer {
-    background-color: #003432; /* Tło stopki */
-    color: white; /* Kolor tekstu */
-    text-align: center; /* Wyśrodkowanie tekstu */
-    padding: 20px 0; /* Odstępy wewnętrzne */
-    font-size: 16px; /* Rozmiar czcionki */
-    position: relative; /* Pozycjonowanie */
-    bottom: 0; /* Stopka na dole strony */
-    width: 100%; /* Szerokość na 100% */
-    margin-top: 20px; /* Odstęp od innych elementów */
-}
-
-/* Linki w stopce */
-.footer a {
-    color: orange; /* Kolor linków */
-    text-decoration: none; /* Brak podkreślenia */
-}
-
-.footer a:hover {
-    text-decoration: underline; /* Podkreślenie linków przy najechaniu */
-}
-
-/* Styl dla akapitu w stopce */
-.footer p {
-    margin: 5px 0; /* Odstępy między akapitami */
-}
 
 
 

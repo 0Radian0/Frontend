@@ -6,12 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-import About from './pages/About';
-import Trainings from './pages/Trainings';
-import Location from './pages/Location';
 
 import Menu from './components/Menu';
-import HemaReko from './components/HemaReko';
 import UsersPanel from './pages/UsersPanel';
 import AdminRoute from "./components/AdminRoute";
 import LoggedUsersRoute from "./components/LoggedUsersRoute";
@@ -29,13 +25,11 @@ import ResetPassword from "./pages/ResetPassword";
 import ApplicationForm from "./components/ApplicationForm";
 
 //Style
-//import './assets/styles/Style_main/style_responsive_480.css';
-//import './assets/styles/Style_main/style_responsive_1024.css';
-//import './assets/styles/Style_main/style_responsive_884.css';
-import './assets/styles/Style_main/style.css';
-//import './assets/styles/Style_sub/style_g.css';
+
+//import './assets/styles/Style_main/style.css';
+
 import './assets/styles/Style_sub/style_login.css';
-//import './assets/styles/Style_sub/style_register.css';
+
 
 //komponenty globalne
 import TopBar from "./components/TopBar";
@@ -53,9 +47,6 @@ function App() {
   <TopBar/>
   <Header/>
   <NavMenu/>
-
-
-
       
       <Routes>
         <Route path="/" element={<Login/>} />
@@ -81,7 +72,7 @@ function App() {
         {/* Nieistniejące strony */}
         <Route path="/*" element={<NotFound />} />
       </Routes>
-      <Menu />
+  
       <Footer/>
     </div>
   );
