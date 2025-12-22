@@ -1,24 +1,22 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { fetchAPI } from "../config/api"; // ✅ Import API config
 
 export default function ResetPassword() {
-    const [email, setEmail] = useState(null);
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
-    // pobranie tokenu z url
+    const [loading, setLoading] = useState(false);
+    
+    // Pobranie tokenu z URL
     const { token } = useParams();
     const navigate = useNavigate();
-
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
         setMessage(null);
         setError(null);
-
-        // If nie ma żadnego userId bo dla jakiegoś niezalogowanego musi być
 
         // Walidacja hasła
         if (!newPassword || !confirmPassword) {
@@ -33,34 +31,39 @@ export default function ResetPassword() {
             setError("Hasła muszą być identyczne");
             return;
         }
+
+        setLoading(true);
+
         try {
-            const res = await fetch("http://localhost:5000/api/users/resetPasswordToken", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            // ✅ Używamy fetchAPI zamiast hardcoded URL
+            const { data } = await fetchAPI('/auth/users/resetPasswordToken', {
+                method: 'POST',
                 body: JSON.stringify({ token, newPassword }),
             });
-            const data = await res.json();
 
-            if (!res.ok) {
-                setError(data.error || "Błąd podczas zmiany hasła");
-                return;
-            }
             setMessage(data.message || "Zmiana hasła zakończona sukcesem");
             setNewPassword("");
             setConfirmPassword("");
             
-        } catch (e) {
-            setError(e.message);
-        }
-        setTimeout(() => navigate("/frontPage"), 1000);
+            // Przekierowanie po 2 sekundach
+            setTimeout(() => navigate("/login"), 2000);
 
-    }
+        } catch (err) {
+            console.error("❌ Błąd resetowania hasła:", err);
+            setError(err.message || "Błąd podczas zmiany hasła");
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="trainings-container">
             <h3>Zmiana hasła użytkownika</h3>
+            
             {message ? (
-                <p style={{ color: "green" }}>{message}</p>
+                <div>
+                    <p style={{ color: "green" }}>{message}</p>
+                    <p>Przekierowanie na stronę logowania...</p>
+                </div>
             ) : (
                 <form onSubmit={handleResetPassword}>
                     <div>
@@ -73,8 +76,10 @@ export default function ResetPassword() {
                             value={newPassword}
                             onChange={(e) => setNewPassword(e.target.value)}
                             placeholder="Nowe hasło"
+                            disabled={loading}
                         />
                     </div>
+                    
                     <div>
                         <label>Potwierdź nowe hasło</label>
                         <input
@@ -85,9 +90,14 @@ export default function ResetPassword() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder="Powtórz hasło"
+                            disabled={loading}
                         />
                     </div>
-                    <button type="submit">Zmień hasło</button>
+                    
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Zmiana hasła...' : 'Zmień hasło'}
+                    </button>
+                    
                     {error && <p style={{ color: "red" }}>{error}</p>}
                 </form>
             )}
