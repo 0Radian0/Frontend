@@ -26,7 +26,7 @@ import ApplicationForm from "./components/ApplicationForm";
 
 //Style
 
-//import './assets/styles/Style_main/style.css';
+import './assets/styles/Style_main/style.css';
 
 import './assets/styles/Style_sub/style_login.css';
 
