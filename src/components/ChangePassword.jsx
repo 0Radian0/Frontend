@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchAPI } from "../config/api"; // ✅ Import API config
 
 export default function ChangePassword() {
     const [oldPassword, setOldPassword] = useState("");
@@ -7,8 +8,8 @@ export default function ChangePassword() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [message, setMessage] = useState(null);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -28,36 +29,43 @@ export default function ChangePassword() {
             setError("Hasła muszą być identyczne");
             return;
         }
-        if (!window.confirm("Czy na pewno chcesz zmienić hasło użytkownika?")) return;
-        // Logika zmiany hasła
+
+        if (!window.confirm("Czy na pewno chcesz zmienić hasło?")) return;
+
+        const userID = localStorage.getItem("userID");
+        if (!userID) {
+            setError("Brak zalogowanego użytkownika");
+            return;
+        }
+
+        setLoading(true);
+
         try {
-            const userID = localStorage.getItem("userID");
-            if (!userID) { setError("Brak zalogowanego użytkownika do zmiany hasła :/"); return; }
-            const res = await fetch("http://localhost:5000/api/users/changePassword", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+            // ✅ Używamy fetchAPI
+            const { data } = await fetchAPI('/auth/users/changePassword', {
+                method: 'POST',
                 body: JSON.stringify({ userID, oldPassword, newPassword }),
             });
-            const data = await res.json();
-            if (!res.ok) {
-                setError(data.error || "Błąd podczas zmiany hasła");
-                return;
-            }
-            setMessage(data.message || "Zmiana hasła zakończona sukcesem");
+
+            setMessage(data.message || "Hasło zostało zmienione pomyślnie!");
             setOldPassword("");
             setNewPassword("");
             setConfirmPassword("");
-        } catch (e) {
-            setError(e.message);
+
+            // Przekierowanie po 1 sekundzie
+            setTimeout(() => navigate("/frontPage"), 1000);
+
+        } catch (err) {
+            console.error("❌ Błąd zmiany hasła:", err);
+            setError(err.message || "Nie udało się zmienić hasła");
+            setLoading(false);
         }
-        setTimeout(() => navigate("/frontPage"), 1000);
-    }
-
-
+    };
 
     return (
         <div className="trainings-container">
             <h3>Zmiana hasła użytkownika</h3>
+            
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Wprowadź stare hasło</label>
@@ -66,37 +74,46 @@ export default function ChangePassword() {
                         name="oldPassword"
                         value={oldPassword}
                         onChange={(e) => setOldPassword(e.target.value)}
+                        disabled={loading}
+                        required
                     />
-
                 </div>
+                
                 <div>
-                    {/* Pola do wprowadzania  nowego hasła */}
                     <label>Wprowadź nowe hasło</label>
                     <input
                         type="password"
                         name="newPassword"
-                        required pattern='^.{8,255}$'
+                        required
+                        pattern="^.{8,255}$"
                         value={newPassword}
-                        title="Hasło musi zawierać conajmniej 8 znaków"
+                        title="Hasło musi zawierać co najmniej 8 znaków"
                         onChange={(e) => setNewPassword(e.target.value)}
+                        disabled={loading}
                     />
                 </div>
+                
                 <div>
                     <label>Potwierdź nowe hasło</label>
                     <input
                         type="password"
                         name="confirmPassword"
-                        required pattern='^.{8,255}$'
+                        required
+                        pattern="^.{8,255}$"
                         value={confirmPassword}
-                        title="Hasła muszę się zgadzać"
+                        title="Hasła muszą się zgadzać"
                         onChange={(e) => setConfirmPassword(e.target.value)}
+                        disabled={loading}
                     />
                 </div>
-                <button type="submit">Zmień hasło</button>
+                
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Zmiana hasła...' : 'Zmień hasło'}
+                </button>
             </form>
-            {message && <p>{message}</p>}
-            {error && <p>{error}</p>}
-        </div>
 
+            {message && <p style={{ color: 'green' }}>{message}</p>}
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+        </div>
     );
 }
