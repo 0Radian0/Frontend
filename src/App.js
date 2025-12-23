@@ -7,7 +7,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
-import Menu from '.components/Menu'
+import Menu from './components/Menu'
 import UsersPanel from './pages/UsersPanel';
 import AdminRoute from "./components/AdminRoute";
 import LoggedUsersRoute from "./components/LoggedUsersRoute";
