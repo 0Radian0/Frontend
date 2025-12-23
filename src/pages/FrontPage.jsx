@@ -1,66 +1,97 @@
 import React, { useState, useEffect } from "react";
 import TrainingsCalendar from "../components/Calendar";
 import { Link } from 'react-router-dom';
+import { fetchAPI } from "../config/api"; // ✅ Import API config
 
 export default function FrontPage() {
     const [sumToPay, setSumToPay] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
     const rawDescription = localStorage.getItem("description");
     const description =
         rawDescription && rawDescription !== "undefined" && rawDescription.trim() !== ""
             ? rawDescription
-            : "Brak opisu użytkownika :("; const userID = Number(localStorage.getItem("userID"));
+            : "Brak opisu użytkownika :(";
+    
+    const userID = Number(localStorage.getItem("userID"));
 
     useEffect(() => {
         // Wyświetlanie statusu płatności użytkownika
         const showPaymentStatus = async () => {
-            try {
-                const res = await fetch(`http://localhost:5000/api/paymentStatus/${userID}`);
-                const data = await res.json();
+            if (!userID) {
+                setError("Nie znaleziono ID użytkownika");
+                setLoading(false);
+                return;
+            }
 
-                if (res.ok) {
-                    setSumToPay(Number(data.sumToPay) || 0);
-                } else {
-                    alert(data.error || "Błąd wyświetlania statusu płatności");
-                }
-            } catch (e) {
-                console.error("Błąd wyświetlania statusu płatności:", e);
+            try {
+                // ✅ Używamy fetchAPI
+                const { data } = await fetchAPI(`/payments/paymentStatus/${userID}`, {
+                    method: 'GET'
+                });
+
+                setSumToPay(Number(data.sumToPay) || 0);
+                setLoading(false);
+
+            } catch (err) {
+                console.error("❌ Błąd wyświetlania statusu płatności:", err);
+                setError(err.message || "Nie udało się pobrać statusu płatności");
+                setLoading(false);
             }
         };
 
-        if (userID) showPaymentStatus();
+        showPaymentStatus();
     }, [userID]);
-
 
     return (
         <div>
             {/* Status płatności użytkownika */}
             <div className="trainings-container">
-                Status płatności za zajęcia:{" "}
-                {sumToPay > 0
-                    ? `Na dzień dzisiejszy do zapłaty: ${sumToPay.toFixed(2)} zł`
-                    : "Opłacone :)"}
+                <h3>Status płatności za zajęcia</h3>
+                {loading ? (
+                    <p>Ładowanie...</p>
+                ) : error ? (
+                    <p style={{ color: 'red' }}>{error}</p>
+                ) : (
+                    <p>
+                        {sumToPay > 0
+                            ? `Na dzień dzisiejszy do zapłaty: ${sumToPay.toFixed(2)} zł`
+                            : "Wszystko opłacone! 🎉"}
+                    </p>
+                )}
             </div>
 
-            {/* Zmiana hasła - przejście do modułu */}
-            <Link to="/changePassword">
-                <button>Zmiana hasła</button>
-            </Link>
+            {/* Przyciski zarządzania kontem */}
+            <div className="account-actions" style={{ margin: '20px 0' }}>
+                <Link to="/changePassword">
+                    <button>Zmiana hasła</button>
+                </Link>
 
-            {/* Zmiana opisu użytkownika */}
-            <Link to="/changeDescription">
-                <button>Zmiana opisu użytkownika</button>
-            </Link>
+                <Link to="/changeDescription">
+                    <button>Zmiana opisu użytkownika</button>
+                </Link>
 
-            {/* Zmiana danych użytkownika */}
-            <Link to={"/changeData"}>
-                <button>Zmiana danych użytkownika</button>
-            </Link>
+                <Link to="/changeData">
+                    <button>Zmiana danych użytkownika</button>
+                </Link>
+            </div>
 
-            <h2>Obecny opis</h2>
-            <div>{description}</div>
+            {/* Opis użytkownika */}
+            <div className="user-description" style={{ margin: '20px 0' }}>
+                <h2>Obecny opis</h2>
+                <div style={{ 
+                    padding: '15px', 
+                    backgroundColor: '#f5f5f5', 
+                    borderRadius: '5px',
+                    minHeight: '50px'
+                }}>
+                    {description}
+                </div>
+            </div>
 
-            {/* Kalendarz  */}
-            <div>
+            {/* Kalendarz treningów */}
+            <div className="trainings-calendar">
                 <TrainingsCalendar />
             </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchAPI } from "../config/api"; // ✅ Import API config
 
 export default function ChangeUserData() {
     const [login, setLogin] = useState("");
@@ -7,6 +8,7 @@ export default function ChangeUserData() {
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [message, setMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const getInitialUser = () => ({
@@ -23,17 +25,18 @@ export default function ChangeUserData() {
 
         const user = getInitialUser();
         if (!user.userID) {
-            setMessage("Brakuje użytkownika, dla którego można zmienić dane :(");
+            setMessage("Brakuje ID użytkownika");
             return;
         }
-        if (!window.confirm("Czy na pewno chcesz zmienić dane osobowe użytkownika?")) return;
+
+        if (!window.confirm("Czy na pewno chcesz zmienić dane osobowe?")) return;
+
+        setLoading(true);
+
         try {
-            const response = await fetch("http://localhost:5000/api/users/changeUserData", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
-                },
+            // ✅ Używamy fetchAPI
+            const { data } = await fetchAPI('/auth/users/changeUserData', {
+                method: 'POST',
                 body: JSON.stringify({
                     id: user.userID,
                     login,
@@ -43,22 +46,23 @@ export default function ChangeUserData() {
                 })
             });
 
-            const data = await response.json();
+            setMessage("Dane użytkownika zostały zaktualizowane ✅");
+            
+            // Aktualizuj localStorage
+            localStorage.setItem("login", login);
+            localStorage.setItem("email", email);
+            localStorage.setItem("name", name);
+            localStorage.setItem("surname", surname);
 
-            if (response.ok) {
-                setMessage("Dane użytkownika zostały zaktualizowane");
-                localStorage.setItem("login", login);
-                localStorage.setItem("email", email);
-                localStorage.setItem("name", name);
-                localStorage.setItem("surname", surname);
+            // Powiadom inne komponenty o zmianie
+            window.dispatchEvent(new Event("storage"));
 
-                setTimeout(() => navigate("/frontPage"), 500);
-            } else {
-                setMessage(`${data.error || "Błąd podczas próby zmiany danych użytkownika"}`);
-            }
+            setTimeout(() => navigate("/frontPage"), 1000);
+
         } catch (err) {
-            console.error(err);
-            setMessage("Błąd podczas przesyłania danych do backendu");
+            console.error("❌ Błąd zmiany danych:", err);
+            setMessage(err.message || "Błąd podczas zmiany danych użytkownika");
+            setLoading(false);
         }
     };
 
@@ -69,8 +73,8 @@ export default function ChangeUserData() {
         setEmail(user.email);
         setName(user.name);
         setSurname(user.surname);
-        setMessage("Pozostawiamy poprzednio zapisane dane. Nastąpi powrót do panelu startowego");
-        setTimeout(() => navigate("/frontPage"), 2000);
+        setMessage("Anulowano zmiany. Powrót do panelu...");
+        setTimeout(() => navigate("/frontPage"), 1500);
     };
 
     useEffect(() => {
@@ -82,13 +86,14 @@ export default function ChangeUserData() {
     }, []);
 
     return (
-        <div>
+        <div className="trainings-container">
             <h2>Zmiana danych użytkownika</h2>
             <h3>Aktualne dane użytkownika</h3>
-            <p>Zachowaj ostrożność przy zmianie danych osobowych. Upewnij się, że podany adres e-mail jest poprawny, żeby wiadomości nie trafiły w niepowołane ręce</p>
+            <p>Zachowaj ostrożność przy zmianie danych osobowych. Upewnij się, że podany adres e-mail jest poprawny.</p>
+            
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Wprowadź nowy login użytkownika: </label>
+                    <label>Login użytkownika:</label>
                     <input
                         type="text"
                         name="login"
@@ -97,49 +102,65 @@ export default function ChangeUserData() {
                         title="Proszę wprowadzić login o długości od 3 do 45 znaków."
                         value={login}
                         onChange={e => setLogin(e.target.value)}
+                        disabled={loading}
                     />
                 </div>
+                
                 <div>
-                    <label>Wprowadź nowy email użytkownika: </label>
+                    <label>Email użytkownika:</label>
                     <input
                         type="email"
                         name="email"
                         required
                         pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
-                        title="Proszę wprowadzić nowy email użytkownika."
+                        title="Wprowadź poprawny adres email."
                         value={email}
                         onChange={e => setEmail(e.target.value)}
+                        disabled={loading}
                     />
                 </div>
+                
                 <div>
-                    <label>Wprowadź imię użytkownika: </label>
+                    <label>Imię użytkownika:</label>
                     <input
                         type="text"
                         name="name"
                         required
                         pattern="^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,2}$"
-                        title="Proszę wprowadzić imię użytkownika."
+                        title="Wprowadź poprawne imię."
                         value={name}
                         onChange={e => setName(e.target.value)}
+                        disabled={loading}
                     />
                 </div>
+                
                 <div>
-                    <label>Wprowadź nazwisko użytkownika: </label>
+                    <label>Nazwisko użytkownika:</label>
                     <input
                         type="text"
                         name="surname"
                         required
                         pattern="^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:[-\s][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$"
-                        title="Proszę wprowadzić nazwisko użytkownika."
+                        title="Wprowadź poprawne nazwisko."
                         value={surname}
                         onChange={e => setSurname(e.target.value)}
+                        disabled={loading}
                     />
                 </div>
-                <button type="submit">Zapisz zmiany</button>
-                <button type="button" onClick={handleReset}>Anuluj</button>
+                
+                <button type="submit" disabled={loading}>
+                    {loading ? 'Zapisywanie...' : 'Zapisz zmiany'}
+                </button>
+                <button type="button" onClick={handleReset} disabled={loading}>
+                    Anuluj
+                </button>
             </form>
 
-            {message && <p>{message}</p>}
+            {message && (
+                <p style={{ color: message.includes('✅') ? 'green' : 'red' }}>
+                    {message}
+                </p>
+            )}
         </div>
     );
 }
