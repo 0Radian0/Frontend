@@ -4,7 +4,6 @@ import { fetchAPI } from "../../config/api"; // ✅ Import API config
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
-    login: "",
     email: "",
     firstName: "",
     lastName: "",
@@ -35,7 +34,7 @@ export default function RegisterForm() {
 
     // Przygotowanie danych do backendu
     const payload = {
-      login: formData.login,
+
       email: formData.email,
       name: formData.firstName,
       surname: formData.lastName,
@@ -66,15 +65,6 @@ export default function RegisterForm() {
 
   return (
     <form className="register-form" onSubmit={handleRegister}>
-      <label>Login</label>
-      <input
-        type="text"
-        value={formData.login}
-        onChange={(e) => setFormData({ ...formData, login: e.target.value })}
-        disabled={loading}
-        required
-        placeholder="Wprowadź login"
-      />
 
       <label>Email</label>
       <input
