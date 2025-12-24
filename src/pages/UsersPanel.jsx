@@ -5,7 +5,8 @@ import { fetchAPI } from "../config/api"; // ✅ Import API config
 export default function UsersPanel() {
     const [users, setUsers] = useState([]);
     const [filter, setFilter] = useState('all');
-    const [sortBy, setSortBy] = useState('login');
+    const [sortBy, setSortBy] = useState('regDate');
+
     const [order, setOrder] = useState('desc');
     const [statusFilter, setStatusFilter] = useState('all');
     const [changingRanksUserID, setchangingRanksUserID] = useState(null);
@@ -13,14 +14,14 @@ export default function UsersPanel() {
 
     // Kolumny do sortowania
     const sortColumnsMap = {
-        login: "login",
-        regDate: "registrationDate",
-        descp: "description",
-        lastLog: "lastLog",
-        deactivated: "deactivated",
-        payStatus: "paymentActive",
-        sumToPay: "sumToPay"
-    };
+    regDate: "registrationDate",
+    descp: "description",
+    lastLog: "lastLog",
+    deactivated: "deactivated",
+    payStatus: "paymentActive",
+    sumToPay: "sumToPay"
+};
+
 
     // Uprawnienia do filtrowania
     const rankNames = {
@@ -31,7 +32,9 @@ export default function UsersPanel() {
 
     // Odświeżanie strony
     const fetchUsers = async () => {
-        const sortColumn = sortColumnsMap[sortBy] || "login";
+        const sortColumn = sortColumnsMap[sortBy] || "registrationDate";
+
+
         const orderValue = order === "asc" ? "ASC" : "DESC";
 
         let status = "all";
@@ -218,7 +221,7 @@ export default function UsersPanel() {
                 <div className="filters">
                     <label>Sortowanie:</label>
                     <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-                        <option value="login">Nazwa użytkownika</option>
+                        
                         <option value="regDate">Data rejestracji</option>
                         <option value="descp">Opis</option>
                         <option value="lastLog">Ostatnie logowanie</option>
@@ -242,7 +245,7 @@ export default function UsersPanel() {
                     <table>
                         <thead>
                             <tr>
-                                <th>Login</th>
+                                
                                 <th>Imię i nazwisko</th>
                                 <th>Rodzaj użytkownika</th>
                                 <th>Data rejestracji</th>
@@ -259,7 +262,7 @@ export default function UsersPanel() {
                             {Array.isArray(users) && users.length > 0 ? (
                                 users.map((user) => (
                                     <tr key={user.userID}>
-                                        <td>{user.login}</td>
+                                        
                                         <td>{user.name + " " + user.surname}</td>
                                         <td>{rankNames[user.rankID]}</td>
                                         <td>{new Date(user.registrationDate).toLocaleDateString()}</td>
