@@ -510,7 +510,7 @@ export default function PaymentsPanel() {
                         <tbody>
                             {statusTab.length > 0 ? (
                                 statusTab.map((el, idx) => {
-                                    const user = usersList.find(u => u.userID === el.userID) || usersList.find(u => u.login === el.login);
+                                    const user = usersList.find(u => u.userID === el.userID) 
                                     const userEmail = el.email || user?.email;
 
                                     return (

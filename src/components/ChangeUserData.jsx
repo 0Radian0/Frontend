@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { fetchAPI } from "../config/api"; // ✅ Import API config
 
 export default function ChangeUserData() {
-    const [login, setLogin] = useState("");
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
@@ -12,7 +11,6 @@ export default function ChangeUserData() {
     const navigate = useNavigate();
 
     const getInitialUser = () => ({
-        login: localStorage.getItem("login") || "",
         email: localStorage.getItem("email") || "",
         name: localStorage.getItem("name") || "",
         surname: localStorage.getItem("surname") || "",
@@ -39,7 +37,7 @@ export default function ChangeUserData() {
                 method: 'POST',
                 body: JSON.stringify({
                     id: user.userID,
-                    login,
+
                     email,
                     name,
                     surname
@@ -49,7 +47,7 @@ export default function ChangeUserData() {
             setMessage("Dane użytkownika zostały zaktualizowane ✅");
             
             // Aktualizuj localStorage
-            localStorage.setItem("login", login);
+
             localStorage.setItem("email", email);
             localStorage.setItem("name", name);
             localStorage.setItem("surname", surname);
@@ -69,7 +67,7 @@ export default function ChangeUserData() {
     const handleReset = (e) => {
         e.preventDefault();
         const user = getInitialUser();
-        setLogin(user.login);
+
         setEmail(user.email);
         setName(user.name);
         setSurname(user.surname);
@@ -79,7 +77,7 @@ export default function ChangeUserData() {
 
     useEffect(() => {
         const user = getInitialUser();
-        setLogin(user.login);
+
         setEmail(user.email);
         setName(user.name);
         setSurname(user.surname);
@@ -92,19 +90,6 @@ export default function ChangeUserData() {
             <p>Zachowaj ostrożność przy zmianie danych osobowych. Upewnij się, że podany adres e-mail jest poprawny.</p>
             
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Login użytkownika:</label>
-                    <input
-                        type="text"
-                        name="login"
-                        required
-                        pattern="^.{3,45}$"
-                        title="Proszę wprowadzić login o długości od 3 do 45 znaków."
-                        value={login}
-                        onChange={e => setLogin(e.target.value)}
-                        disabled={loading}
-                    />
-                </div>
                 
                 <div>
                     <label>Email użytkownika:</label>

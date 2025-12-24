@@ -29,7 +29,6 @@ export default function LoginForm() {
 
             // Zapisz dane użytkownika
             localStorage.setItem("token", data.token);
-            localStorage.setItem("login", data.user.login);
             localStorage.setItem("userID", data.user.userID);
             localStorage.setItem("rankID", data.user.rankID);
             localStorage.setItem("email", data.user.email);
