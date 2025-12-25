@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import TrainingsCalendar from "../components/Calendar";
 import { Link } from 'react-router-dom';
 import { fetchAPI } from "../config/api";
-import "./FrontPage.css"; // Importuj style
+import "../assets/styles/FrontPage.css"; // Importuj style
 
 export default function FrontPage() {
     const [sumToPay, setSumToPay] = useState(null);
