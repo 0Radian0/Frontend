@@ -254,137 +254,138 @@
     margin-bottom: 20px;
     letter-spacing: 1px;
 }
+/* ======= React Calendar – Modern Minimal ======= */
 
-/* ======= React Calendar ======= */
 .react-calendar {
-    background-color: #012f2d;
-    border: 1px solid #024c48;
-    border-radius: 12px;
-    padding: 10px;
-    color: white;
+    background-color: #0e1f1e;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 14px;
+    color: #e5f2f1;
     width: 100%;
     box-sizing: border-box;
+    font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* Widoki kalendarza */
-.react-calendar__viewContainer {
-    width: 100%;
-}
-
+/* ======= Nawigacja ======= */
 .react-calendar__navigation {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
 .react-calendar__navigation button {
-    background: none;
-    color: white;
+    background: transparent;
+    color: #e5f2f1;
     border: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     padding: 6px 10px;
-    border-radius: 6px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
 }
 
 .react-calendar__navigation button:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.08);
 }
 
-/* Widok miesięczny */
+/* ======= Dni tygodnia ======= */
 .react-calendar__month-view__weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
     text-transform: uppercase;
-    color: #ccc;
-    font-weight: bold;
-    font-size: 0.8rem;
+    color: #9fb8b6;
+    font-weight: 500;
+    font-size: 0.75rem;
     letter-spacing: 1px;
     text-align: center;
+    margin-bottom: 6px;
 }
 
+/* ======= Siatka dni ======= */
 .react-calendar__month-view__days {
     display: grid !important;
     grid-template-columns: repeat(7, 1fr);
-    gap: 4px;
+    gap: 6px;
 }
 
-/* Widoki roczne / dekadowe / stuletnie */
+/* ======= Kafelki ======= */
+.react-calendar__tile {
+    background: transparent;
+    color: #e5f2f1;
+    border-radius: 10px;
+    padding: 10px 0;
+    min-height: 48px;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.react-calendar__tile:hover {
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-1px);
+}
+
+/* Dzisiaj */
+.react-calendar__tile--now {
+    background: rgba(255,255,255,0.12);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* ======= Dni z treningiem ======= */
+.has-training {
+    background: rgba(31, 183, 166, 0.25) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px #1fb7a6;
+}
+
+.has-training:hover {
+    background: rgba(31, 183, 166, 0.35) !important;
+}
+
+/* ======= Widoki roczne ======= */
 .react-calendar__year-view__months,
 .react-calendar__decade-view__years,
 .react-calendar__century-view__decades {
     display: grid !important;
     grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
+    gap: 8px;
 }
 
-/* Kafelki */
-.react-calendar__tile {
-    background: transparent;
-    color: white;
-    border-radius: 8px;
-    padding: 12px 0;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 50px;
-    box-sizing: border-box;
-}
 
-.react-calendar__tile:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: scale(1.02);
-}
+/* ======= Szczegóły treningów ======= */
 
-.react-calendar__tile--now {
-    background: #ffffffa4 !important;
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-}
-
-/* Dni z treningami */
-.has-training {
-    background-color: #b36b00 !important;
-    color: white !important;
-    font-weight: 600;
-}
-
-.has-training:hover {
-    background-color: #d28100 !important;
-    cursor: pointer;
-}
-
-/* ======= Sekcja szczegółów ======= */
 .training-details {
-    margin-top: 30px;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 20px;
-    border-radius: 10px;
-    text-align: left;
+    margin-top: 28px;
+    background: #132b29;
+    padding: 22px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
 }
 
 .training-details h3 {
-    font-family: "Copperplate Gothic", serif;
-    color: #fff;
-    font-size: 20px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 5px;
+    color: #e5f2f1;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 8px;
 }
 
+/* Pojedynczy trening */
 .training-item {
-    background: rgba(255, 255, 255, 0.05);
-    margin: 12px 0;
-    padding: 12px 14px;
-    border-left: 4px solid #b36b00;
-    border-radius: 8px;
+    background: rgba(255,255,255,0.04);
+    margin: 14px 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border-left: 4px solid #1fb7a6;
+    transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .training-item:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-1px);
 }
+
 
 /* ======= Filtry, tabele i przyciski (opcjonalnie dla reszty sekcji) ======= */
 .filters {
