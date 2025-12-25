@@ -1,0 +1,131 @@
+/* =========================================
+   React Calendar – Modern Minimal
+   ========================================= */
+
+.react-calendar {
+    background-color: #0e1f1e;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 14px;
+    color: #e5f2f1;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ======= Nawigacja ======= */
+.react-calendar__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.react-calendar__navigation button {
+    background: transparent;
+    color: #e5f2f1;
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.react-calendar__navigation button:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+/* ======= Dni tygodnia ======= */
+.react-calendar__month-view__weekdays {
+    text-transform: uppercase;
+    color: #9fb8b6;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+/* ======= Siatka dni ======= */
+.react-calendar__month-view__days {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+/* ======= Kafelki ======= */
+.react-calendar__tile {
+    background: transparent;
+    color: #e5f2f1;
+    border-radius: 10px;
+    padding: 10px 0;
+    min-height: 48px;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.react-calendar__tile:hover {
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-1px);
+}
+
+/* Dzisiaj */
+.react-calendar__tile--now {
+    background: rgba(255,255,255,0.12);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* ======= Dni z treningiem ======= */
+.has-training {
+    background: rgba(31, 183, 166, 0.25) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 1px #1fb7a6;
+}
+
+.has-training:hover {
+    background: rgba(31, 183, 166, 0.35) !important;
+}
+
+/* ======= Widoki roczne ======= */
+.react-calendar__year-view__months,
+.react-calendar__decade-view__years,
+.react-calendar__century-view__decades {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+/* ======= Szczegóły treningów ======= */
+
+.training-details {
+    margin-top: 28px;
+    background: #132b29;
+    padding: 22px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.training-details h3 {
+    color: #e5f2f1;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 8px;
+}
+
+.training-item {
+    background: rgba(255,255,255,0.04);
+    margin: 14px 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border-left: 4px solid #1fb7a6;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.training-item:hover {
+    background: rgba(255,255,255,0.08);
+    transform: translateY(-1px);
+}

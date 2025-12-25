@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import { fetchAPI } from "../config/api"; // ✅ Import API config
+import "../assets/styles/calendar.css";
+
 
 export default function TrainingsCalendar() {
   const [trainings, setTrainings] = useState([]);
