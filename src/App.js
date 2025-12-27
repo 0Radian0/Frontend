@@ -31,6 +31,14 @@ import Header from "./components/Header";
 import NavMenu from "./components/NavMenu";
 import Footer from "./components/Footer";
 
+//Style
+
+import './assets/styles/Style_main/style.css';
+
+import './assets/styles/Style_sub/style_login.css';
+
+
+
 function App() {
   return (
     <div className="App">
