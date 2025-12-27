@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import { fetchAPI } from "../config/api";
 import 'react-calendar/dist/Calendar.css';
-import "../assets/styles/calendar.css";
+//import "../assets/styles/calendar.css";
 
 export default function TrainingsCalendar({ onDateSelect }) {
   const [trainings, setTrainings] = useState([]);
