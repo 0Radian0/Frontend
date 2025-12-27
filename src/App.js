@@ -62,7 +62,7 @@ function App() {
         <Route path="/resetPass/:token" element={<ResetPassword />} />
 
         <Route path="/UsersPanel" element={<AdminRoute><UsersPanel /></AdminRoute>} />
-        <Route path="/frontPage" element={<LoggedUsersRoute><FrontPage /></LoggedUsersRoute>} />
+        <Route path="/FrontPage" element={<LoggedUsersRoute><FrontPage /></LoggedUsersRoute>} />
         <Route path="/changePassword" element={<LoggedUsersRoute><ChangePassword /></LoggedUsersRoute>} />
         <Route path="/changeDescription" element={<LoggedUsersRoute><ChangeDescription /></LoggedUsersRoute>} />
         <Route path="/trainingsPanel" element={<LoggedUsersRoute><TrainingsPanel /></LoggedUsersRoute>} />
