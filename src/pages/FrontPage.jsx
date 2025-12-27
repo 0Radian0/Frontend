@@ -53,7 +53,7 @@ export default function FrontPage() {
             <div className="dashboard-grid">
                 {/* LEWA KOLUMNA - KALENDARZ */}
                 <div className="calendar-section">
-                    <h2>📅 Kalendarz Treningów</h2>
+                    <h2> Kalendarz Treningów</h2>
                     <TrainingsCalendar onDateSelect={handleDateSelect} />
                 </div>
 
@@ -61,7 +61,7 @@ export default function FrontPage() {
                 <div className="info-section">
                     {/* Status płatności */}
                     <div className="info-card">
-                        <h3>💳 Status Płatności</h3>
+                        <h3> Status Płatności</h3>
                         {loading ? (
                             <div className="loading-spinner">Ładowanie...</div>
                         ) : error ? (
@@ -82,31 +82,31 @@ export default function FrontPage() {
 
                     {/* Szczegóły treningu */}
                     <div className="info-card">
-                        <h3>🥋 Szczegóły Treningu</h3>
+                        <h3> Szczegóły Treningu</h3>
                         {selectedTraining ? (
                             <div className="training-details">
                                 <h3>{selectedTraining.title || "Trening"}</h3>
-                                <p><strong>📅 Data:</strong> {selectedTraining.date}</p>
-                                <p><strong>⏰ Godzina:</strong> {selectedTraining.time}</p>
-                                <p><strong>🏛️ Miejsce:</strong> {selectedTraining.place}</p>
-                                <p><strong>📝 Opis:</strong> {selectedTraining.description}</p>
+                                <p><strong> Data:</strong> {selectedTraining.date}</p>
+                                <p><strong> Godzina:</strong> {selectedTraining.time}</p>
+                                <p><strong> Miejsce:</strong> {selectedTraining.place}</p>
+                                <p><strong> Opis:</strong> {selectedTraining.description}</p>
                                 
                                 {selectedTraining.allTrainings && selectedTraining.allTrainings.length > 1 && (
                                     <p style={{ marginTop: '10px', fontSize: '14px', opacity: 0.9 }}>
-                                        ℹ️ Tego dnia odbywają się {selectedTraining.allTrainings.length} treningi
+                                        ℹ Tego dnia odbywają się {selectedTraining.allTrainings.length} treningi
                                     </p>
                                 )}
                             </div>
                         ) : (
                             <div className="no-training-selected">
-                                👈 Kliknij datę w kalendarzu, aby zobaczyć szczegóły treningu
+                                 Kliknij datę w kalendarzu, aby zobaczyć szczegóły treningu
                             </div>
                         )}
                     </div>
 
                     {/* Zarządzanie kontem */}
                     <div className="info-card">
-                        <h3>⚙️ Zarządzanie Kontem</h3>
+                        <h3> Zarządzanie Kontem</h3>
                         <div className="action-buttons">
                             <Link to="/changePassword" className="action-button">
                                 🔒 Zmiana hasła

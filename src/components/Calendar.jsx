@@ -290,7 +290,7 @@ export default function TrainingsCalendar({ onDateSelect }) {
             {selectedDate && (
               <div className="calendar-training-details">
                 <h4>
-                  📅 {selectedDate.toLocaleDateString("pl-PL", {
+                   {selectedDate.toLocaleDateString("pl-PL", {
                     weekday: "long",
                     year: "numeric",
                     month: "long",
@@ -300,23 +300,23 @@ export default function TrainingsCalendar({ onDateSelect }) {
 
                 {selectedTrainings.length === 0 ? (
                   <div className="no-training-message">
-                    🏖️ Brak treningów tego dnia
+                     Brak treningów tego dnia
                   </div>
                 ) : (
                   selectedTrainings.map((t) => (
                     <div key={t.trainingID} className="training-list-item">
                       <p>
-                        <strong>🏛️ Miejsce:</strong> {t.trainingPlace}
+                        <strong> Miejsce:</strong> {t.trainingPlace}
                       </p>
                       <p>
-                        <strong>⏰ Godzina:</strong>{" "}
+                        <strong> Godzina:</strong>{" "}
                         {new Date(t.trainingDate).toLocaleTimeString("pl-PL", {
                           hour: "2-digit",
                           minute: "2-digit",
                         })}
                       </p>
                       <p>
-                        <strong>📝 Opis:</strong> {t.trainingDetails || "Standardowy trening"}
+                        <strong> Opis:</strong> {t.trainingDetails || "Standardowy trening"}
                       </p>
                     </div>
                   ))
