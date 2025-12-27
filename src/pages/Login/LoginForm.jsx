@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAPI } from "../../config/api"; // ✅ Import API config
+import { fetchAPI } from "../../config/api";
 
 export default function LoginForm() {
     const [formData, setFormData] = useState({ email: '', password: '' });
@@ -14,20 +14,17 @@ export default function LoginForm() {
         setLoading(true);
 
         try {
-            // ✅ Używamy fetchAPI zamiast hardcoded URL
             const { data } = await fetchAPI('/auth/login', {
                 method: 'POST',
                 body: JSON.stringify(formData),
             });
 
-            // Sprawdź czy konto jest dezaktywowane
             if (data.user.deactivated === 1) {
                 setError("Twoje konto zostało dezaktywowane. Skontaktuj się z administratorem.");
                 setLoading(false);
                 return;
             }
 
-            // Zapisz dane użytkownika
             localStorage.setItem("token", data.token);
             localStorage.setItem("userID", data.user.userID);
             localStorage.setItem("rankID", data.user.rankID);
@@ -39,11 +36,9 @@ export default function LoginForm() {
             localStorage.setItem("lastLog", data.user.lastLog);
             localStorage.setItem("registrationDate", data.user.registrationDate);
 
-            // Powiadom inne komponenty o zalogowaniu
             window.dispatchEvent(new Event("storage"));
 
-            console.log('✅ Zalogowano pomyślnie!');
-            navigate("/frontPage");
+            navigate("/frontpage");
 
         } catch (err) {
             console.error('❌ Błąd logowania:', err);
@@ -78,11 +73,20 @@ export default function LoginForm() {
                 {loading ? 'Logowanie...' : 'Zaloguj się'}
             </button>
 
-            <p className="login-register-text">
+            <p>
+                <span
+                    onClick={() => navigate("/forgot-password")}
+                    style={{ cursor: "pointer" }}
+                >
+                    Zapomniałeś hasła?
+                </span>
+            </p>
+
+            <p>
                 Nie masz konta?{" "}
                 <span
-                    className="login-register-link"
                     onClick={() => navigate("/register")}
+                    style={{ cursor: "pointer" }}
                 >
                     Zarejestruj się
                 </span>
