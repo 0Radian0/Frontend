@@ -1,9 +1,31 @@
-import { useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  const [rankID, setRankID] = useState(Number(localStorage.getItem("rankID")));
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem("token"));
+      setRankID(Number(localStorage.getItem("rankID")));
+    }
+
+    window.addEventListener("storage", handleStorageChange);
+    handleStorageChange();
+
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setIsLoggedIn(false);
+    setRankID(null);
+    navigate("/");
+  }
 
   return (
     <>
@@ -293,6 +315,8 @@ export default function Navbar() {
       {/* Pasek separujący nad menu */}
       <div className="navbar-separator"></div>
 
+      <div className="navbar-separator"></div>
+
       <nav className="navbar">
         <div className="navbar-container">
           <button
@@ -305,126 +329,75 @@ export default function Navbar() {
 
           <ul className={`nav-menu ${mobileMenuOpen ? 'mobile-open' : ''}`}>
             {/* Strona główna */}
-            <li className="nav-item">
-              <a className="nav-link" href="/">
-                Strona główna
-              </a>
-            </li>
+            {location.pathname !== "/" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  Strona główna
+                </Link>
+              </li>
+            )}
 
-            {/* O nas - Z DROPDOWN */}
-            <li 
-              className={`nav-item ${activeDropdown === 'onas' ? 'active' : ''}`}
-              onMouseEnter={() => setActiveDropdown('onas')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="nav-link">
-                O nas <FaAngleDown />
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="/o-nas/kim-jestesmy">
-                    Kim jesteśmy
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/o-nas/treningi">
-                    Treningi
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/o-nas/zarzad">
-                    Zarząd Klubu
-                  </a>
-                </li>
-              </ul>
-            </li>
+            {/* Panel startowy - tylko dla zalogowanych */}
+            {isLoggedIn && location.pathname !== "/frontPage" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/frontPage">
+                  Panel startowy
+                </Link>
+              </li>
+            )}
 
-            {/* Szermierka - Z DROPDOWN */}
-            <li 
-              className={`nav-item ${activeDropdown === 'szermierka' ? 'active' : ''}`}
-              onMouseEnter={() => setActiveDropdown('szermierka')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="nav-link">
-                Szermierka <FaAngleDown />
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a className="dropdown-item" href="/szermierka/wprowadzenie">
-                    Wprowadzenie
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/szermierka/bron">
-                    Broń
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/szermierka/sprzet">
-                    Sprzęt
-                  </a>
-                </li>
-              </ul>
-            </li>
+            {/* Panel treningów - tylko dla zalogowanych */}
+            {isLoggedIn && location.pathname !== "/trainingsPanel" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/trainingsPanel">
+                  Panel treningów
+                </Link>
+              </li>
+            )}
 
-            {/* Rekonstrukcja - Z DROPDOWN I SUBMENU */}
-            <li 
-              className={`nav-item ${activeDropdown === 'rekonstrukcja' ? 'active' : ''}`}
-              onMouseEnter={() => setActiveDropdown('rekonstrukcja')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="nav-link">
-                Rekonstrukcja <FaAngleDown />
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <a 
-                    className="dropdown-item" 
-                    href="https://rycerze.com.pl/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    Stowarzyszeniem Chorągiew Rycerstwa Ziemi Lubelskiej
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="/rekonstrukcja/podstawy-reko">
-                    Podstawy
-                  </a>
-                </li>
-                <li className="dropdown-submenu">
-                  <a className="dropdown-item" href="/rekonstrukcja/hajduk">
-                    Hajduk
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <a className="dropdown-item" href="/rekonstrukcja/hajduk/hajduk-ubior">
-                        Ubiór
-                      </a>
-                    </li>
-                    <li>
-                      <a className="dropdown-item" href="/rekonstrukcja/hajduk/hajduk-ekwipunek">
-                        Ekwipunek
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
+            {/* Płatności - tylko dla zalogowanych */}
+            {isLoggedIn && location.pathname !== "/payments" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/payments">
+                  Płatności
+                </Link>
+              </li>
+            )}
 
-            {/* Kontakt */}
-            <li className="nav-item">
-              <a className="nav-link" href="/kontakt">
-                Kontakt
-              </a>
-            </li>
+            {/* Panel użytkowników - tylko dla adminów */}
+            {isLoggedIn && rankID === 1 && location.pathname !== "/UsersPanel" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/UsersPanel">
+                  Panel użytkowników
+                </Link>
+              </li>
+            )}
 
-            {/* Regulamin */}
-            <li className="nav-item">
-              <a className="nav-link" href="/regulamin">
-                Regulamin
-              </a>
-            </li>
+            {/* Formularz kontaktowy - tylko dla niezalogowanych */}
+            {!isLoggedIn && location.pathname !== "/appForm" && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/appForm">
+                  Formularz kontaktowy
+                </Link>
+              </li>
+            )}
+
+            {/* Logowanie / Wylogowanie */}
+            {isLoggedIn ? (
+              <li className="nav-item">
+                <button className="nav-link" onClick={handleLogout}>
+                  Wyloguj
+                </button>
+              </li>
+            ) : (
+              location.pathname !== "/Login" && (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/Login">
+                    Logowanie
+                  </Link>
+                </li>
+              )
+            )}
           </ul>
         </div>
       </nav>
