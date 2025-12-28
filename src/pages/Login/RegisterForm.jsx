@@ -145,16 +145,7 @@ export default function RegisterForm() {
         </label>
       </div>
 
-      <p className="login-register-text">
-        Masz już konto?{" "}
-        <span
-          className="login-register-link"
-          onClick={() => navigate("/login")}
-          style={{ cursor: "pointer", color: "#1a73e8" }}
-        >
-          Zaloguj się
-        </span>
-      </p>
+      
     </form>
   );
 }

@@ -79,7 +79,7 @@ export default function LoginForm() {
                 {loading ? 'Logowanie...' : 'Zaloguj się'}
             </button>
 
-            <p className="login-register-text">
+            {/* <p className="login-register-text">
                 <span
                     className="login-register-link"
                     onClick={() => navigate("/forgotPass")}
@@ -87,7 +87,7 @@ export default function LoginForm() {
                 >
                     Zapomniałeś hasła?
                 </span>
-            </p>
+            </p> */}
 
             <p className="login-register-text">
                 Nie masz konta?{" "}
