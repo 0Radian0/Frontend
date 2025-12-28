@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAPI } from "../../config/api"; // ✅ Import API config
+import { fetchAPI } from "../../config/api";
 
 export default function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -27,6 +27,10 @@ export default function RegisterForm() {
       setError("Musisz zaakceptować regulamin");
       return;
     }
+    if (formData.password.length < 8) {
+      setError("Hasło musi mieć co najmniej 8 znaków");
+      return;
+    }
     if (formData.password !== formData.confirmPassword) {
       setError("Hasła nie są takie same");
       return;
@@ -34,7 +38,6 @@ export default function RegisterForm() {
 
     // Przygotowanie danych do backendu
     const payload = {
-
       email: formData.email,
       name: formData.firstName,
       surname: formData.lastName,
@@ -44,7 +47,6 @@ export default function RegisterForm() {
     setLoading(true);
 
     try {
-      // ✅ Używamy fetchAPI zamiast hardcoded URL
       const { data } = await fetchAPI('/auth/register', {
         method: 'POST',
         body: JSON.stringify(payload)
@@ -52,7 +54,6 @@ export default function RegisterForm() {
 
       if (data.success) {
         setSuccessMessage(data.message);
-        // Przekierowanie po 3 sekundach
         setTimeout(() => navigate("/login"), 3000);
       }
 
@@ -65,7 +66,6 @@ export default function RegisterForm() {
 
   return (
     <form className="register-form" onSubmit={handleRegister}>
-
       <label>Email</label>
       <input
         type="email"
@@ -73,7 +73,7 @@ export default function RegisterForm() {
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         disabled={loading}
         required
-        placeholder="Wprowadź email"
+        placeholder="twoj@email.com"
       />
 
       <div className="name-row">
@@ -86,6 +86,8 @@ export default function RegisterForm() {
             disabled={loading}
             required
             placeholder="Imię"
+            pattern="^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,2}$"
+            title="Wprowadź poprawne imię (pierwsza litera wielka)"
           />
         </div>
         <div className="name-field">
@@ -97,6 +99,8 @@ export default function RegisterForm() {
             disabled={loading}
             required
             placeholder="Nazwisko"
+            pattern="^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:[-\s][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$"
+            title="Wprowadź poprawne nazwisko (pierwsza litera wielka)"
           />
         </div>
       </div>
@@ -108,7 +112,8 @@ export default function RegisterForm() {
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
         disabled={loading}
         required
-        placeholder="Hasło"
+        minLength="8"
+        placeholder="Co najmniej 8 znaków"
       />
 
       <label>Powtórz hasło</label>
@@ -118,11 +123,12 @@ export default function RegisterForm() {
         onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
         disabled={loading}
         required
+        minLength="8"
         placeholder="Powtórz hasło"
       />
 
-      {error && <p className="register-error">{error}</p>}
-      {successMessage && <p className="success-message">{successMessage}. Przekierowanie...</p>}
+      {error && <p className="register-error" style={{ color: 'red' }}>{error}</p>}
+      {successMessage && <p className="success-message" style={{ color: 'green' }}>{successMessage}. Przekierowanie...</p>}
 
       <div className="register-actions">
         <button type="submit" className="register-btn" disabled={loading}>
@@ -138,6 +144,17 @@ export default function RegisterForm() {
           Przeczytałem i akceptuję regulamin
         </label>
       </div>
+
+      <p className="login-register-text">
+        Masz już konto?{" "}
+        <span
+          className="login-register-link"
+          onClick={() => navigate("/login")}
+          style={{ cursor: "pointer", color: "#1a73e8" }}
+        >
+          Zaloguj się
+        </span>
+      </p>
     </form>
   );
 }

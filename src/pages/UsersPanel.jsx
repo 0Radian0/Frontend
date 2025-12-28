@@ -980,9 +980,7 @@ export default function UsersPanel() {
                                             >
                                                 {user.paymentActive === 1 ? '💳 Wyłącz płatności' : '💰 Włącz płatności'}
                                             </button>
-                                            <button className="btn btn-sm btn-danger" onClick={() => handleDelete(user.userID)}>
-                                                🗑️ Usuń
-                                            </button>
+                                           
                                         </>
                                     )}
                                 </div>

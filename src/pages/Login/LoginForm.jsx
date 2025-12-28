@@ -25,6 +25,7 @@ export default function LoginForm() {
                 return;
             }
 
+            // ✅ Zapisz dane użytkownika
             localStorage.setItem("token", data.token);
             localStorage.setItem("userID", data.user.userID);
             localStorage.setItem("rankID", data.user.rankID);
@@ -38,11 +39,14 @@ export default function LoginForm() {
 
             window.dispatchEvent(new Event("storage"));
 
-            navigate("/frontpage");
+            console.log('✅ Zalogowano pomyślnie!');
+            
+            // ✅ POPRAWIONE: frontPage (wielka litera P)
+            navigate("/frontPage");
 
         } catch (err) {
             console.error('❌ Błąd logowania:', err);
-            setError(err.message || "Wystąpił niespodziewany błąd");
+            setError(err.message || "Wystąpił błąd logowania");
             setLoading(false);
         }
     };
@@ -56,6 +60,7 @@ export default function LoginForm() {
                 onChange={e => setFormData({ ...formData, email: e.target.value })}
                 disabled={loading}
                 required
+                placeholder="Wprowadź email"
             />
 
             <label>Hasło</label>
@@ -65,28 +70,31 @@ export default function LoginForm() {
                 onChange={e => setFormData({ ...formData, password: e.target.value })}
                 disabled={loading}
                 required
+                placeholder="Wprowadź hasło"
             />
 
-            {error && <p className="login-error">{error}</p>}
+            {error && <p className="login-error" style={{ color: 'red' }}>{error}</p>}
 
             <button type="submit" className="login-btn" disabled={loading}>
                 {loading ? 'Logowanie...' : 'Zaloguj się'}
             </button>
 
-            <p>
+            <p className="login-register-text">
                 <span
-                    onClick={() => navigate("/forgot-password")}
-                    style={{ cursor: "pointer" }}
+                    className="login-register-link"
+                    onClick={() => navigate("/forgotPass")}
+                    style={{ cursor: "pointer", color: "#1a73e8" }}
                 >
                     Zapomniałeś hasła?
                 </span>
             </p>
 
-            <p>
+            <p className="login-register-text">
                 Nie masz konta?{" "}
                 <span
+                    className="login-register-link"
                     onClick={() => navigate("/register")}
-                    style={{ cursor: "pointer" }}
+                    style={{ cursor: "pointer", color: "#1a73e8" }}
                 >
                     Zarejestruj się
                 </span>

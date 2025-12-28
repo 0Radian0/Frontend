@@ -147,7 +147,7 @@ function App() {
       </Routes>
 
       <Footer />
-      <Menu />
+     
     </div>
   );
 }
