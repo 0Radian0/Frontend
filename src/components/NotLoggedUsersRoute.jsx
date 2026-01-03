@@ -2,8 +2,10 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 // Funkcja nadająca dostęp do modułu jedynie użytkownikom niezalogoawanym 
-export default function LoggedUsersRoute({ children }) {
+// ✅ DOBRZE
+export default function NotLoggedUsersRoute({ children }) {
     const token = !!localStorage.getItem("token");
-
-    return !token ? children : <Navigate to="/" replace />;
+    
+    // Jeśli user JEST zalogowany, przekieruj do frontPage
+    return token ? <Navigate to="/frontPage" replace /> : children;
 }

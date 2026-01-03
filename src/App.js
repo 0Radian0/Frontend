@@ -11,7 +11,6 @@ import Menu from './components/Menu';
 import UsersPanel from './pages/UsersPanel';
 import AdminRoute from "./components/AdminRoute";
 import LoggedUsersRoute from "./components/LoggedUsersRoute";
-import NotLoggedUsersRoute from "./components/NotLoggedUsersRoute";
 import TrainingsPanel from "./pages/TrainingsPanel";
 import ChangePassword from "./components/ChangePassword";
 import PaymentsPanel from "./pages/PaymentsPanel";
@@ -31,13 +30,9 @@ import Header from "./components/Header";
 import NavMenu from "./components/NavMenu";
 import Footer from "./components/Footer";
 
-//Style
-
+// Style
 import './assets/styles/Style_main/style.css';
-
 import './assets/styles/Style_sub/style_login.css';
-
-
 
 function App() {
   return (
@@ -47,33 +42,24 @@ function App() {
       <NavMenu />
 
       <Routes>
-
-        <Route path="/" element={<Login/>} />
-        {/* Logowanie */}
+        {/* ✅ Strona główna i logowanie */}
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
 
-        {/* Rejestracja / auth */}
+        {/* ✅ Rejestracja */}
         <Route path="/register" element={<Login />} />
+
+        {/* ✅ Publiczne (dostępne dla wszystkich) */}
+        <Route path="/appForm" element={<ApplicationForm />} />
+        <Route path="/forgotPass" element={<ForgotPassword />} />
+        <Route path="/resetPass/:token" element={<ResetPassword />} />
+
+        {/* ✅ Tylko dla niezalogowanych */}
         <Route path="/auth" element={<Authentication />} />
 
-        {/* Reset hasła */}
+        {/* ✅ Strefa zalogowana (poprawione wielkości liter) */}
         <Route
-          path="/forgot-password"
-          element={
-            <NotLoggedUsersRoute>
-              <ForgotPassword />
-            </NotLoggedUsersRoute>
-          }
-        />
-        <Route path="/reset-password/:token" element={<ResetPassword />} />
-
-        {/* Formularz kontaktowy  */}
-        <Route path="/appForm" element={<ApplicationForm />} />
-
-        {/* Strefa zalogowana */}
-        <Route
-          path="/frontpage"
+          path="/frontPage"
           element={
             <LoggedUsersRoute>
               <FrontPage />
@@ -82,16 +68,7 @@ function App() {
         />
 
         <Route
-          path="/userspanel"
-          element={
-            <AdminRoute>
-              <UsersPanel />
-            </AdminRoute>
-          }
-        />
-
-        <Route
-          path="/changepassword"
+          path="/changePassword"
           element={
             <LoggedUsersRoute>
               <ChangePassword />
@@ -100,7 +77,7 @@ function App() {
         />
 
         <Route
-          path="/changedescription"
+          path="/changeDescription"
           element={
             <LoggedUsersRoute>
               <ChangeDescription />
@@ -109,7 +86,7 @@ function App() {
         />
 
         <Route
-          path="/changedata"
+          path="/changeData"
           element={
             <LoggedUsersRoute>
               <ChangeUserData />
@@ -118,7 +95,7 @@ function App() {
         />
 
         <Route
-          path="/trainingspanel"
+          path="/trainingsPanel"
           element={
             <LoggedUsersRoute>
               <TrainingsPanel />
@@ -135,12 +112,21 @@ function App() {
           }
         />
 
-        {/* 404 */}
+        {/* ✅ Strefa admina */}
+        <Route
+          path="/UsersPanel"
+          element={
+            <AdminRoute>
+              <UsersPanel />
+            </AdminRoute>
+          }
+        />
+
+        {/* ✅ 404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 
       <Footer />
-     
     </div>
   );
 }

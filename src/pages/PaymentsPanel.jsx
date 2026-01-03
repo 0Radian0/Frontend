@@ -287,365 +287,365 @@ export default function PaymentsPanel() {
         <>
             <style>{`
                /* ============================================
-   MAIN CONTAINER
-   ============================================ */
-.payments-panel-container {
-    max-width: 1400px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
+    MAIN CONTAINER
+    ============================================ */
+    .payments-panel-container {
+        max-width: 1400px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
 
-/* ============================================
-   HEADER
-   ============================================ */
-.panel-header {
-    background: white;
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px;
-}
-
-.panel-header h1 {
-    font-size: 32px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.panel-header p {
-    color: #666;
-    font-size: 15px;
-}
-
-/* ============================================
-   PAYMENT STATUS CARD
-   ============================================ */
-.payment-status-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 30px;
-    border-radius: 16px;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
-}
-
-.payment-status-card h3 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    opacity: 0.9;
-}
-
-.payment-amount-display {
-    font-size: 48px;
-    font-weight: 700;
-    margin: 10px 0;
-}
-
-.payment-status-badge {
-    display: inline-block;
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* ============================================
-   FILTERS
-   ============================================ */
-.filters-container {
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    margin-bottom: 30px;
-}
-
-.filters-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-}
-
-.filter-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.filter-group label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #555;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.filter-group select {
-    padding: 12px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.filter-group select:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-/* ============================================
-   TABLE
-   ============================================ */
-.payments-table-container {
-    background: white;
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    overflow-x: auto;
-}
-
-.payments-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.payments-table th {
-    background: #f8f9fa;
-    padding: 15px;
-    text-align: left;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 2px solid #e0e0e0;
-    white-space: nowrap;
-}
-
-.payments-table td {
-    padding: 15px;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.payments-table tr:hover {
-    background: #f8f9fa;
-}
-
-.payment-row.overdue {
-    background: #fff3cd;
-}
-
-.payment-row.paid {
-    background: #d4edda;
-}
-
-.status-badge {
-    padding: 6px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.status-badge.paid {
-    background: #d4edda;
-    color: #155724;
-}
-
-.status-badge.unpaid {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.status-badge.overdue {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-/* ============================================
-   BUTTONS
-   ============================================ */
-.btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    margin-right: 8px;
-    margin-bottom: 4px;
-}
-
-.btn-primary {
-    background: #667eea;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #764ba2;
-}
-
-.btn-danger {
-    background: #f44336;
-    color: white;
-}
-
-.btn-danger:hover {
-    background: #d32f2f;
-}
-
-.btn-success {
-    background: #4caf50;
-    color: white;
-}
-
-.btn-success:hover {
-    background: #45a049;
-}
-
-.btn-secondary {
-    background: white;
-    border: 2px solid #e0e0e0;
-    color: #666;
-}
-
-.btn-secondary:hover {
-    background: #f5f5f5;
-}
-
-/* ============================================
-   ADMIN SECTION
-   ============================================ */
-.admin-section {
-    background: white;
-    border-radius: 16px;
-    padding: 30px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-    margin-top: 30px;
-}
-
-.admin-section h2 {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.form-container {
-    background: #f8f9fa;
-    padding: 25px;
-    border-radius: 12px;
-    margin-top: 20px;
-}
-
-/* ============================================
-   STATUS GRID
-   ============================================ */
-.status-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.status-card {
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 20px;
-    transition: all 0.3s ease;
-}
-
-.status-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.status-card.has-debt {
-    border-color: #f44336;
-    background: #fff5f5;
-}
-
-.status-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin-bottom: 15px;
-}
-
-.user-name {
-    font-weight: 700;
-    font-size: 16px;
-    color: #333;
-}
-
-.debt-amount {
-    font-size: 24px;
-    font-weight: 700;
-    color: #f44336;
-}
-
-.debt-amount.paid {
-    color: #4caf50;
-}
-
-/* ============================================
-   LOADING
-   ============================================ */
-.loading-container {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.loading-spinner {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #667eea;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-@media (max-width: 768px) {
-    .filters-grid {
-        grid-template-columns: 1fr;
+    /* ============================================
+    HEADER
+    ============================================ */
+    .panel-header {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
     }
 
     .panel-header h1 {
-        font-size: 24px;
+        font-size: 32px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .panel-header p {
+        color: #666;
+        font-size: 15px;
+    }
+
+    /* ============================================
+    PAYMENT STATUS CARD
+    ============================================ */
+    .payment-status-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 16px;
+        margin-bottom: 30px;
+        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+    }
+
+    .payment-status-card h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        opacity: 0.9;
     }
 
     .payment-amount-display {
-        font-size: 36px;
+        font-size: 48px;
+        font-weight: 700;
+        margin: 10px 0;
     }
 
-    .status-grid {
-        grid-template-columns: 1fr;
+    .payment-status-badge {
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
     }
 
+    /* ============================================
+    FILTERS
+    ============================================ */
+    .filters-container {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+    }
+
+    .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .filter-group label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .filter-group select {
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .filter-group select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    /* ============================================
+    TABLE
+    ============================================ */
     .payments-table-container {
-        padding: 20px;
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        overflow-x: auto;
     }
 
-    .btn {
-        display: block;
+    .payments-table {
         width: 100%;
-        margin-right: 0;
-        margin-bottom: 8px;
+        border-collapse: collapse;
     }
-}
+
+    .payments-table th {
+        background: #f8f9fa;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        color: #333;
+        border-bottom: 2px solid #e0e0e0;
+        white-space: nowrap;
+    }
+
+    .payments-table td {
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .payments-table tr:hover {
+        background: #f8f9fa;
+    }
+
+    .payment-row.overdue {
+        background: #fff3cd;
+    }
+
+    .payment-row.paid {
+        background: #d4edda;
+    }
+
+    .status-badge {
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .status-badge.paid {
+        background: #d4edda;
+        color: #155724;
+    }
+
+    .status-badge.unpaid {
+        background: #fff3cd;
+        color: #856404;
+    }
+
+    .status-badge.overdue {
+        background: #f8d7da;
+        color: #721c24;
+    }
+
+    /* ============================================
+    BUTTONS
+    ============================================ */
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-right: 8px;
+        margin-bottom: 4px;
+    }
+
+    .btn-primary {
+        background: #667eea;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #764ba2;
+    }
+
+    .btn-danger {
+        background: #f44336;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background: #d32f2f;
+    }
+
+    .btn-success {
+        background: #4caf50;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background: #45a049;
+    }
+
+    .btn-secondary {
+        background: white;
+        border: 2px solid #e0e0e0;
+        color: #666;
+    }
+
+    .btn-secondary:hover {
+        background: #f5f5f5;
+    }
+
+    /* ============================================
+    ADMIN SECTION
+    ============================================ */
+    .admin-section {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        margin-top: 30px;
+    }
+
+    .admin-section h2 {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-container {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 12px;
+        margin-top: 20px;
+    }
+
+    /* ============================================
+    STATUS GRID
+    ============================================ */
+    .status-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .status-card {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .status-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-card.has-debt {
+        border-color: #f44336;
+        background: #fff5f5;
+    }
+
+    .status-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 15px;
+    }
+
+    .user-name {
+        font-weight: 700;
+        font-size: 16px;
+        color: #333;
+    }
+
+    .debt-amount {
+        font-size: 24px;
+        font-weight: 700;
+        color: #f44336;
+    }
+
+    .debt-amount.paid {
+        color: #4caf50;
+    }
+
+    /* ============================================
+    LOADING
+    ============================================ */
+    .loading-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .loading-spinner {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* ============================================
+    RESPONSIVE
+    ============================================ */
+    @media (max-width: 768px) {
+        .filters-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .panel-header h1 {
+            font-size: 24px;
+        }
+
+        .payment-amount-display {
+            font-size: 36px;
+        }
+
+        .status-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .payments-table-container {
+            padding: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 8px;
+        }
+    }
             `}</style>
 
             <div className="payments-panel-container">
