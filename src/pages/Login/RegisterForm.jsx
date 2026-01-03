@@ -21,8 +21,6 @@ export default function RegisterForm() {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
-
-    // ✅ Walidacja w JavaScript (zamiast pattern w HTML)
     const nameRegex = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,2}$/;
     const surnameRegex = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:[-\s][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$/;
 

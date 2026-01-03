@@ -1,6 +1,6 @@
-/* ============================================
+/* 
    GŁÓWNY KONTENER DASHBOARDU
-   ============================================ */
+    */
 .dashboard-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -16,9 +16,9 @@
     align-items: start;
 }
 
-/* ============================================
+/* 
    LEWA KOLUMNA - KALENDARZ
-   ============================================ */
+    */
 .calendar-section {
     background: white;
     border-radius: 12px;
@@ -35,9 +35,9 @@
     color: #333;
 }
 
-/* ============================================
+/* 
    PRAWA KOLUMNA - INFORMACJE
-   ============================================ */
+    */
 .info-section {
     display: flex;
     flex-direction: column;
@@ -63,9 +63,9 @@
     color: #333;
 }
 
-/* ============================================
+/* 
    STATUS PŁATNOŚCI
-   ============================================ */
+    */
 .payment-status {
     font-size: 16px;
     padding: 20px;
@@ -95,9 +95,9 @@
     letter-spacing: -1px;
 }
 
-/* ============================================
+/* 
    PRZYCISKI ZARZĄDZANIA
-   ============================================ */
+    */
 .action-buttons {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -126,9 +126,9 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ============================================
+/* 
    OPIS UŻYTKOWNIKA
-   ============================================ */
+    */
 .user-description-content {
     padding: 20px;
     background: #f8f9fa;
@@ -140,9 +140,9 @@
     font-size: 15px;
 }
 
-/* ============================================
+/* 
    SZCZEGÓŁY TRENINGU
-   ============================================ */
+    */
 .training-details {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -192,9 +192,9 @@
     }
 }
 
-/* ============================================
+/* 
    LOADING & ERROR STATES
-   ============================================ */
+    */
 .loading-spinner {
     text-align: center;
     padding: 20px;
@@ -224,9 +224,9 @@
     font-size: 14px;
 }
 
-/* ============================================
+/* 
    RESPONSIVE
-   ============================================ */
+    */
 @media (max-width: 992px) {
     .dashboard-container {
         padding: 20px 15px;

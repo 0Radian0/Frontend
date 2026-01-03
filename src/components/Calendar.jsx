@@ -47,7 +47,7 @@ export default function TrainingsCalendar({ onDateSelect }) {
 
     setSelectedTrainings(filtered);
 
-    // ✅ WAŻNE: Wywołaj callback dla FrontPage
+   
     if (onDateSelect && filtered.length > 0) {
       const firstTraining = filtered[0];
       onDateSelect({
@@ -83,9 +83,9 @@ export default function TrainingsCalendar({ onDateSelect }) {
   return (
     <>
       <style>{`
-        /* ============================================
+        /* 
            REACT-CALENDAR OVERRIDE - Minimalistyczny styl
-           ============================================ */
+            */
         .react-calendar {
           width: 100%;
           border: none;
@@ -205,9 +205,9 @@ export default function TrainingsCalendar({ onDateSelect }) {
           color: #ccc;
         }
 
-        /* ============================================
+        /* 
            SZCZEGÓŁY TRENINGU POD KALENDARZEM
-           ============================================ */
+            */
         .calendar-training-details {
           margin-top: 25px;
           padding: 20px;

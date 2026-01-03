@@ -35,9 +35,9 @@ export default function Navbar() {
   return (
     <>
       <style>{`
-        /* ============================================
+        /* 
            PASEK NAD MENU (SEPARATOR)
-           ============================================ */
+            */
         .navbar-separator {
           height: 1px;
           background: linear-gradient(to right, transparent, #d0d0d0 20%, #d0d0d0 80%, transparent);
@@ -45,9 +45,9 @@ export default function Navbar() {
           max-width: 1400px;
         }
 
-        /* ============================================
+        /* 
            GŁÓWNY KONTENER NAVBAR
-           ============================================ */
+            */
         .navbar {
           background-color: rgba(254, 254, 254, 1);
           padding: 0;
@@ -63,9 +63,9 @@ export default function Navbar() {
           align-items: stretch;
         }
 
-        /* ============================================
+        /* 
            MENU NAWIGACYJNE - Główna lista
-           ============================================ */
+            */
         .nav-menu {
           display: flex;
           list-style: none;
@@ -81,9 +81,9 @@ export default function Navbar() {
           align-items: stretch;
         }
 
-        /* ============================================
+        /* 
            LINKI MENU - Rozmiar tekstu i układ
-           ============================================ */
+            */
         .nav-link {
           display: flex;
           align-items: center;
@@ -112,9 +112,9 @@ export default function Navbar() {
           cursor: not-allowed;
         }
 
-        /* ============================================
+        /* 
            MOBILE MENU
-           ============================================ */
+            */
         .mobile-toggle {
           display: none;
           background: #333;
