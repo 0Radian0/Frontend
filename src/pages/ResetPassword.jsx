@@ -74,9 +74,9 @@ export default function ResetPassword() {
     return (
         <>
             <style>{`
-                /* ============================================
+                /* 
                    KONTENER GŁÓWNY
-                   ============================================ */
+                    */
                 .reset-password-wrapper {
                     min-height: 80vh;
                     display: flex;
@@ -95,9 +95,9 @@ export default function ResetPassword() {
                     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
                 }
 
-                /* ============================================
+                /* 
                    NAGŁÓWEK
-                   ============================================ */
+                    */
                 .reset-password-header {
                     text-align: center;
                     margin-bottom: 30px;
@@ -120,9 +120,9 @@ export default function ResetPassword() {
                     font-size: 14px;
                 }
 
-                /* ============================================
+                /* 
                    FORMULARZ
-                   ============================================ */
+                    */
                 .reset-password-form {
                     display: flex;
                     flex-direction: column;
@@ -185,9 +185,9 @@ export default function ResetPassword() {
                     color: #667eea;
                 }
 
-                /* ============================================
+                /* 
                    SIŁA HASŁA
-                   ============================================ */
+                    */
                 .password-strength {
                     margin-top: 8px;
                 }
@@ -222,9 +222,9 @@ export default function ResetPassword() {
                     color: #666;
                 }
 
-                /* ============================================
+                /* 
                    WYMAGANIA HASŁA
-                   ============================================ */
+                    */
                 .password-requirements {
                     background: #f8f9fa;
                     padding: 12px 16px;
@@ -251,9 +251,9 @@ export default function ResetPassword() {
                     color: #667eea;
                 }
 
-                /* ============================================
+                /* 
                    PRZYCISK
-                   ============================================ */
+                    */
                 .submit-button {
                     width: 100%;
                     padding: 14px 24px;
@@ -279,9 +279,9 @@ export default function ResetPassword() {
                     transform: none;
                 }
 
-                /* ============================================
+                /* 
                    KOMUNIKATY
-                   ============================================ */
+                    */
                 .success-message {
                     background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
                     color: #155724;
@@ -326,9 +326,9 @@ export default function ResetPassword() {
                     font-size: 18px;
                 }
 
-                /* ============================================
+                /* 
                    LOADING SPINNER
-                   ============================================ */
+                    */
                 .loading-spinner {
                     display: inline-block;
                     width: 16px;
@@ -344,9 +344,9 @@ export default function ResetPassword() {
                     to { transform: rotate(360deg); }
                 }
 
-                /* ============================================
+                /* 
                    RESPONSIVE
-                   ============================================ */
+                    */
                 @media (max-width: 576px) {
                     .reset-password-container {
                         padding: 30px 20px;
@@ -362,7 +362,7 @@ export default function ResetPassword() {
                 <div className="reset-password-container">
                     {message ? (
                         <div className="success-message">
-                            <div className="icon">✅</div>
+                            <div className="icon"></div>
                             <h3>Sukces!</h3>
                             <p>{message}</p>
                             <p style={{ marginTop: '10px', fontSize: '13px' }}>
@@ -372,7 +372,7 @@ export default function ResetPassword() {
                     ) : (
                         <>
                             <div className="reset-password-header">
-                                <div className="reset-password-icon">🔒</div>
+                                <div className="reset-password-icon"></div>
                                 <h2>Zmiana hasła</h2>
                                 <p>Wprowadź nowe, bezpieczne hasło do swojego konta</p>
                             </div>

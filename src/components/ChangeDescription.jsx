@@ -78,9 +78,9 @@ export default function ChangeDescription() {
     return (
         <>
             <style>{`
-                /* ============================================
+                /* 
                    KONTENER GŁÓWNY
-                   ============================================ */
+                    */
                 .change-description-container {
                     max-width: 900px;
                     margin: 40px auto;
@@ -90,9 +90,9 @@ export default function ChangeDescription() {
                     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
                 }
 
-                /* ============================================
+                /* 
                    NAGŁÓWEK
-                   ============================================ */
+                    */
                 .change-description-header {
                     margin-bottom: 30px;
                 }
@@ -113,9 +113,9 @@ export default function ChangeDescription() {
                     line-height: 1.6;
                 }
 
-                /* ============================================
+                /* 
                    BREADCRUMB
-                   ============================================ */
+                    */
                 .breadcrumb {
                     display: flex;
                     align-items: center;
@@ -139,9 +139,9 @@ export default function ChangeDescription() {
                     color: #999;
                 }
 
-                /* ============================================
+                /* 
                    CURRENT DESCRIPTION
-                   ============================================ */
+                    */
                 .current-description-box {
                     background: #f8f9fa;
                     border-radius: 12px;
@@ -167,9 +167,9 @@ export default function ChangeDescription() {
                     white-space: pre-wrap;
                 }
 
-                /* ============================================
+                /* 
                    INFO BOX
-                   ============================================ */
+                    */
                 .info-box {
                     background: #e3f2fd;
                     border-left: 4px solid #2196f3;
@@ -195,9 +195,9 @@ export default function ChangeDescription() {
                     margin: 4px 0;
                 }
 
-                /* ============================================
+                /* 
                    FORMULARZ
-                   ============================================ */
+                   */
                 .change-description-form {
                     display: flex;
                     flex-direction: column;
@@ -266,9 +266,9 @@ export default function ChangeDescription() {
                     border-color: #4caf50;
                 }
 
-                /* ============================================
+                /* 
                    LIVE PREVIEW
-                   ============================================ */
+                    */
                 .live-preview {
                     background: #fff;
                     border: 2px dashed #e0e0e0;
@@ -301,9 +301,9 @@ export default function ChangeDescription() {
                     padding: 20px;
                 }
 
-                /* ============================================
+                /* 
                    PRZYCISKI
-                   ============================================ */
+                    */
                 .form-actions {
                     display: flex;
                     gap: 12px;
@@ -363,9 +363,9 @@ export default function ChangeDescription() {
                     cursor: not-allowed;
                 }
 
-                /* ============================================
+                /* 
                    KOMUNIKATY
-                   ============================================ */
+                    */
                 .success-message {
                     background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
                     color: #155724;
@@ -419,9 +419,9 @@ export default function ChangeDescription() {
                     75% { transform: translateX(5px); }
                 }
 
-                /* ============================================
+                /* 
                    LOADING SPINNER
-                   ============================================ */
+                    */
                 .loading-spinner {
                     display: inline-block;
                     width: 16px;
@@ -436,9 +436,9 @@ export default function ChangeDescription() {
                     to { transform: rotate(360deg); }
                 }
 
-                /* ============================================
+                /* 
                    RESPONSIVE
-                   ============================================ */
+                    */
                 @media (max-width: 768px) {
                     .change-description-container {
                         margin: 20px;
@@ -468,7 +468,7 @@ export default function ChangeDescription() {
 
                 <div className="change-description-header">
                     <h2>
-                        <span>📝</span>
+                        <span></span>
                         Zmiana opisu użytkownika
                     </h2>
                     <p>Opowiedz społeczności o sobie i swojej przygodzie z HEMA</p>
@@ -487,7 +487,7 @@ export default function ChangeDescription() {
                     <>
                         <div className="current-description-box">
                             <h3>
-                                <span>📄</span>
+                                <span></span>
                                 Twój obecny opis:
                             </h3>
                             <div className="current-description-text">
@@ -496,7 +496,7 @@ export default function ChangeDescription() {
                         </div>
 
                         <div className="info-box">
-                            <strong>💡 Co warto zawrzeć w opisie:</strong>
+                            <strong> Co warto zawrzeć w opisie:</strong>
                             <ul>
                                 <li>Jak zaczęła się Twoja przygoda z HEMA</li>
                                 <li>Jaką bronią się interesujesz</li>
@@ -508,7 +508,7 @@ export default function ChangeDescription() {
                         <form className="change-description-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="newDescription">
-                                    <span>✏️ Nowy opis</span>
+                                    <span> Nowy opis</span>
                                     <span className={`char-counter ${charRemaining < 100 ? 'warning' : ''} ${charRemaining < 0 ? 'danger' : ''}`}>
                                         {charCount} / {MAX_LENGTH} znaków
                                         {charRemaining < 0 && ` (${Math.abs(charRemaining)} za dużo)`}
@@ -531,7 +531,7 @@ export default function ChangeDescription() {
                             {newDescription.trim() && (
                                 <div className="live-preview">
                                     <h4>
-                                        <span>👁️</span>
+                                        <span></span>
                                         Podgląd na żywo:
                                     </h4>
                                     <div className="preview-content">

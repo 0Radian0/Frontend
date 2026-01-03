@@ -4,9 +4,9 @@ const Footer = () => {
   return (
     <>
       <style>{`
-        /* ============================================
+        /* 
            FOOTER - Główny kontener
-           ============================================ */
+            */
         .footer {
           margin-top: 100px;
           text-align: left;
@@ -25,9 +25,9 @@ const Footer = () => {
           gap: 60px;
         }
 
-        /* ============================================
+        /* 
            KOLUMNA 1 - Informacje o klubie
-           ============================================ */
+            */
         .footer-column h2 {
           font-size: 22px;
           font-weight: 700;
@@ -44,9 +44,9 @@ const Footer = () => {
           color: rgba(255, 255, 255, 0.8);
         }
 
-        /* ============================================
+        /* 
            KOLUMNA 2 i 3 - Linki
-           ============================================ */
+            */
         .footer-column h3 {
           font-size: 16px;
           font-weight: 700;
@@ -88,9 +88,9 @@ const Footer = () => {
           color: #fff;
         }
 
-        /* ============================================
+        /* 
            RESPONSIVE - Mobile
-           ============================================ */
+            */
         @media (max-width: 992px) {
           .footer-container {
             grid-template-columns: 1fr;
@@ -123,16 +123,17 @@ const Footer = () => {
             <h3>Na skróty</h3>
             <ul className="footer-links">
               <li>
-                <a href="/o-nas">O nas</a>
+                <a href="https://szermierka.pollub.pl/o-nas/kim-jestesmy" >O nas</a>
+              </li>
+             
+              <li>
+                <a href="https://szermierka.pollub.pl/rekonstrukcja/podstawy-reko">Rekonstrukcja</a>
+              </li>
+               <li>
+                <a href="/appForm">Formularz kontaktowy</a>
               </li>
               <li>
-                <a href="/sport/podstawy">HEMA</a>
-              </li>
-              <li>
-                <a href="/rekonstrukcja/podstawy-reko">Rekonstrukcja</a>
-              </li>
-              <li>
-                <a href="/kontakt">Kontakt</a>
+                <a href="https://szermierka.pollub.pl/kontakt">Kontakt</a>
               </li>
             </ul>
           </div>

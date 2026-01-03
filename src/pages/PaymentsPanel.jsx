@@ -286,18 +286,18 @@ export default function PaymentsPanel() {
     return (
         <>
             <style>{`
-               /* ============================================
+               /* 
     MAIN CONTAINER
-    ============================================ */
+     */
     .payments-panel-container {
         max-width: 1400px;
         margin: 40px auto;
         padding: 0 20px;
     }
 
-    /* ============================================
+    /* 
     HEADER
-    ============================================ */
+     */
     .panel-header {
         background: white;
         padding: 30px;
@@ -321,9 +321,9 @@ export default function PaymentsPanel() {
         font-size: 15px;
     }
 
-    /* ============================================
+    /* 
     PAYMENT STATUS CARD
-    ============================================ */
+     */
     .payment-status-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
@@ -354,9 +354,9 @@ export default function PaymentsPanel() {
         font-weight: 600;
     }
 
-    /* ============================================
+    /* 
     FILTERS
-    ============================================ */
+     */
     .filters-container {
         background: white;
         padding: 25px;
@@ -399,9 +399,9 @@ export default function PaymentsPanel() {
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
 
-    /* ============================================
+    /* 
     TABLE
-    ============================================ */
+     */
     .payments-table-container {
         background: white;
         border-radius: 16px;
@@ -465,9 +465,9 @@ export default function PaymentsPanel() {
         color: #721c24;
     }
 
-    /* ============================================
+    /* 
     BUTTONS
-    ============================================ */
+     */
     .btn {
         padding: 8px 16px;
         border: none;
@@ -517,9 +517,9 @@ export default function PaymentsPanel() {
         background: #f5f5f5;
     }
 
-    /* ============================================
+    /* 
     ADMIN SECTION
-    ============================================ */
+     */
     .admin-section {
         background: white;
         border-radius: 16px;
@@ -542,9 +542,9 @@ export default function PaymentsPanel() {
         margin-top: 20px;
     }
 
-    /* ============================================
+    /* 
     STATUS GRID
-    ============================================ */
+     */
     .status-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -592,9 +592,9 @@ export default function PaymentsPanel() {
         color: #4caf50;
     }
 
-    /* ============================================
+    /* 
     LOADING
-    ============================================ */
+     */
     .loading-container {
         text-align: center;
         padding: 60px 20px;
@@ -615,9 +615,9 @@ export default function PaymentsPanel() {
         100% { transform: rotate(360deg); }
     }
 
-    /* ============================================
+    /* 
     RESPONSIVE
-    ============================================ */
+     */
     @media (max-width: 768px) {
         .filters-grid {
             grid-template-columns: 1fr;
@@ -658,7 +658,7 @@ export default function PaymentsPanel() {
                 {/* STATUS CARD - tylko dla użytkownika */}
                 {!isAdmin && (
                     <div className="payment-status-card">
-                        <h3>💰 Twój status płatności</h3>
+                        <h3> Twój status płatności</h3>
                         <div className="payment-amount-display">
                             {sumToPay > 0 ? `${sumToPay.toFixed(2)} zł` : '0.00 zł'}
                         </div>
@@ -672,7 +672,7 @@ export default function PaymentsPanel() {
                 <div className="filters-container">
                     <div className="filters-grid">
                         <div className="filter-group">
-                            <label>📊 Filtruj płatności</label>
+                            <label> Filtruj płatności</label>
                             <select value={filter} onChange={e => setFilter(e.target.value)}>
                                 <option value="all">Wszystkie płatności</option>
                                 <option value="paid">Opłacone</option>
@@ -682,7 +682,7 @@ export default function PaymentsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>🔄 Sortuj po</label>
+                            <label> Sortuj po</label>
                             <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
                                 <option value="paymentDate">Data płatności</option>
                                 <option value="dueDate">Termin</option>
@@ -691,7 +691,7 @@ export default function PaymentsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>⬆️ Kolejność</label>
+                            <label>⬆ Kolejność</label>
                             <select value={order} onChange={e => setOrder(e.target.value)}>
                                 <option value="ASC">Rosnąco</option>
                                 <option value="DESC">Malejąco</option>
@@ -700,7 +700,7 @@ export default function PaymentsPanel() {
 
                         {isAdmin && (
                             <div className="filter-group">
-                                <label>👤 Użytkownik</label>
+                                <label> Użytkownik</label>
                                 <select value={userToShowHistory} onChange={e => setUserToShowHistory(e.target.value)}>
                                     <option value="all">Wszyscy</option>
                                     {usersList.map(u => (
@@ -716,7 +716,7 @@ export default function PaymentsPanel() {
 
                 {/* TABELA PŁATNOŚCI */}
                 <div className="payments-table-container">
-                    <h2 style={{marginBottom: '20px'}}>📜 Historia Płatności</h2>
+                    <h2 style={{marginBottom: '20px'}}> Historia Płatności</h2>
                     {loading ? (
                         <div className="loading-container">
                             <div className="loading-spinner"></div>
@@ -730,11 +730,11 @@ export default function PaymentsPanel() {
                         <table className="payments-table">
                             <thead>
                                 <tr>
-                                    {isAdmin && <th>👤 Użytkownik</th>}
-                                    <th>📅 Data płatności</th>
-                                    <th>⏰ Termin</th>
-                                    <th>💵 Kwota</th>
-                                    <th>📊 Status</th>
+                                    {isAdmin && <th> Użytkownik</th>}
+                                    <th> Data płatności</th>
+                                    <th> Termin</th>
+                                    <th> Kwota</th>
+                                    <th> Status</th>
                                     {isAdmin && <th>⚙️ Opcje</th>}
                                 </tr>
                             </thead>
@@ -785,7 +785,7 @@ export default function PaymentsPanel() {
                             {form && (
                                 <div className="form-container">
                                     <button className="btn btn-secondary" onClick={() => setPressedMultiple(!pressedMultiple)} style={{marginBottom: '15px'}}>
-                                        {pressedMultiple ? '👤 Pojedyncza' : '👥 Dla wszystkich'}
+                                        {pressedMultiple ? ' Pojedyncza' : ' Dla wszystkich'}
                                     </button>
 
                                     <form onSubmit={pressedMultiple ? handleMultipleAdd : handleSingleAdd}>

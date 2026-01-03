@@ -95,9 +95,9 @@ export default function ChangeUserData() {
     return (
         <>
             <style>{`
-                /* ============================================
+                /* 
                    KONTENER GŁÓWNY
-                   ============================================ */
+                    */
                 .change-data-container {
                     max-width: 700px;
                     margin: 40px auto;
@@ -107,9 +107,9 @@ export default function ChangeUserData() {
                     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
                 }
 
-                /* ============================================
+                /* 
                    NAGŁÓWEK
-                   ============================================ */
+                    */
                 .change-data-header {
                     margin-bottom: 30px;
                 }
@@ -130,9 +130,9 @@ export default function ChangeUserData() {
                     line-height: 1.6;
                 }
 
-                /* ============================================
+                /* 
                    BREADCRUMB
-                   ============================================ */
+                    */
                 .breadcrumb {
                     display: flex;
                     align-items: center;
@@ -156,9 +156,9 @@ export default function ChangeUserData() {
                     color: #999;
                 }
 
-                /* ============================================
+                /* 
                    INFO ALERT
-                   ============================================ */
+                    */
                 .info-alert {
                     background: #fff3cd;
                     border-left: 4px solid #ffc107;
@@ -177,9 +177,9 @@ export default function ChangeUserData() {
                     flex-shrink: 0;
                 }
 
-                /* ============================================
+                /* 
                    CURRENT DATA DISPLAY
-                   ============================================ */
+                    */
                 .current-data-box {
                     background: #f8f9fa;
                     border-radius: 12px;
@@ -221,9 +221,9 @@ export default function ChangeUserData() {
                     font-weight: 500;
                 }
 
-                /* ============================================
+                /* 
                    FORMULARZ
-                   ============================================ */
+                    */
                 .change-data-form {
                     display: flex;
                     flex-direction: column;
@@ -277,9 +277,9 @@ export default function ChangeUserData() {
                     margin-top: 4px;
                 }
 
-                /* ============================================
+                /* 
                    PRZYCISKI
-                   ============================================ */
+                    */
                 .form-actions {
                     display: flex;
                     gap: 12px;
@@ -339,9 +339,9 @@ export default function ChangeUserData() {
                     cursor: not-allowed;
                 }
 
-                /* ============================================
+                /* 
                    KOMUNIKATY
-                   ============================================ */
+                    */
                 .success-message {
                     background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
                     color: #155724;
@@ -395,9 +395,9 @@ export default function ChangeUserData() {
                     75% { transform: translateX(5px); }
                 }
 
-                /* ============================================
+                /* 
                    CHANGES INDICATOR
-                   ============================================ */
+                    */
                 .changes-indicator {
                     background: #fff3cd;
                     color: #856404;
@@ -415,9 +415,9 @@ export default function ChangeUserData() {
                     font-size: 18px;
                 }
 
-                /* ============================================
+                /* 
                    LOADING SPINNER
-                   ============================================ */
+                    */
                 .loading-spinner {
                     display: inline-block;
                     width: 16px;
@@ -432,9 +432,9 @@ export default function ChangeUserData() {
                     to { transform: rotate(360deg); }
                 }
 
-                /* ============================================
+                /* 
                    RESPONSIVE
-                   ============================================ */
+                    */
                 @media (max-width: 768px) {
                     .change-data-container {
                         margin: 20px;
@@ -465,7 +465,7 @@ export default function ChangeUserData() {
 
                 <div className="change-data-header">
                     <h2>
-                        <span>👤</span>
+                        <span></span>
                         Zmiana danych użytkownika
                     </h2>
                     <p>Zaktualizuj swoje dane osobowe. Upewnij się, że wszystkie informacje są poprawne.</p>
@@ -494,7 +494,7 @@ export default function ChangeUserData() {
                 ) : (
                     <>
                         <div className="current-data-box">
-                            <h3>📋 Aktualne dane</h3>
+                            <h3> Aktualne dane</h3>
                             <div className="data-item">
                                 <span className="data-label">Email:</span>
                                 <span className="data-value">{getInitialUser().email}</span>
@@ -512,7 +512,7 @@ export default function ChangeUserData() {
                         <form className="change-data-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="email">
-                                    📧 Adres e-mail
+                                     Adres e-mail
                                 </label>
                                 <input
                                     type="email"
@@ -532,7 +532,7 @@ export default function ChangeUserData() {
 
                             <div className="form-group">
                                 <label htmlFor="name">
-                                    ✏️ Imię
+                                     Imię
                                 </label>
                                 <input
                                     type="text"
@@ -552,7 +552,7 @@ export default function ChangeUserData() {
 
                             <div className="form-group">
                                 <label htmlFor="surname">
-                                    ✏️ Nazwisko
+                                     Nazwisko
                                 </label>
                                 <input
                                     type="text"

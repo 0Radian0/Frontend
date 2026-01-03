@@ -1,6 +1,6 @@
-/* ============================================
+/* 
    AUTH CARD CONTAINER (DARK)
-   ============================================ */
+    */
 .auth-card {
     background: #0f0f12;
     padding: 32px;
@@ -11,9 +11,9 @@
     margin: 0 auto;
 }
 
-/* ============================================
+/* 
    HEADINGS & TEXT
-   ============================================ */
+    */
 .auth-card h2 {
     font-size: 24px;
     font-weight: 700;
@@ -27,9 +27,9 @@
     margin-bottom: 24px;
 }
 
-/* ============================================
+/* 
    FORM
-   ============================================ */
+    */
 .register-form {
     display: flex;
     flex-direction: column;
@@ -47,9 +47,9 @@
     flex-direction: column;
 }
 
-/* ============================================
+/* 
    LABELS
-   ============================================ */
+    */
 .register-form label {
     font-size: 13px;
     font-weight: 600;
@@ -57,9 +57,9 @@
     margin-bottom: 6px;
 }
 
-/* ============================================
+/* 
    INPUTS (DARK)
-   ============================================ */
+    */
 .register-form input {
     background: #1a1a1f;
     color: #ffffff;
@@ -80,9 +80,9 @@
     box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.25);
 }
 
-/* ============================================
+/* 
    ACTIONS
-   ============================================ */
+    */
 .register-actions {
     display: flex;
     align-items: center;
@@ -90,9 +90,9 @@
     margin-top: 10px;
 }
 
-/* ============================================
+/* 
    BUTTON
-   ============================================ */
+    */
 .register-btn {
     background: linear-gradient(135deg, #ff9800, #f57c00);
     color: #111;
@@ -115,9 +115,9 @@
     transform: translateY(0);
 }
 
-/* ============================================
+/* 
    TERMS
-   ============================================ */
+    */
 .terms-label {
     font-size: 13px;
     color: #bdbdbd;
@@ -131,9 +131,9 @@
     accent-color: #ff9800;
 }
 
-/* ============================================
+/* 
    SWITCH LOGIN / REGISTER
-   ============================================ */
+    */
 .login-register-text,
 .login-switch {
     margin-top: 20px;
@@ -157,9 +157,9 @@
     text-decoration: underline;
 }
 
-/* ============================================
+/* 
    ERRORS
-   ============================================ */
+    */
 .register-error {
     background: rgba(244, 67, 54, 0.15);
     color: #ff8a80;
@@ -170,9 +170,9 @@
     border: 1px solid rgba(244, 67, 54, 0.4);
 }
 
-/* ============================================
+/* 
    RESPONSIVE
-   ============================================ */
+    */
 @media (max-width: 480px) {
     .auth-card {
         padding: 24px;

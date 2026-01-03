@@ -86,9 +86,9 @@ export default function ChangePassword() {
     return (
         <>
             <style>{`
-                /* ============================================
+                /* 
                    KONTENER GŁÓWNY
-                   ============================================ */
+                    */
                 .change-password-container {
                     max-width: 600px;
                     margin: 40px auto;
@@ -98,9 +98,9 @@ export default function ChangePassword() {
                     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
                 }
 
-                /* ============================================
+                /* 
                    NAGŁÓWEK
-                   ============================================ */
+                    */
                 .change-password-header {
                     margin-bottom: 30px;
                 }
@@ -120,9 +120,9 @@ export default function ChangePassword() {
                     font-size: 14px;
                 }
 
-                /* ============================================
+                /* 
                    BREADCRUMB
-                   ============================================ */
+                    */
                 .breadcrumb {
                     display: flex;
                     align-items: center;
@@ -146,9 +146,9 @@ export default function ChangePassword() {
                     color: #999;
                 }
 
-                /* ============================================
+                /* 
                    FORMULARZ
-                   ============================================ */
+                    */
                 .change-password-form {
                     display: flex;
                     flex-direction: column;
@@ -210,9 +210,9 @@ export default function ChangePassword() {
                     color: #667eea;
                 }
 
-                /* ============================================
+                /* 
                    SIŁA HASŁA
-                   ============================================ */
+                    */
                 .password-strength {
                     margin-top: 8px;
                 }
@@ -247,9 +247,9 @@ export default function ChangePassword() {
                     color: #666;
                 }
 
-                /* ============================================
+                /* 
                    INFO BOX
-                   ============================================ */
+                    */
                 .info-box {
                     background: #e3f2fd;
                     border-left: 4px solid #2196f3;
@@ -274,9 +274,9 @@ export default function ChangePassword() {
                     margin: 4px 0;
                 }
 
-                /* ============================================
+                /* 
                    PRZYCISKI
-                   ============================================ */
+                    */
                 .form-actions {
                     display: flex;
                     gap: 12px;
@@ -324,9 +324,9 @@ export default function ChangePassword() {
                     border-color: #ccc;
                 }
 
-                /* ============================================
+                /* 
                    KOMUNIKATY
-                   ============================================ */
+                    */
                 .success-message {
                     background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
                     color: #155724;
@@ -380,9 +380,9 @@ export default function ChangePassword() {
                     75% { transform: translateX(5px); }
                 }
 
-                /* ============================================
+                /* 
                    LOADING SPINNER
-                   ============================================ */
+                    */
                 .loading-spinner {
                     display: inline-block;
                     width: 16px;
@@ -398,9 +398,9 @@ export default function ChangePassword() {
                     to { transform: rotate(360deg); }
                 }
 
-                /* ============================================
+                /* 
                    RESPONSIVE
-                   ============================================ */
+                    */
                 @media (max-width: 768px) {
                     .change-password-container {
                         margin: 20px;
@@ -430,7 +430,7 @@ export default function ChangePassword() {
 
                 <div className="change-password-header">
                     <h2>
-                        <span>🔒</span>
+                        <span></span>
                         Zmiana hasła
                     </h2>
                     <p>Zaktualizuj hasło do swojego konta</p>
@@ -542,7 +542,7 @@ export default function ChangePassword() {
                         </div>
 
                         <div className="info-box">
-                            <strong>💡 Wskazówki dotyczące bezpiecznego hasła:</strong>
+                            <strong> Wskazówki dotyczące bezpiecznego hasła:</strong>
                             <ul>
                                 <li>Używaj co najmniej 8 znaków</li>
                                 <li>Połącz małe i wielkie litery</li>

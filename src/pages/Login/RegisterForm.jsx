@@ -22,9 +22,20 @@ export default function RegisterForm() {
     setError("");
     setSuccessMessage("");
 
-    // Walidacja
+    // ✅ Walidacja w JavaScript (zamiast pattern w HTML)
+    const nameRegex = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,2}$/;
+    const surnameRegex = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:[-\s][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$/;
+
     if (!formData.acceptedTerms) {
       setError("Musisz zaakceptować regulamin");
+      return;
+    }
+    if (!nameRegex.test(formData.firstName)) {
+      setError("Imię musi zaczynać się wielką literą");
+      return;
+    }
+    if (!surnameRegex.test(formData.lastName)) {
+      setError("Nazwisko musi zaczynać się wielką literą");
       return;
     }
     if (formData.password.length < 8) {
@@ -36,7 +47,6 @@ export default function RegisterForm() {
       return;
     }
 
-    // Przygotowanie danych do backendu
     const payload = {
       email: formData.email,
       name: formData.firstName,
@@ -85,9 +95,8 @@ export default function RegisterForm() {
             onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
             disabled={loading}
             required
-            placeholder="Imię"
-            pattern="^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,2}$"
-            title="Wprowadź poprawne imię (pierwsza litera wielka)"
+            placeholder="Jan"
+            /* ❌ USUŃ pattern - przeniesione do JS */
           />
         </div>
         <div className="name-field">
@@ -98,9 +107,8 @@ export default function RegisterForm() {
             onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
             disabled={loading}
             required
-            placeholder="Nazwisko"
-            pattern="^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:[-\s][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$"
-            title="Wprowadź poprawne nazwisko (pierwsza litera wielka)"
+            placeholder="Kowalski"
+            /* ❌ USUŃ pattern - przeniesione do JS */
           />
         </div>
       </div>
@@ -145,7 +153,16 @@ export default function RegisterForm() {
         </label>
       </div>
 
-      
+      <p className="login-register-text">
+        Masz już konto?{" "}
+        <span
+          className="login-register-link"
+          onClick={() => navigate("/login")}
+          style={{ cursor: "pointer", color: "#1a73e8" }}
+        >
+          Zaloguj się
+        </span>
+      </p>
     </form>
   );
 }
