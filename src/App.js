@@ -68,15 +68,8 @@ function App() {
         />
         <Route path="/reset-password/:token" element={<ResetPassword />} />
 
-        {/* Formularz */}
-        <Route
-          path="/appForm"
-          element={
-            <NotLoggedUsersRoute>
-              <ApplicationForm />
-            </NotLoggedUsersRoute>
-          }
-        />
+        {/* Formularz kontaktowy  */}
+        <Route path="/appForm" element={<ApplicationForm />} />
 
         {/* Strefa zalogowana */}
         <Route
