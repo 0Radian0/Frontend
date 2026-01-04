@@ -52,7 +52,7 @@ function App() {
         {/* ✅ Publiczne (dostępne dla wszystkich) */}
         <Route path="/appForm" element={<ApplicationForm />} />
         <Route path="/forgotPass" element={<ForgotPassword />} />
-        <Route path="/resetPass/:token" element={<ResetPassword />} />
+        <Route path="/resetPass/:token" element={<ResetPassword />} /> 
 
         {/* ✅ Tylko dla niezalogowanych */}
         <Route path="/auth" element={<Authentication />} />

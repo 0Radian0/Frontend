@@ -129,8 +129,10 @@ const Footer = () => {
               <li>
                 <a href="https://szermierka.pollub.pl/rekonstrukcja/podstawy-reko">Rekonstrukcja</a>
               </li>
-               <li>
-                <a href="/appForm">Formularz kontaktowy</a>
+               <li className="nav-item">
+                <Link className="nav-link" to="/appForm">
+                  Formularz kontaktowy
+                </Link>
               </li>
               <li>
                 <a href="https://szermierka.pollub.pl/kontakt">Kontakt</a>
