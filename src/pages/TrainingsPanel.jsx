@@ -572,7 +572,7 @@ export default function TrainingsPanel() {
             <div className="trainings-panel-container">
                 <div className="panel-header">
                     <h1>
-                        <span></span>
+                        <span>🥋</span>
                         Panel Treningów
                     </h1>
                     <p>Zarządzaj treningami, zapisuj się i sprawdzaj uczestników</p>
@@ -581,7 +581,7 @@ export default function TrainingsPanel() {
                 <div className="filters-container">
                     <div className="filters-grid">
                         <div className="filter-group">
-                            <label> Filtruj treningi</label>
+                            <label>📅 Filtruj treningi</label>
                             <select value={filter} onChange={e => setFilter(e.target.value)}>
                                 <option value="all">Wszystkie treningi</option>
                                 <option value="new">Przyszłe treningi</option>
@@ -592,7 +592,7 @@ export default function TrainingsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label> Moje treningi</label>
+                            <label>👤 Moje treningi</label>
                             <select value={userTrainingFilter} onChange={e => setUserTrainingFilter(e.target.value)}>
                                 <option value="all">Wszystkie treningi</option>
                                 <option value="userTrainings">Tylko moje zapisy</option>
@@ -600,7 +600,7 @@ export default function TrainingsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label> Sortuj po</label>
+                            <label>🔄 Sortuj po</label>
                             <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
                                 <option value="trainingDate">Data</option>
                                 <option value="trainingPlace">Miejsce</option>
@@ -609,7 +609,7 @@ export default function TrainingsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>⬆ Kolejność</label>
+                            <label>⬆️ Kolejność</label>
                             <select value={order} onChange={e => setOrder(e.target.value)}>
                                 <option value="ASC">Rosnąco</option>
                                 <option value="DESC">Malejąco</option>
@@ -622,13 +622,13 @@ export default function TrainingsPanel() {
                             className={`view-button ${viewMode === 'cards' ? 'active' : ''}`}
                             onClick={() => setViewMode('cards')}
                         >
-                             Karty
+                            📇 Karty
                         </button>
                         <button 
                             className={`view-button ${viewMode === 'table' ? 'active' : ''}`}
                             onClick={() => setViewMode('table')}
                         >
-                             Tabela
+                            📊 Tabela
                         </button>
                     </div>
                 </div>
@@ -650,9 +650,9 @@ export default function TrainingsPanel() {
                             <div key={el.trainingID} className={`training-card ${isTrainingPast(el.trainingDate) ? 'past' : ''}`}>
                                 <div className="training-header">
                                     <div className="training-date">
-                                         {new Date(el.trainingDate).toLocaleDateString('pl-PL')}
+                                        📅 {new Date(el.trainingDate).toLocaleDateString('pl-PL')}
                                         <div style={{fontSize: '14px', fontWeight: '400', color: '#666', marginTop: '4px'}}>
-                                             {new Date(el.trainingDate).toLocaleTimeString('pl-PL', {hour: '2-digit', minute: '2-digit'})}
+                                            ⏰ {new Date(el.trainingDate).toLocaleTimeString('pl-PL', {hour: '2-digit', minute: '2-digit'})}
                                         </div>
                                     </div>
                                     <span className={`training-badge ${isTrainingPast(el.trainingDate) ? 'past' : 'upcoming'}`}>
@@ -662,14 +662,14 @@ export default function TrainingsPanel() {
 
                                 <div className="training-info">
                                     <div className="training-info-item">
-                                        <span></span>
+                                        <span>📍</span>
                                         <div>
                                             <strong>Miejsce:</strong> {el.trainingPlace}
                                         </div>
                                     </div>
                                     {el.trainingDetails && (
                                         <div className="training-info-item">
-                                            <span></span>
+                                            <span>📝</span>
                                             <div>
                                                 <strong>Szczegóły:</strong> {el.trainingDetails}
                                             </div>

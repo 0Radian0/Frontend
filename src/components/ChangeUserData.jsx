@@ -465,7 +465,7 @@ export default function ChangeUserData() {
 
                 <div className="change-data-header">
                     <h2>
-                        <span></span>
+                        <span>👤</span>
                         Zmiana danych użytkownika
                     </h2>
                     <p>Zaktualizuj swoje dane osobowe. Upewnij się, że wszystkie informacje są poprawne.</p>
@@ -494,7 +494,7 @@ export default function ChangeUserData() {
                 ) : (
                     <>
                         <div className="current-data-box">
-                            <h3> Aktualne dane</h3>
+                            <h3>📋 Aktualne dane</h3>
                             <div className="data-item">
                                 <span className="data-label">Email:</span>
                                 <span className="data-value">{getInitialUser().email}</span>
@@ -512,7 +512,7 @@ export default function ChangeUserData() {
                         <form className="change-data-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="email">
-                                     Adres e-mail
+                                    📧 Adres e-mail
                                 </label>
                                 <input
                                     type="email"
@@ -532,7 +532,7 @@ export default function ChangeUserData() {
 
                             <div className="form-group">
                                 <label htmlFor="name">
-                                     Imię
+                                    ✏️ Imię
                                 </label>
                                 <input
                                     type="text"
@@ -552,7 +552,7 @@ export default function ChangeUserData() {
 
                             <div className="form-group">
                                 <label htmlFor="surname">
-                                     Nazwisko
+                                    ✏️ Nazwisko
                                 </label>
                                 <input
                                     type="text"

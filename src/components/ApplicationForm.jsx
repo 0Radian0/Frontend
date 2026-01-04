@@ -29,7 +29,7 @@ export default function ApplicationForm() {
         setLoading(true);
 
         try {
-            // fallback i lepsze logowanie
+            // ✅ Poprawione: dodano fallback i lepsze logowanie
             const API_URL = process.env.REACT_APP_API_URL || 'https://backend-production-3aa9.up.railway.app/api';
             
             console.log('🔍 API_URL:', API_URL); // Debug
@@ -40,7 +40,7 @@ export default function ApplicationForm() {
                 headers: { 
                     "Content-Type": "application/json"
                 },
-                // credentials dla CORS
+                // ✅ DODANE: credentials dla CORS
                 credentials: 'include',
                 body: JSON.stringify({
                     toWho: "adrianpietka0481@gmail.com",
@@ -54,12 +54,12 @@ export default function ApplicationForm() {
                 }),
             });
 
-            console.log(' Status odpowiedzi:', res.status); // Debug
+            console.log('📡 Status odpowiedzi:', res.status); // Debug
 
             let data;
             try {
                 data = await res.json();
-                console.log(' Odpowiedź z backendu:', data); // Debug
+                console.log('📦 Odpowiedź z backendu:', data); // Debug
             } catch (parseError) {
                 console.error('❌ Błąd parsowania JSON:', parseError);
                 setError(`Błąd backendu: odpowiedź nie jest JSON. Status: ${res.status}`);

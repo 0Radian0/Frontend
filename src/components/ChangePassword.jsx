@@ -430,7 +430,7 @@ export default function ChangePassword() {
 
                 <div className="change-password-header">
                     <h2>
-                        <span></span>
+                        <span>🔒</span>
                         Zmiana hasła
                     </h2>
                     <p>Zaktualizuj hasło do swojego konta</p>
@@ -542,7 +542,7 @@ export default function ChangePassword() {
                         </div>
 
                         <div className="info-box">
-                            <strong> Wskazówki dotyczące bezpiecznego hasła:</strong>
+                            <strong>💡 Wskazówki dotyczące bezpiecznego hasła:</strong>
                             <ul>
                                 <li>Używaj co najmniej 8 znaków</li>
                                 <li>Połącz małe i wielkie litery</li>

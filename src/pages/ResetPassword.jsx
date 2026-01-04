@@ -362,7 +362,7 @@ export default function ResetPassword() {
                 <div className="reset-password-container">
                     {message ? (
                         <div className="success-message">
-                            <div className="icon"></div>
+                            <div className="icon">✅</div>
                             <h3>Sukces!</h3>
                             <p>{message}</p>
                             <p style={{ marginTop: '10px', fontSize: '13px' }}>
@@ -372,7 +372,7 @@ export default function ResetPassword() {
                     ) : (
                         <>
                             <div className="reset-password-header">
-                                <div className="reset-password-icon"></div>
+                                <div className="reset-password-icon">🔒</div>
                                 <h2>Zmiana hasła</h2>
                                 <p>Wprowadź nowe, bezpieczne hasło do swojego konta</p>
                             </div>

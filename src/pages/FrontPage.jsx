@@ -109,20 +109,20 @@ export default function FrontPage() {
                         <h3> Zarządzanie Kontem</h3>
                         <div className="action-buttons">
                             <Link to="/changePassword" className="action-button">
-                                 Zmiana hasła
+                                🔒 Zmiana hasła
                             </Link>
                             <Link to="/changeDescription" className="action-button">
-                                 Zmiana opisu
+                                ✏️ Zmiana opisu
                             </Link>
                             <Link to="/changeData" className="action-button">
-                                 Zmiana danych
+                                👤 Zmiana danych
                             </Link>
                         </div>
                     </div>
 
                     {/* Opis użytkownika */}
                     <div className="info-card">
-                        <h3> O Mnie</h3>
+                        <h3>📝 O Mnie</h3>
                         <div className="user-description-content">
                             {description}
                         </div>

@@ -778,35 +778,35 @@ export default function UsersPanel() {
             <div className="users-panel-container">
                 {/* HEADER */}
                 <div className="panel-header">
-                    <h1><span></span> Panel Użytkowników</h1>
+                    <h1><span>👥</span> Panel Użytkowników</h1>
                     <p>Zarządzaj użytkownikami, uprawnieniami i płatnościami</p>
                 </div>
 
                 {/* STATS OVERVIEW */}
                 <div className="stats-overview">
                     <div className="stat-card">
-                        <div className="stat-icon"></div>
+                        <div className="stat-icon">👤</div>
                         <div className="stat-info">
                             <div className="stat-value">{users.length}</div>
                             <div className="stat-label">Użytkowników</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon"></div>
+                        <div className="stat-icon">✅</div>
                         <div className="stat-info">
                             <div className="stat-value">{users.filter(u => u.deactivated === 0).length}</div>
                             <div className="stat-label">Aktywnych</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon"></div>
+                        <div className="stat-icon">💳</div>
                         <div className="stat-info">
                             <div className="stat-value">{users.filter(u => u.paymentActive === 1).length}</div>
                             <div className="stat-label">Z płatnościami</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon"></div>
+                        <div className="stat-icon">⚠️</div>
                         <div className="stat-info">
                             <div className="stat-value">{users.filter(u => u.sumToPay > 0).length}</div>
                             <div className="stat-label">Do zapłaty</div>
@@ -818,7 +818,7 @@ export default function UsersPanel() {
                 <div className="filters-container">
                     <div className="filters-grid">
                         <div className="filter-group">
-                            <label> Uprawnienia</label>
+                            <label>👔 Uprawnienia</label>
                             <select value={filter} onChange={e => setFilter(e.target.value)}>
                                 <option value="all">Wszystkie</option>
                                 <option value="admin">Administratorzy</option>
@@ -828,7 +828,7 @@ export default function UsersPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label> Status</label>
+                            <label>🔍 Status</label>
                             <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
                                 <option value="all">Wszyscy</option>
                                 <option value="active">Aktywni</option>
@@ -840,7 +840,7 @@ export default function UsersPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label> Sortuj po</label>
+                            <label>🔄 Sortuj po</label>
                             <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
                                 <option value="regDate">Data rejestracji</option>
                                 <option value="lastLog">Ostatnie logowanie</option>
@@ -851,7 +851,7 @@ export default function UsersPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>⬆ Kolejność</label>
+                            <label>⬆️ Kolejność</label>
                             <select value={order} onChange={e => setOrder(e.target.value)}>
                                 <option value="asc">Rosnąco</option>
                                 <option value="desc">Malejąco</option>
@@ -864,13 +864,13 @@ export default function UsersPanel() {
                             className={`view-button ${viewMode === 'cards' ? 'active' : ''}`}
                             onClick={() => setViewMode('cards')}
                         >
-                             Karty
+                            📇 Karty
                         </button>
                         <button 
                             className={`view-button ${viewMode === 'table' ? 'active' : ''}`}
                             onClick={() => setViewMode('table')}
                         >
-                             Tabela
+                            📊 Tabela
                         </button>
                     </div>
                 </div>
@@ -903,7 +903,7 @@ export default function UsersPanel() {
 
                                 <div className="user-details">
                                     <div className="detail-item">
-                                        <span className="detail-icon"></span>
+                                        <span className="detail-icon">📅</span>
                                         <div>
                                             <div className="detail-label">Rejestracja</div>
                                             <div className="detail-value">{new Date(user.registrationDate).toLocaleDateString('pl-PL')}</div>
@@ -911,7 +911,7 @@ export default function UsersPanel() {
                                     </div>
 
                                     <div className="detail-item">
-                                        <span className="detail-icon"></span>
+                                        <span className="detail-icon">🕐</span>
                                         <div>
                                             <div className="detail-label">Ostatnie logowanie</div>
                                             <div className="detail-value">{user.lastLog ? new Date(user.lastLog).toLocaleDateString('pl-PL') : 'Brak danych'}</div>
@@ -919,7 +919,7 @@ export default function UsersPanel() {
                                     </div>
 
                                     <div className="detail-item">
-                                        <span className="detail-icon"></span>
+                                        <span className="detail-icon">💰</span>
                                         <div>
                                             <div className="detail-label">Do zapłaty</div>
                                             <div className={`detail-value ${user.sumToPay > 0 ? 'debt' : 'paid'}`}>
@@ -929,7 +929,7 @@ export default function UsersPanel() {
                                     </div>
 
                                     <div className="detail-item">
-                                        <span className="detail-icon"></span>
+                                        <span className="detail-icon">💳</span>
                                         <div>
                                             <div className="detail-label">Status płatności</div>
                                             <div className="detail-value">
@@ -940,51 +940,57 @@ export default function UsersPanel() {
 
                                     {user.description && (
                                         <div className="user-description">
-                                            <div className="detail-label"> Opis:</div>
+                                            <div className="detail-label">📝 Opis:</div>
                                             <div className="description-text">{user.description}</div>
                                         </div>
                                     )}
                                 </div>
 
                                 <div className="user-actions">
-                                    {changingRanksUserID === user.userID ? (
-                                        <div className="rank-selector">
-                                            <select
-                                                value={user.rankID}
-                                                onChange={e => handleChangeRanks(Number(e.target.value), user.userID)}
-                                                onBlur={() => setchangingRanksUserID(null)}
-                                                autoFocus
-                                            >
-                                                <option value={1}>Administrator</option>
-                                                <option value={2}>Trener</option>
-                                                <option value={3}>Użytkownik</option>
-                                            </select>
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <button className="btn btn-sm btn-secondary" onClick={() => setchangingRanksUserID(user.userID)}>
-                                                 Uprawnienia
-                                            </button>
-                                            <button className="btn btn-sm btn-primary" onClick={() => handleResetPassword(user.userID)}>
-                                                 Reset hasła
-                                            </button>
-                                            <button 
-                                                className={`btn btn-sm ${user.deactivated === 1 ? 'btn-success' : 'btn-warning'}`}
-                                                onClick={() => handleDeactivate(user.userID, user.deactivated)}
-                                            >
-                                                {user.deactivated === 1 ? '✅ Odblokuj' : '🔒 Zablokuj'}
-                                            </button>
-                                            <button 
-                                                className={`btn btn-sm ${user.paymentActive === 1 ? 'btn-warning' : 'btn-success'}`}
-                                                onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)}
-                                            >
-                                                {user.paymentActive === 1 ? ' Wyłącz płatności' : ' Włącz płatności'}
-                                            </button>
-                                           
-                                        </>
-                                    )}
-                                </div>
+                                {changingRanksUserID === user.userID ? (
+                            <div className="rank-selector">                         
+            <select
+                value={user.rankID}
+                onChange={e => handleChangeRanks(Number(e.target.value), user.userID)}
+                onBlur={() => setchangingRanksUserID(null)}
+                autoFocus
+            >
+                <option value={1}>Administrator</option>
+                <option value={2}>Trener</option>
+                <option value={3}>Użytkownik</option>
+            </select>
+                                    </div>
+                                ) : (
+                                    <>
+                                        <button className="btn btn-sm btn-secondary" onClick={() => setchangingRanksUserID(user.userID)}>
+                                            👔 Uprawnienia
+                                        </button>
+                                        <button className="btn btn-sm btn-primary" onClick={() => handleResetPassword(user.userID)}>
+                                            🔑 Reset hasła
+                                        </button>
+                                        <button 
+                                            className={`btn btn-sm ${user.deactivated === 1 ? 'btn-success' : 'btn-warning'}`}
+                                            onClick={() => handleDeactivate(user.userID, user.deactivated)}
+                                        >
+                                            {user.deactivated === 1 ? '✅ Odblokuj' : '🔒 Zablokuj'}
+                                        </button>
+                                        <button 
+                                            className={`btn btn-sm ${user.paymentActive === 1 ? 'btn-warning' : 'btn-success'}`}
+                                            onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)}
+                                        >
+                                            {user.paymentActive === 1 ? '💳 Wyłącz płatności' : '💰 Włącz płatności'}
+                                        </button>
+                                        {/* ✅ DODANY przycisk usuwania */}
+                                        <button 
+                                            className="btn btn-sm btn-danger" 
+                                            onClick={() => handleDelete(user.userID)}
+                                        >
+                                            🗑️ Usuń
+                                        </button>
+                                    </>
+                                )}
                             </div>
+                        </div>
                         ))}
                     </div>
                 ) : (
@@ -1029,13 +1035,13 @@ export default function UsersPanel() {
                                         </td>
                                         <td>
                                             <div className="table-actions">
-                                                <button className="btn-icon" onClick={() => setchangingRanksUserID(user.userID)} title="Uprawnienia"></button>
-                                                <button className="btn-icon" onClick={() => handleResetPassword(user.userID)} title="Reset hasła"></button>
+                                                <button className="btn-icon" onClick={() => setchangingRanksUserID(user.userID)} title="Uprawnienia">👔</button>
+                                                <button className="btn-icon" onClick={() => handleResetPassword(user.userID)} title="Reset hasła">🔑</button>
                                                 <button className="btn-icon" onClick={() => handleDeactivate(user.userID, user.deactivated)} title={user.deactivated === 1 ? 'Odblokuj' : 'Zablokuj'}>
                                                     {user.deactivated === 1 ? '✅' : '🔒'}
                                                 </button>
                                                 <button className="btn-icon" onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)} title="Płatności">💳</button>
-                                                <button className="btn-icon btn-danger" onClick={() => handleDelete(user.userID)} title="Usuń"></button>
+                                                <button className="btn-icon btn-danger" onClick={() => handleDelete(user.userID)} title="Usuń">🗑️</button>
                                             </div>
                                         </td>
                                     </tr>

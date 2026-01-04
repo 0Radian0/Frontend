@@ -468,7 +468,7 @@ export default function ChangeDescription() {
 
                 <div className="change-description-header">
                     <h2>
-                        <span></span>
+                        <span>📝</span>
                         Zmiana opisu użytkownika
                     </h2>
                     <p>Opowiedz społeczności o sobie i swojej przygodzie z HEMA</p>
@@ -487,7 +487,7 @@ export default function ChangeDescription() {
                     <>
                         <div className="current-description-box">
                             <h3>
-                                <span></span>
+                                <span>📄</span>
                                 Twój obecny opis:
                             </h3>
                             <div className="current-description-text">
@@ -496,7 +496,7 @@ export default function ChangeDescription() {
                         </div>
 
                         <div className="info-box">
-                            <strong> Co warto zawrzeć w opisie:</strong>
+                            <strong>💡 Co warto zawrzeć w opisie:</strong>
                             <ul>
                                 <li>Jak zaczęła się Twoja przygoda z HEMA</li>
                                 <li>Jaką bronią się interesujesz</li>
@@ -508,7 +508,7 @@ export default function ChangeDescription() {
                         <form className="change-description-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="newDescription">
-                                    <span> Nowy opis</span>
+                                    <span>✏️ Nowy opis</span>
                                     <span className={`char-counter ${charRemaining < 100 ? 'warning' : ''} ${charRemaining < 0 ? 'danger' : ''}`}>
                                         {charCount} / {MAX_LENGTH} znaków
                                         {charRemaining < 0 && ` (${Math.abs(charRemaining)} za dużo)`}
@@ -531,7 +531,7 @@ export default function ChangeDescription() {
                             {newDescription.trim() && (
                                 <div className="live-preview">
                                     <h4>
-                                        <span></span>
+                                        <span>👁️</span>
                                         Podgląd na żywo:
                                     </h4>
                                     <div className="preview-content">
