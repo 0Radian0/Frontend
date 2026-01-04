@@ -282,37 +282,9 @@ export default function PaymentsPanel() {
         if (paymentDate) return false;
         return new Date(dueDate) < new Date();
     };
-    useEffect(() => {
-    const fetchStatusTabWithDebug = async () => {
-        try {
-            const { data } = await fetchAPI('/payments/showUserPaymentStatus', { method: 'GET' });
-            console.log('📊 statusTab data:', data.paymentsTab);
-            setStatusTab(Array.isArray(data.paymentsTab) ? data.paymentsTab : []);
-        } catch (err) {
-            console.error("❌ Błąd pobierania listy statusów:", err);
-            setStatusTab([]);
-        }
-    };
     
-    fetchStatusTabWithDebug();
-}, [payments, usersList]);
 
-// Dodaj także log dla usersList:
-useEffect(() => {
-    const fetchUsersListWithDebug = async () => {
-        if (!isAdmin) return;
-        try {
-            const { data } = await fetchAPI('/auth/users', { method: 'GET' });
-            console.log('👥 usersList data:', data);
-            setUsersList(Array.isArray(data) ? data : []);
-        } catch (err) {
-            console.error("❌ Błąd pobierania listy użytkowników:", err);
-            setUsersList([]);
-        }
-    };
-    
-    fetchUsersListWithDebug();
-}, []);
+
 
     return (
         <>
@@ -863,99 +835,74 @@ useEffect(() => {
 
                         {/* STATUSY UŻYTKOWNIKÓW */}
                        
-<div className="admin-section">
-    <h2>👥 Statusy Płatności Użytkowników</h2>
-    
-    {/* Dodaj informacje debugowania dla admina */}
-    {statusTab.length === 0 && (
-        <p style={{textAlign: 'center', padding: '20px', color: '#999'}}>
-            Brak danych o statusach płatności
-        </p>
-    )}
-    
-    <div className="status-grid">
-        {statusTab.map((el, idx) => {
-            // Debugowanie - usuń po naprawieniu
-            console.log('🔍 Element statusTab:', el);
-            console.log('🔍 Szukam userID:', el.userID);
-            
-            // Próbuj znaleźć użytkownika na różne sposoby
-            let user = null;
-            
-            // Sposób 1: Normalny find
-            if (el.userID) {
-                user = usersList.find(u => u.userID === el.userID);
-            }
-            
-            // Sposób 2: Jeśli userID to string, a w bazie number (lub odwrotnie)
-            if (!user && el.userID) {
-                user = usersList.find(u => String(u.userID) === String(el.userID));
-            }
-            
-            // Sposób 3: Jeśli w statusTab jest user_id zamiast userID
-            if (!user && el.user_id) {
-                user = usersList.find(u => u.userID === el.user_id || String(u.userID) === String(el.user_id));
-            }
-            
-            // Debugowanie - usuń po naprawieniu
-            console.log('✅ Znaleziony user:', user);
-            
-            // Email - sprawdź różne źródła
-            const userEmail = el.email || user?.email || el.userEmail || user?.userEmail;
-            
-            const debt = Number(el.sumToPay) || 0;
-            
-            // Nazwa użytkownika
-            const userName = user 
-                ? `${user.name || ''} ${user.surname || ''}`.trim() 
-                : (el.name && el.surname ? `${el.name} ${el.surname}` : `ID: ${el.userID || el.user_id || 'Brak'}`);
-
-            return (
-                <div key={idx} className={`status-card ${debt > 0 ? 'has-debt' : ''}`}>
-                    <div className="status-card-header">
-                        <div className="user-name">
-                            {userName}
-                        </div>
-                        <div className={`debt-amount ${debt === 0 ? 'paid' : ''}`}>
-                            {debt.toFixed(2)} zł
-                        </div>
-                    </div>
+            <div className="admin-section">
+                <h2>👥 Statusy Płatności Użytkowników</h2>
+                                    
+                {/* Dodaj informacje debugowania dla admina */}
+                {statusTab.length === 0 && (
+                    <p style={{textAlign: 'center', padding: '20px', color: '#999'}}>
+                        Brak danych o statusach płatności
+                    </p>
+                )}
+                
+                <div className="status-grid">
+                    {statusTab.map((el, idx) => {
+                        // Teraz backend zwraca wszystkie potrzebne dane!
+                        const debt = Number(el.sumToPay) || 0;
+                        const userName = `${el.name || ''} ${el.surname || ''}`.trim() || 'Nieznany użytkownik';
+                        const userEmail = el.email;
                     
-                    {/* Informacje debugowania - usuń po naprawieniu */}
-                    <div style={{fontSize: '11px', color: '#999', marginTop: '5px', marginBottom: '5px'}}>
-                        userID: {el.userID || el.user_id || 'brak'} | email: {userEmail || 'brak'}
-                    </div>
-                    
-                    <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>
-                        Ostatnia płatność: {el.lastPaymentDate ? new Date(el.lastPaymentDate).toLocaleDateString('pl-PL') : 'Brak'}
-                    </div>
-                    
-                    {/* Przycisk przypomnienia - pokazuje się zawsze gdy jest dług, nawet bez emaila */}
-                    {debt > 0 && (
-                        userEmail ? (
-                            <button 
-                                className="btn btn-primary" 
-                                style={{width: '100%'}} 
-                                onClick={() => sendReminderToUser(userEmail, debt.toFixed(2))}
-                            >
-                                📧 Wyślij przypomnienie
-                            </button>
-                        ) : (
-                            <button 
-                                className="btn btn-secondary" 
-                                style={{width: '100%', opacity: 0.5, cursor: 'not-allowed'}} 
-                                disabled
-                                title="Brak adresu email użytkownika"
-                            >
-                                📧 Brak emaila
-                            </button>
-                        )
-                    )}
+                        return (
+                            <div key={idx} className={`status-card ${debt > 0 ? 'has-debt' : ''}`}>
+                                <div className="status-card-header">
+                                    <div className="user-name">
+                                        {userName}
+                                    </div>
+                                    <div className={`debt-amount ${debt === 0 ? 'paid' : ''}`}>
+                                        {debt.toFixed(2)} zł
+                                    </div>
+                                </div>
+                                
+                                <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>
+                                    Ostatnia płatność: {el.lastPaymentDate ? new Date(el.lastPaymentDate).toLocaleDateString('pl-PL') : 'Brak'}
+                                </div>
+                                
+                                {/* Email info */}
+                                {userEmail && (
+                                    <div style={{fontSize: '12px', color: '#888', marginBottom: '10px'}}>
+                                        📧 {userEmail}
+                                    </div>
+                                )}
+                                
+                                {/* Przycisk przypomnienia */}
+                                {debt > 0 && (
+                                    userEmail ? (
+                                        <button 
+                                            className="btn btn-primary" 
+                                            style={{width: '100%'}} 
+                                            onClick={() => sendReminderToUser(userEmail, debt.toFixed(2))}
+                                        >
+                                            📧 Wyślij przypomnienie
+                                        </button>
+                                    ) : (
+                                        <div style={{
+                                            padding: '10px',
+                                            backgroundColor: '#fff3cd',
+                                            border: '1px solid #ffc107',
+                                            borderRadius: '8px',
+                                            fontSize: '13px',
+                                            color: '#856404',
+                                            textAlign: 'center'
+                                        }}>
+                                            ⚠️ Użytkownik nie ma przypisanego emaila
+                                        </div>
+                                    )
+                                )}
+                            </div>
+                        );
+                    })}
                 </div>
-            );
-        })}
-    </div>
-</div>
+            </div>
                     </>
                 )}
             </div>
