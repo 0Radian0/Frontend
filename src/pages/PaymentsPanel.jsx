@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PaymentForm from "../components/PaymentForm";
 import { fetchAPI } from "../config/api";
+import { FaCheck, FaTimes, FaPlus, FaExclamationTriangle, FaClock, FaTrash, FaEdit, FaCog, FaUser, FaUsers} from 'react-icons/fa';
+
 
 export default function PaymentsPanel() {
+    const editFormRef = useRef(null)
     const [payments, setPayments] = useState([]);
     const [filter, setFilter] = useState('notPaidAfterDueTime');
     const [sortBy, setSortBy] = useState('paymentDate');
@@ -120,7 +123,7 @@ export default function PaymentsPanel() {
             });
 
             if (data.success) {
-                alert("Płatność została dodana ✅");
+                alert("Płatność została dodana ");
                 e.target.reset();
                 setForm(false);
                 fetchPayments();
@@ -147,7 +150,7 @@ export default function PaymentsPanel() {
             });
 
             if (data.success) {
-                alert(`${data.message || "Płatności zostały dodane"} ✅`);
+                alert(`${data.message || "Płatności zostały dodane"} `);
                 e.target.reset();
                 setForm(false);
                 fetchPayments();
@@ -157,6 +160,13 @@ export default function PaymentsPanel() {
             alert(err.message || "Błąd podczas dodawania płatności");
         }
     };
+
+    const handleEditClick = (payment) => {
+        setEditingPayment(payment);
+        setTimeout(() => {
+            editFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    }
 
     const handleDelete = async (id) => {
         if (!window.confirm("Czy na pewno chcesz usunąć płatność? Operacja jest nieodwracalna")) return;
@@ -177,7 +187,7 @@ export default function PaymentsPanel() {
         try {
             const { data } = await fetchAPI(`/payments/setPaymentDateOnToday/${paymentID}`, { method: 'PUT' });
             if (data.success) {
-                alert("Dokonano płatności ✅");
+                alert("Dokonano płatności");
                 fetchPayments();
             }
         } catch (err) {
@@ -194,7 +204,7 @@ export default function PaymentsPanel() {
                 body: JSON.stringify({ paymentDate, dueDate, amount, id })
             });
             if (data.success) {
-                alert("Opłata zmodyfikowana ✅");
+                alert("Opłata zmodyfikowana");
                 fetchPayments();
                 fetchPaymentStatus();
                 setEditingPayment(null);
@@ -243,7 +253,7 @@ export default function PaymentsPanel() {
                     </div>`
                 })
             });
-            alert("Wiadomość została wysłana ✅");
+            alert("Wiadomość została wysłana");
         } catch (err) {
             console.error("❌ Błąd wysyłki maila:", err);
             alert(err.message || "Nie udało się wysłać przypomnienia");
@@ -282,7 +292,7 @@ export default function PaymentsPanel() {
         if (paymentDate) return false;
         return new Date(dueDate) < new Date();
     };
-    
+
 
 
 
@@ -666,7 +676,11 @@ export default function PaymentsPanel() {
                             {sumToPay > 0 ? `${sumToPay.toFixed(2)} zł` : '0.00 zł'}
                         </div>
                         <div className="payment-status-badge">
-                            {sumToPay > 0 ? '⚠️ Do zapłaty' : '✅ Wszystko opłacone!'}
+                            <span>
+                                {sumToPay > 0 ? <FaExclamationTriangle style={{ marginRight: '5px' }} /> : <FaCheck style={{ marginRight: '5px' }} />}
+                                {sumToPay > 0 ? 'Do zapłaty' : 'Wszystko opłacone!'}
+                            </span>
+
                         </div>
                     </div>
                 )}
@@ -719,14 +733,14 @@ export default function PaymentsPanel() {
 
                 {/* TABELA PŁATNOŚCI */}
                 <div className="payments-table-container">
-                    <h2 style={{marginBottom: '20px'}}>📜 Historia Płatności</h2>
+                    <h2 style={{ marginBottom: '20px' }}>📜 Historia Płatności</h2>
                     {loading ? (
                         <div className="loading-container">
                             <div className="loading-spinner"></div>
-                            <p style={{marginTop: '20px', color: '#666'}}>Ładowanie płatności...</p>
+                            <p style={{ marginTop: '20px', color: '#666' }}>Ładowanie płatności...</p>
                         </div>
                     ) : payments.length === 0 ? (
-                        <p style={{textAlign: 'center', padding: '40px', color: '#999'}}>
+                        <p style={{ textAlign: 'center', padding: '40px', color: '#999' }}>
                             Brak płatności do wyświetlenia
                         </p>
                     ) : (
@@ -745,7 +759,7 @@ export default function PaymentsPanel() {
                                 {payments.map(el => {
                                     const user = usersList.find(u => u.userID === el.userID);
                                     const overdue = isPaymentOverdue(el.dueDate, el.paymentDate);
-                                    
+
                                     return (
                                         <tr key={el.paymentID} className={`payment-row ${overdue ? 'overdue' : ''} ${el.paymentDate ? 'paid' : ''}`}>
                                             {isAdmin && (
@@ -756,15 +770,18 @@ export default function PaymentsPanel() {
                                             <td><strong>{el.amount} zł</strong></td>
                                             <td>
                                                 <span className={`status-badge ${el.paymentDate ? 'paid' : overdue ? 'overdue' : 'unpaid'}`}>
-                                                    {el.paymentDate ? '✅ Opłacone' : overdue ? '❌ Po terminie' : '⏳ Do zapłaty'}
+                                                    {el.paymentDate ? <FaCheck style={{ marginRight: '5px', color: 'green' }} />
+                                                        : overdue ? <FaTimes style={{ marginRight: '5px', color: 'red' }} />
+                                                            : <FaClock style={{ marginRight: '5px', color: 'orange' }} />}
+                                                    {el.paymentDate ? 'Opłacone' : overdue ? 'Po terminie' : 'Do zapłaty'}
                                                 </span>
                                             </td>
                                             {isAdmin && (
                                                 <td>
-                                                    <button className="btn btn-danger" onClick={() => handleDelete(el.paymentID)}>🗑️</button>
-                                                    <button className="btn btn-primary" onClick={() => setEditingPayment(el)}>✏️</button>
+                                                    <button className="btn btn-danger" onClick={() => handleDelete(el.paymentID)}><FaTrash /></button>
+                                                    <button className="btn btn-primary" onClick={() => handleEditClick(el)}><FaEdit /></button>
                                                     {!el.paymentDate && (
-                                                        <button className="btn btn-success" onClick={() => handleSetPaymentToday(el.paymentID)}>✅</button>
+                                                        <button className="btn btn-success" onClick={() => handleSetPaymentToday(el.paymentID)}><FaCheck /></button>
                                                     )}
                                                 </td>
                                             )}
@@ -780,22 +797,24 @@ export default function PaymentsPanel() {
                 {isAdmin && (
                     <>
                         <div className="admin-section" id="editPayment">
-                            <h2>⚙️ Dodaj Płatność</h2>
+                            <h2><FaCog style={{ marginRight: '5px' }} /> Dodaj Płatność</h2>
                             <button className="btn btn-primary" onClick={() => setForm(!form)}>
-                                {form ? '❌ Anuluj' : '➕ Dodaj płatność'}
+                                {form ? <FaTimes style={{ marginRight: '5px' }} /> : <FaPlus style={{ marginRight: '5px' }} />}
+                                {form ? ' Anuluj' : ' Dodaj płatność'}
                             </button>
 
                             {form && (
                                 <div className="form-container">
-                                    <button className="btn btn-secondary" onClick={() => setPressedMultiple(!pressedMultiple)} style={{marginBottom: '15px'}}>
-                                        {pressedMultiple ? '👤 Pojedyncza' : '👥 Dla wszystkich'}
+                                    <button className="btn btn-secondary" onClick={() => setPressedMultiple(!pressedMultiple)} style={{ marginBottom: '15px' }}>
+                                        {pressedMultiple ? <FaUser style={{ marginRight: '5px' }}/> : <FaUsers style={{ marginRight: '5px' }}/>}
+                                        {pressedMultiple ? 'Pojedyncza' : 'Dla wszystkich'}
                                     </button>
 
                                     <form onSubmit={pressedMultiple ? handleMultipleAdd : handleSingleAdd}>
                                         {!pressedMultiple && (
-                                            <div style={{marginBottom: '15px'}}>
+                                            <div style={{ marginBottom: '15px' }}>
                                                 <label>Wybierz użytkownika:</label>
-                                                <select name="userID" required style={{width: '100%', padding: '10px', marginTop: '8px', borderRadius: '8px', border: '2px solid #e0e0e0'}}>
+                                                <select name="userID" required style={{ width: '100%', padding: '10px', marginTop: '8px', borderRadius: '8px', border: '2px solid #e0e0e0' }}>
                                                     <option value="">-- Wybierz --</option>
                                                     {usersListToPick.map(user => (
                                                         <option key={user.userID} value={user.userID}>
@@ -806,15 +825,15 @@ export default function PaymentsPanel() {
                                             </div>
                                         )}
                                         <PaymentForm />
-                                        <button type="submit" className="btn btn-success" style={{marginTop: '15px'}}>
-                                            ✅ Dodaj {pressedMultiple ? 'płatności' : 'płatność'}
+                                        <button type="submit" className="btn btn-success" style={{ marginTop: '15px' }}>
+                                            Dodaj {pressedMultiple ? 'płatności' : 'płatność'}
                                         </button>
                                     </form>
                                 </div>
                             )}
 
                             {editingPayment && (
-                                <div className="form-container">
+                                <div className="form-container" ref={editFormRef}>
                                     <h3>Edytowanie płatności</h3>
                                     <form onSubmit={e => {
                                         e.preventDefault();
@@ -826,7 +845,7 @@ export default function PaymentsPanel() {
                                         );
                                     }}>
                                         <PaymentForm payment={editingPayment} onChange={setEditingValues} />
-                                        <button type="submit" className="btn btn-primary" style={{marginTop: '15px', marginRight: '10px'}}>💾 Zapisz</button>
+                                        <button type="submit" className="btn btn-primary" style={{ marginTop: '15px', marginRight: '10px' }}>💾 Zapisz</button>
                                         <button type="button" className="btn btn-secondary" onClick={() => setEditingPayment(null)}>❌ Anuluj</button>
                                     </form>
                                 </div>
@@ -834,75 +853,75 @@ export default function PaymentsPanel() {
                         </div>
 
                         {/* STATUSY UŻYTKOWNIKÓW */}
-                       
-            <div className="admin-section">
-                <h2>👥 Statusy Płatności Użytkowników</h2>
-                                    
-                {/* Dodaj informacje debugowania dla admina */}
-                {statusTab.length === 0 && (
-                    <p style={{textAlign: 'center', padding: '20px', color: '#999'}}>
-                        Brak danych o statusach płatności
-                    </p>
-                )}
-                
-                <div className="status-grid">
-                    {statusTab.map((el, idx) => {
-                        // Teraz backend zwraca wszystkie potrzebne dane!
-                        const debt = Number(el.sumToPay) || 0;
-                        const userName = `${el.name || ''} ${el.surname || ''}`.trim() || 'Nieznany użytkownik';
-                        const userEmail = el.email;
-                    
-                        return (
-                            <div key={idx} className={`status-card ${debt > 0 ? 'has-debt' : ''}`}>
-                                <div className="status-card-header">
-                                    <div className="user-name">
-                                        {userName}
-                                    </div>
-                                    <div className={`debt-amount ${debt === 0 ? 'paid' : ''}`}>
-                                        {debt.toFixed(2)} zł
-                                    </div>
-                                </div>
-                                
-                                <div style={{fontSize: '14px', color: '#666', marginBottom: '10px'}}>
-                                    Ostatnia płatność: {el.lastPaymentDate ? new Date(el.lastPaymentDate).toLocaleDateString('pl-PL') : 'Brak'}
-                                </div>
-                                
-                                {/* Email info */}
-                                {userEmail && (
-                                    <div style={{fontSize: '12px', color: '#888', marginBottom: '10px'}}>
-                                        📧 {userEmail}
-                                    </div>
-                                )}
-                                
-                                {/* Przycisk przypomnienia */}
-                                {debt > 0 && (
-                                    userEmail ? (
-                                        <button 
-                                            className="btn btn-primary" 
-                                            style={{width: '100%'}} 
-                                            onClick={() => sendReminderToUser(userEmail, debt.toFixed(2))}
-                                        >
-                                            📧 Wyślij przypomnienie
-                                        </button>
-                                    ) : (
-                                        <div style={{
-                                            padding: '10px',
-                                            backgroundColor: '#fff3cd',
-                                            border: '1px solid #ffc107',
-                                            borderRadius: '8px',
-                                            fontSize: '13px',
-                                            color: '#856404',
-                                            textAlign: 'center'
-                                        }}>
-                                            ⚠️ Użytkownik nie ma przypisanego emaila
+
+                        <div className="admin-section">
+                            <h2><FaUsers style={{ marginRight: '5px' }}/> Statusy Płatności Użytkowników</h2>
+
+                            {/* Dodaj informacje debugowania dla admina */}
+                            {statusTab.length === 0 && (
+                                <p style={{ textAlign: 'center', padding: '20px', color: '#999' }}>
+                                    Brak danych o statusach płatności
+                                </p>
+                            )}
+
+                            <div className="status-grid">
+                                {statusTab.map((el, idx) => {
+                                    // Teraz backend zwraca wszystkie potrzebne dane!
+                                    const debt = Number(el.sumToPay) || 0;
+                                    const userName = `${el.name || ''} ${el.surname || ''}`.trim() || 'Nieznany użytkownik';
+                                    const userEmail = el.email;
+
+                                    return (
+                                        <div key={idx} className={`status-card ${debt > 0 ? 'has-debt' : ''}`}>
+                                            <div className="status-card-header">
+                                                <div className="user-name">
+                                                    {userName}
+                                                </div>
+                                                <div className={`debt-amount ${debt === 0 ? 'paid' : ''}`}>
+                                                    {debt.toFixed(2)} zł
+                                                </div>
+                                            </div>
+
+                                            <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+                                                Ostatnia płatność: {el.lastPaymentDate ? new Date(el.lastPaymentDate).toLocaleDateString('pl-PL') : 'Brak'}
+                                            </div>
+
+                                            {/* Email info */}
+                                            {userEmail && (
+                                                <div style={{ fontSize: '12px', color: '#888', marginBottom: '10px' }}>
+                                                    📧 {userEmail}
+                                                </div>
+                                            )}
+
+                                            {/* Przycisk przypomnienia */}
+                                            {debt > 0 && (
+                                                userEmail ? (
+                                                    <button
+                                                        className="btn btn-primary"
+                                                        style={{ width: '100%' }}
+                                                        onClick={() => sendReminderToUser(userEmail, debt.toFixed(2))}
+                                                    >
+                                                        📧 Wyślij przypomnienie
+                                                    </button>
+                                                ) : (
+                                                    <div style={{
+                                                        padding: '10px',
+                                                        backgroundColor: '#fff3cd',
+                                                        border: '1px solid #ffc107',
+                                                        borderRadius: '8px',
+                                                        fontSize: '13px',
+                                                        color: '#856404',
+                                                        textAlign: 'center'
+                                                    }}>
+                                                        ⚠️ Użytkownik nie ma przypisanego emaila
+                                                    </div>
+                                                )
+                                            )}
                                         </div>
-                                    )
-                                )}
+                                    );
+                                })}
                             </div>
-                        );
-                    })}
-                </div>
-            </div>
+                        </div>
                     </>
                 )}
             </div>

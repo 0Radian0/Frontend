@@ -3,6 +3,7 @@ import TrainingsCalendar from "../components/Calendar";
 import { Link } from 'react-router-dom';
 import { fetchAPI } from "../config/api";
 import "../components/FrontPage.css";
+import { FaCheck } from 'react-icons/fa';
 
 export default function FrontPage() {
     const [sumToPay, setSumToPay] = useState(null);
@@ -74,7 +75,7 @@ export default function FrontPage() {
                                         <div className="payment-amount">{sumToPay.toFixed(2)} zł</div>
                                     </>
                                 ) : (
-                                    <div>✅ Wszystko opłacone!</div>
+                                    <div><FaCheck style={{ color: 'green', fontSize: '20px' }} /> Wszystko opłacone!</div>
                                 )}
                             </div>
                         )}

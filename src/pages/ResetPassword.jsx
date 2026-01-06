@@ -47,7 +47,7 @@ export default function ResetPassword() {
             setTimeout(() => navigate("/login"), 2000);
 
         } catch (err) {
-            console.error("❌ Błąd resetowania hasła:", err);
+            console.error("Błąd resetowania hasła:", err);
             setError(err.message || "Błąd podczas zmiany hasła");
             setLoading(false);
         }

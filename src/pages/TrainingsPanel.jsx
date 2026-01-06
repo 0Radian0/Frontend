@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import TrainingForm from "../components/TrainingForm";
 import { fetchAPI } from "../config/api";
+import { FaCheck, FaTimes, FaEdit, FaTrash, FaPlus, FaCog, FaUser } from 'react-icons/fa';
 
 export default function TrainingsPanel() {
+    const editFormRef = useRef(null)
     const [trainings, setTrainings] = useState([]);
     const [showForm, setForm] = useState(false);
     const [editTraining, setEditTraining] = useState(null);
@@ -76,6 +78,13 @@ export default function TrainingsPanel() {
         }
     };
 
+    const handleEditClick = (training) => {
+        setEditTraining(training);
+        setTimeout(() => {
+            editFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    }
+
     const showParticipants = async (trainingID) => {
         if (activeTrainingID === trainingID) {
             setActiveTrainingID(null);
@@ -113,12 +122,12 @@ export default function TrainingsPanel() {
 
     const handleDelete = async (id) => {
         if (!window.confirm("Czy na pewno chcesz usunąć trening? Operacja jest nieodwracalna")) return;
-        
+
         try {
             const { data } = await fetchAPI(`/trainings/deleteTraining/${id}`, {
                 method: 'DELETE'
             });
-            
+
             if (data.success) {
                 alert("Trening został usunięty");
                 setTrainings(p => p.filter(t => t.trainingID !== id));
@@ -196,7 +205,7 @@ export default function TrainingsPanel() {
             });
 
             if (data.success) {
-                alert("Zapisano na trening! ✅");
+                alert("Zapisano na trening!");
                 showParticipants(trainingID);
             }
         } catch (err) {
@@ -592,7 +601,7 @@ export default function TrainingsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>👤 Moje treningi</label>
+                            <label><FaUser style={{ marginRight: '5px' }} />  Moje treningi</label>
                             <select value={userTrainingFilter} onChange={e => setUserTrainingFilter(e.target.value)}>
                                 <option value="all">Wszystkie treningi</option>
                                 <option value="userTrainings">Tylko moje zapisy</option>
@@ -618,13 +627,13 @@ export default function TrainingsPanel() {
                     </div>
 
                     <div className="view-toggle">
-                        <button 
+                        <button
                             className={`view-button ${viewMode === 'cards' ? 'active' : ''}`}
                             onClick={() => setViewMode('cards')}
                         >
                             📇 Karty
                         </button>
-                        <button 
+                        <button
                             className={`view-button ${viewMode === 'table' ? 'active' : ''}`}
                             onClick={() => setViewMode('table')}
                         >
@@ -651,8 +660,8 @@ export default function TrainingsPanel() {
                                 <div className="training-header">
                                     <div className="training-date">
                                         📅 {new Date(el.trainingDate).toLocaleDateString('pl-PL')}
-                                        <div style={{fontSize: '14px', fontWeight: '400', color: '#666', marginTop: '4px'}}>
-                                            ⏰ {new Date(el.trainingDate).toLocaleTimeString('pl-PL', {hour: '2-digit', minute: '2-digit'})}
+                                        <div style={{ fontSize: '14px', fontWeight: '400', color: '#666', marginTop: '4px' }}>
+                                            ⏰ {new Date(el.trainingDate).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })}
                                         </div>
                                     </div>
                                     <span className={`training-badge ${isTrainingPast(el.trainingDate) ? 'past' : 'upcoming'}`}>
@@ -679,28 +688,28 @@ export default function TrainingsPanel() {
 
                                 <div className="training-actions">
                                     <button className="btn btn-success" onClick={() => handleSign(el.trainingID)}>
-                                        ✅ Zapisz się
+                                        <FaCheck style={{ marginRight: '5px' }} /> Zapisz się
                                     </button>
                                     <button className="btn btn-secondary" onClick={() => removeFromTraining(el.trainingID)}>
-                                        ❌ Zrezygnuj
+                                        <FaTimes style={{ marginRight: '5px' }} /> Zrezygnuj
                                     </button>
                                     {isAdmin && (
                                         <>
-                                            <button className="btn btn-primary" onClick={() => setEditTraining(el)}>
-                                                ✏️ Edytuj
+                                            <button className="btn btn-primary" onClick={() => handleEditClick(el)}>
+                                                <FaEdit style={{ marginRight: '5px' }} /> Edytuj
                                             </button>
                                             <button className="btn btn-danger" onClick={() => handleDelete(el.trainingID)}>
-                                                🗑️ Usuń
+                                                <FaTrash style={{ marginRight: '5px' }} /> Usuń
                                             </button>
                                         </>
                                     )}
                                 </div>
 
                                 <div className="participants-section">
-                                    <button 
-                                        className="btn btn-secondary" 
+                                    <button
+                                        className="btn btn-secondary"
                                         onClick={() => showParticipants(el.trainingID)}
-                                        style={{width: '100%'}}
+                                        style={{ width: '100%' }}
                                     >
                                         {activeTrainingID === el.trainingID ? '▼ Ukryj uczestników' : '▶ Pokaż uczestników'}
                                     </button>
@@ -713,7 +722,7 @@ export default function TrainingsPanel() {
                                             <ul className="participants-list">
                                                 {participants.map(p => (
                                                     <li key={p.userID}>
-                                                        👤 {p.name} {p.surname}
+                                                        <FaUser style={{ marginRight: '5px' }} /> {p.name} {p.surname}
                                                     </li>
                                                 ))}
                                             </ul>
@@ -724,7 +733,7 @@ export default function TrainingsPanel() {
                         ))}
                     </div>
                 ) : (
-                    <p style={{textAlign: 'center', padding: '40px', color: '#666'}}>
+                    <p style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
                         Widok tabeli - do zaimplementowania (opcjonalnie)
                     </p>
                 )}
@@ -732,45 +741,46 @@ export default function TrainingsPanel() {
                 {isAdmin && (
                     <div className="admin-section" id="editTraining">
                         <h2>
-                            <span>⚙️</span>
+                            <span><FaCog /></span>
                             Panel Administratora
                         </h2>
-                        
-                        <button 
-                            className="btn btn-primary" 
+
+                        <button
+                            className="btn btn-primary"
                             onClick={() => setForm(prev => !prev)}
-                            style={{marginBottom: '20px'}}
+                            style={{ marginBottom: '20px' }}
                         >
-                            {showForm ? '❌ Anuluj dodawanie' : '➕ Dodaj nowy trening'}
+                            {showForm ? <FaTimes style={{ marginRight: '5px' }} /> : <FaPlus style={{ marginRight: '5px' }} />}{showForm ? 'Anuluj dodawanie' : 'Dodaj nowy trening'}
+
                         </button>
 
                         {showForm && (
                             <div className="form-container">
-                                <h3 style={{marginBottom: '20px'}}>Dodaj nowy trening</h3>
+                                <h3 style={{ marginBottom: '20px' }}>Dodaj nowy trening</h3>
                                 <form onSubmit={handleAdd}>
                                     <TrainingForm />
-                                    <button type="submit" className="btn btn-success" style={{marginTop: '15px'}}>
-                                        ✅ Dodaj trening
+                                    <button type="submit" className="btn btn-success" style={{ marginTop: '15px' }}>
+                                        <FaCheck style={{ marginRight: '5px' }} /> Dodaj trening
                                     </button>
                                 </form>
                             </div>
                         )}
 
                         {editTraining && (
-                            <div className="form-container">
-                                <h3 style={{marginBottom: '20px'}}>Edytowanie treningu</h3>
-                                <button 
-                                    type="button" 
+                            <div className="form-container" ref={editFormRef}>
+                                <h3 style={{ marginBottom: '20px' }}>Edytowanie treningu</h3>
+                                <button
+                                    type="button"
                                     className="btn btn-secondary"
                                     onClick={() => setEditTraining(null)}
-                                    style={{marginBottom: '15px'}}
+                                    style={{ marginBottom: '15px' }}
                                 >
-                                    ❌ Anuluj edytowanie
+                                    <FaTimes style={{ marginRight: '5px' }} /> Anuluj edytowanie
                                 </button>
                                 <form onSubmit={handleUpdate}>
                                     <TrainingForm training={editTraining} />
-                                    <button type="submit" className="btn btn-primary" style={{marginTop: '15px'}}>
-                                        💾 Zapisz zmiany
+                                    <button type="submit" className="btn btn-primary" style={{ marginTop: '15px' }}>
+                                        <FaCheck style={{ marginRight: '5px' }} /> Zapisz zmiany
                                     </button>
                                 </form>
                             </div>

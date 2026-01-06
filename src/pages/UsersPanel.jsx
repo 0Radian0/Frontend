@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { fetchAPI } from "../config/api";
+import { FaLock, FaCheck, FaExclamationTriangle, FaCreditCard, FaUser, FaUsers } from 'react-icons/fa';
+
 
 export default function UsersPanel() {
     const [users, setUsers] = useState([]);
@@ -10,7 +12,7 @@ export default function UsersPanel() {
     const [statusFilter, setStatusFilter] = useState('all');
     const [changingRanksUserID, setchangingRanksUserID] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [viewMode, setViewMode] = useState('cards'); 
+    const [viewMode, setViewMode] = useState('cards');
 
     const sortColumnsMap = {
         regDate: "registrationDate",
@@ -69,7 +71,7 @@ export default function UsersPanel() {
 
     const handleDelete = async (userID) => {
         if (!window.confirm("Czy na pewno chcesz usunąć tego użytkownika? Operacja jest nieodwracalna i spowoduje usunięcie wszystkich powiązanych danych.")) return;
-        
+
         try {
             const { data } = await fetchAPI(`/auth/users/${userID}`, { method: 'DELETE' });
             if (data.success) {
@@ -85,7 +87,7 @@ export default function UsersPanel() {
 
     const handleChangeRanks = async (rankID, userID) => {
         if (!window.confirm("Czy na pewno chcesz zmienić uprawnienia użytkownika?")) return;
-        
+
         try {
             const { data } = await fetchAPI('/auth/users/rank', {
                 method: 'POST',
@@ -778,35 +780,35 @@ export default function UsersPanel() {
             <div className="users-panel-container">
                 {/* HEADER */}
                 <div className="panel-header">
-                    <h1><span>👥</span> Panel Użytkowników</h1>
+                    <h1><span><FaUsers /></span> Panel Użytkowników</h1>
                     <p>Zarządzaj użytkownikami, uprawnieniami i płatnościami</p>
                 </div>
 
                 {/* STATS OVERVIEW */}
                 <div className="stats-overview">
                     <div className="stat-card">
-                        <div className="stat-icon">👤</div>
+                        <div className="stat-icon"><FaUser /></div>
                         <div className="stat-info">
                             <div className="stat-value">{users.length}</div>
                             <div className="stat-label">Użytkowników</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">✅</div>
+                        <div className="stat-icon"><FaCheck /></div>
                         <div className="stat-info">
                             <div className="stat-value">{users.filter(u => u.deactivated === 0).length}</div>
                             <div className="stat-label">Aktywnych</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">💳</div>
+                        <div className="stat-icon"><FaCreditCard /></div>
                         <div className="stat-info">
                             <div className="stat-value">{users.filter(u => u.paymentActive === 1).length}</div>
                             <div className="stat-label">Z płatnościami</div>
                         </div>
                     </div>
                     <div className="stat-card">
-                        <div className="stat-icon">⚠️</div>
+                        <div className="stat-icon"><FaExclamationTriangle /></div>
                         <div className="stat-info">
                             <div className="stat-value">{users.filter(u => u.sumToPay > 0).length}</div>
                             <div className="stat-label">Do zapłaty</div>
@@ -860,13 +862,13 @@ export default function UsersPanel() {
                     </div>
 
                     <div className="view-toggle">
-                        <button 
+                        <button
                             className={`view-button ${viewMode === 'cards' ? 'active' : ''}`}
                             onClick={() => setViewMode('cards')}
                         >
                             📇 Karty
                         </button>
-                        <button 
+                        <button
                             className={`view-button ${viewMode === 'table' ? 'active' : ''}`}
                             onClick={() => setViewMode('table')}
                         >
@@ -879,7 +881,7 @@ export default function UsersPanel() {
                 {loading ? (
                     <div className="loading-container">
                         <div className="loading-spinner"></div>
-                        <p style={{marginTop: '20px', color: '#666'}}>Ładowanie użytkowników...</p>
+                        <p style={{ marginTop: '20px', color: '#666' }}>Ładowanie użytkowników...</p>
                     </div>
                 ) : users.length === 0 ? (
                     <div className="empty-state">
@@ -897,7 +899,8 @@ export default function UsersPanel() {
                                         <div className="user-role">{rankNames[user.rankID]}</div>
                                     </div>
                                     <div className={`user-status-badge ${user.deactivated === 1 ? 'blocked' : 'active'}`}>
-                                        {user.deactivated === 1 ? '🔒 Zablokowany' : '✅ Aktywny'}
+                                        {user.deactivated === 1 ? <><FaLock style={{ marginRight: '5px', color: 'gray' }} />Zablokowany</>
+                                            : <><FaCheck style={{ marginRight: '5px', color: 'green' }} />Aktywny</>}
                                     </div>
                                 </div>
 
@@ -947,50 +950,50 @@ export default function UsersPanel() {
                                 </div>
 
                                 <div className="user-actions">
-                                {changingRanksUserID === user.userID ? (
-                            <div className="rank-selector">                         
-            <select
-                value={user.rankID}
-                onChange={e => handleChangeRanks(Number(e.target.value), user.userID)}
-                onBlur={() => setchangingRanksUserID(null)}
-                autoFocus
-            >
-                <option value={1}>Administrator</option>
-                <option value={2}>Trener</option>
-                <option value={3}>Użytkownik</option>
-            </select>
-                                    </div>
-                                ) : (
-                                    <>
-                                        <button className="btn btn-sm btn-secondary" onClick={() => setchangingRanksUserID(user.userID)}>
-                                            👔 Uprawnienia
-                                        </button>
-                                        <button className="btn btn-sm btn-primary" onClick={() => handleResetPassword(user.userID)}>
-                                            🔑 Reset hasła
-                                        </button>
-                                        <button 
-                                            className={`btn btn-sm ${user.deactivated === 1 ? 'btn-success' : 'btn-warning'}`}
-                                            onClick={() => handleDeactivate(user.userID, user.deactivated)}
-                                        >
-                                            {user.deactivated === 1 ? '✅ Odblokuj' : '🔒 Zablokuj'}
-                                        </button>
-                                        <button 
-                                            className={`btn btn-sm ${user.paymentActive === 1 ? 'btn-warning' : 'btn-success'}`}
-                                            onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)}
-                                        >
-                                            {user.paymentActive === 1 ? '💳 Wyłącz płatności' : '💰 Włącz płatności'}
-                                        </button>
-                                        {/* ✅ DODANY przycisk usuwania */}
-                                        <button 
-                                            className="btn btn-sm btn-danger" 
-                                            onClick={() => handleDelete(user.userID)}
-                                        >
-                                            🗑️ Usuń
-                                        </button>
-                                    </>
-                                )}
+                                    {changingRanksUserID === user.userID ? (
+                                        <div className="rank-selector">
+                                            <select
+                                                value={user.rankID}
+                                                onChange={e => handleChangeRanks(Number(e.target.value), user.userID)}
+                                                onBlur={() => setchangingRanksUserID(null)}
+                                                autoFocus
+                                            >
+                                                <option value={1}>Administrator</option>
+                                                <option value={2}>Trener</option>
+                                                <option value={3}>Użytkownik</option>
+                                            </select>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <button className="btn btn-sm btn-secondary" onClick={() => setchangingRanksUserID(user.userID)}>
+                                                👔 Uprawnienia
+                                            </button>
+                                            <button className="btn btn-sm btn-primary" onClick={() => handleResetPassword(user.userID)}>
+                                                🔑 Reset hasła
+                                            </button>
+                                            <button
+                                                className={`btn btn-sm ${user.deactivated === 1 ? 'btn-success' : 'btn-warning'}`}
+                                                onClick={() => handleDeactivate(user.userID, user.deactivated)}
+                                            >
+                                                {user.deactivated === 1 ? '✅ Odblokuj' : '🔒 Zablokuj'}
+                                            </button>
+                                            <button
+                                                className={`btn btn-sm ${user.paymentActive === 1 ? 'btn-warning' : 'btn-success'}`}
+                                                onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)}
+                                            >
+                                                {user.paymentActive === 1 ? '💳 Wyłącz płatności' : '💰 Włącz płatności'}
+                                            </button>
+                                            {/* ✅ DODANY przycisk usuwania */}
+                                            <button
+                                                className="btn btn-sm btn-danger"
+                                                onClick={() => handleDelete(user.userID)}
+                                            >
+                                                🗑️ Usuń
+                                            </button>
+                                        </>
+                                    )}
+                                </div>
                             </div>
-                        </div>
                         ))}
                     </div>
                 ) : (
@@ -1012,8 +1015,8 @@ export default function UsersPanel() {
                                 {users.map(user => (
                                     <tr key={user.userID} className={user.deactivated === 1 ? 'row-deactivated' : ''}>
                                         <td>
-                                            <div style={{fontWeight: '600'}}>{user.name} {user.surname}</div>
-                                            <div style={{fontSize: '12px', color: '#999'}}>{user.email}</div>
+                                            <div style={{ fontWeight: '600' }}>{user.name} {user.surname}</div>
+                                            <div style={{ fontSize: '12px', color: '#999' }}>{user.email}</div>
                                         </td>
                                         <td><span className="role-badge">{rankNames[user.rankID]}</span></td>
                                         <td>{new Date(user.registrationDate).toLocaleDateString('pl-PL')}</td>
