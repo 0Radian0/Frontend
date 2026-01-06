@@ -28,7 +28,7 @@ export default function Navbar() {
   }
 
   // Ukryj navbar na stronie logowania
-  if (location.pathname === "/Login" || location.pathname === "/login" || location.pathname === "/") {
+  if (location.pathname === "/Login" || location.pathname === "/login" || location.pathname === "/" || location.pathname === "/register") {
     return null;
   }
 

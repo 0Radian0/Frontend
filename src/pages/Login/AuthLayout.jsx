@@ -1,9 +1,7 @@
-//Layout dwoch sekcji - slider ze zdjeciem oraz karta z formularzem logowania
-import './login-slider.css'
 import LoginSlider from "./LoginSlider";
 import LoginCard from "./LoginCard";
 import RegisterCard from "./RegisterCard";
-import { Outlet, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function AuthLayout() {
   const location = useLocation();
@@ -17,23 +15,17 @@ export default function AuthLayout() {
   }
 
   return (
-    <div 
-      className="login-wrapper"
-      style={{ marginLeft: "15%", marginRight: "15%", height: "75vh"  }}
-    >
-      <div className="row">
-
+    <div className="auth-layout-wrapper">
+      <div className="auth-layout-container">
         {/* Lewa część – slider */}
-        <div className="col-md-7 login-left p-0 bg-blue">
+        <div className="auth-slider-section">
           <LoginSlider />
         </div>
 
         {/* Prawa część – formularz */}
-        <div className="col-md-5 login-right d-flex justify-content-center align-items-center bg-black">
-          {/* Renderujemy odpowiedni formularz */}
+        <div className="auth-form-section">
           <FormComponent />
         </div>
-
       </div>
     </div>
   );

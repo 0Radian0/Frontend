@@ -54,45 +54,41 @@ export default function LoginForm() {
         <div className="login-form" onSubmit={handleLogin}>
             {/* Email field */}
             <div>
-                <label>Email</label>
+                <label>Login</label>
                 <input
                     type="email"
                     value={formData.email}
                     onChange={e => setFormData({ ...formData, email: e.target.value })}
                     disabled={loading}
                     required
-                    placeholder="Enter your email"
+                    placeholder="Podaj adres email"
                 />
             </div>
 
             {/* Password field */}
             <div>
-                <label>Password</label>
+                <label>Hasło</label>
                 <input
                     type="password"
                     value={formData.password}
                     onChange={e => setFormData({ ...formData, password: e.target.value })}
                     disabled={loading}
                     required
-                    placeholder="Enter your password"
+                    placeholder="Podaj swoje hasło"
                 />
             </div>
 
             {/* Remember me & Forgot password */}
             <div className="login-options">
                 <label className="remember-me-wrapper">
-                    <input
-                        type="checkbox"
-                        checked={rememberMe}
-                        onChange={e => setRememberMe(e.target.checked)}
-                    />
-                    <span className="remember-me-label">Remember me</span>
+                    
+                    
                 </label>
                 <span
                     className="forgot-password-link"
                     onClick={() => navigate("/forgotPass")}
                 >
-                    Forgot Password
+                    Zapomniałem hasła
                 </span>
             </div>
 
@@ -106,17 +102,17 @@ export default function LoginForm() {
                 disabled={loading}
                 onClick={handleLogin}
             >
-                {loading ? 'Logging in...' : 'Submit'}
+                {loading ? 'Logging in...' : 'Zaloguj'}
             </button>
 
             {/* Register link */}
             <p className="login-signup-text">
-                Don't have account?{" "}
+                Nie masz jeszcze konta?{" "}
                 <span
                     className="login-signup-link"
                     onClick={() => navigate("/register")}
                 >
-                    Request a free trial
+                    Zarejestruj się
                 </span>
             </p>
         </div>

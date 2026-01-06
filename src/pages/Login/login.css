@@ -1,7 +1,12 @@
 /* 
-   LOGIN PAGE CONTAINER
+   ============================================
+   SHARED STYLES (LOGIN & REGISTER)
+   ============================================
 */
-.login-page-wrapper {
+
+/* Page Container */
+.login-page-wrapper,
+.register-page-wrapper {
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -11,30 +16,32 @@
 }
 
 /* 
-   LOGIN CARD (LIGHT THEME - PODOBNY DO WZORU)
+   ============================================
+   LOGIN FORM STYLES
+   ============================================
 */
+
+/* Login Card */
 .login-card {
-    background: #ffffff;
-    padding: 48px 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-    max-width: 420px;
+    background: transparent;
+    padding: 24px 40px;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 460px;
     width: 100%;
     margin: 0 auto;
 }
 
-/* 
-   LOGO CONTAINER
-*/
+/* Logo Container */
 .login-logo {
     display: flex;
     justify-content: center;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 }
 
 .login-logo-icon {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     background: #1a1a1a;
     border-radius: 8px;
     display: flex;
@@ -42,28 +49,24 @@
     justify-content: center;
 }
 
-/* 
-   HEADINGS
-*/
+/* Headings */
 .login-title {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     color: #1a1a1a;
     text-align: center;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     letter-spacing: -0.5px;
 }
 
 .login-subtitle {
-    font-size: 14px;
+    font-size: 13px;
     color: #6b7280;
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
 }
 
-/* 
-   FORM
-*/
+/* Form */
 .login-form {
     display: flex;
     flex-direction: column;
@@ -71,23 +74,23 @@
 
 .login-form label {
     display: block;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: #374151;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .login-form input[type="email"],
 .login-form input[type="password"] {
     width: 100%;
-    padding: 12px 14px;
+    padding: 10px 12px;
     border: 1px solid #d1d5db;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 14px;
     color: #1a1a1a;
     background: #ffffff;
     transition: all 0.2s ease;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 .login-form input::placeholder {
@@ -106,33 +109,31 @@
     opacity: 0.6;
 }
 
-/* 
-   FORM OPTIONS (REMEMBER ME + FORGOT PASSWORD)
-*/
+/* Form Options (Remember Me + Forgot Password) */
 .login-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .remember-me-wrapper {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
 }
 
 .remember-me-wrapper input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
+    width: 15px;
+    height: 15px;
     cursor: pointer;
     accent-color: #1a1a1a;
     margin: 0;
 }
 
 .remember-me-label {
-    font-size: 14px;
+    font-size: 13px;
     color: #374151;
     font-weight: 400;
     user-select: none;
@@ -140,7 +141,7 @@
 }
 
 .forgot-password-link {
-    font-size: 14px;
+    font-size: 13px;
     color: #374151;
     text-decoration: none;
     font-weight: 500;
@@ -152,21 +153,19 @@
     color: #1a1a1a;
 }
 
-/* 
-   SUBMIT BUTTON
-*/
+/* Login Button */
 .login-btn {
     width: 100%;
-    padding: 12px 24px;
+    padding: 10px 24px;
     background: #1a1a1a;
     color: #ffffff;
     border: none;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
 }
 
 .login-btn:hover:not(:disabled) {
@@ -184,26 +183,22 @@
     cursor: not-allowed;
 }
 
-/* 
-   ERROR MESSAGE
-*/
+/* Login Error Message */
 .login-error {
     background: #fee2e2;
     color: #dc2626;
-    font-size: 13px;
-    padding: 12px;
+    font-size: 12px;
+    padding: 10px;
     border-radius: 8px;
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     border: 1px solid #fecaca;
 }
 
-/* 
-   REGISTER LINK (UNIKALNE DLA LOGIN)
-*/
+/* Login Signup Link */
 .login-signup-text {
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     color: #6b7280;
     margin-top: 0;
 }
@@ -222,14 +217,275 @@
 }
 
 /* 
-   RESPONSIVE
+   ============================================
+   REGISTER FORM STYLES
+   ============================================
+*/
+
+/* Register Card */
+.register-card {
+    background: transparent;
+    padding: 24px 40px;
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 460px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* Logo Container */
+.register-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.register-logo-icon {
+    width: 44px;
+    height: 44px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Headings */
+.register-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    text-align: center;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+}
+
+.register-subtitle {
+    font-size: 13px;
+    color: #6b7280;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form */
+.register-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.register-form label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 5px;
+}
+
+.register-form input[type="email"],
+.register-form input[type="text"],
+.register-form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1a1a1a;
+    background: #ffffff;
+    transition: all 0.2s ease;
+    margin-bottom: 12px;
+}
+
+.register-form input::placeholder {
+    color: #9ca3af;
+}
+
+.register-form input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.register-form input:disabled {
+    background: #f9fafb;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Name Row (First Name + Last Name) */
+.name-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0;
+}
+
+.name-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.name-field label {
+    margin-bottom: 5px;
+}
+
+.name-field input {
+    margin-bottom: 12px;
+}
+
+/* Terms Checkbox */
+.terms-wrapper {
+    margin-bottom: 16px;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #374151;
+    font-weight: 400;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: #1a1a1a;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.terms-checkbox span {
+    user-select: none;
+    line-height: 1.3;
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 10px 24px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 16px;
+}
+
+.register-btn:hover:not(:disabled) {
+    background: #000000;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.register-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.register-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* Register Error & Success Messages */
+.register-error {
+    background: #fee2e2;
+    color: #dc2626;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 12px;
+    border: 1px solid #fecaca;
+}
+
+.register-success {
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 12px;
+    border: 1px solid #a7f3d0;
+}
+
+/* Register Login Link */
+.register-login-text {
+    text-align: center;
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 0;
+}
+
+.register-login-link {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    cursor: pointer;
+}
+
+.register-login-link:hover {
+    color: #000000;
+    text-decoration: underline;
+}
+
+/* Old styles compatibility (if needed) */
+.register-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.terms-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #374151;
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+.terms-label input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: #1a1a1a;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.success-message {
+    background: #d1fae5;
+    color: #065f46;
+    font-size: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 12px;
+    border: 1px solid #a7f3d0;
+}
+
+/* 
+   ============================================
+   RESPONSIVE DESIGN
+   ============================================
 */
 @media (max-width: 480px) {
-    .login-card {
+    .login-card,
+    .register-card {
         padding: 32px 24px;
     }
 
-    .login-title {
+    .login-title,
+    .register-title {
         font-size: 24px;
     }
 
@@ -237,5 +493,10 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+    }
+
+    .name-row {
+        flex-direction: column;
+        gap: 0;
     }
 }

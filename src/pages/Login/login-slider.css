@@ -1,110 +1,390 @@
-/* Główny wrapper logowania */
-.login-wrapper {
-    height: 80vh; 
-    overflow: hidden;
-    margin-left: 15%;
-    margin-right: 15%;
-}
+/* 
+   ============================================
+   AUTH LAYOUT - SPLIT SCREEN (OGRANICZONY)
+   ============================================
+*/
 
-.login-wrapper .row {
-    height: 100%;
-}
-
-/* Lewa strona - slider */
-.login-left {
-    background: #000;
-    overflow: hidden;
-    height: 100%;
-    display: flex;
-}
-
-/* Prawa strona - formularz */
-.login-right {
-    height: 100%;
+/* Wrapper - centruje i ogranicza zawartość */
+.auth-layout-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f5f5f5;
+    min-height: calc(100vh - 80px); /* Odejmujemy wysokość navbara */
+    padding: 40px 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
 }
 
-/* Slider */
-.login-slider {
+.auth-layout-container {
+    display: flex;
+    width: 90%;
+    max-width: 1400px;
+    height: 80vh;
+    min-height: 680px;
+    max-height: 750px;
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+/* Lewa sekcja - Slider (58% szerokości) */
+.auth-slider-section {
+    flex: 0 0 58%;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+/* Prawa sekcja - Formularz (42% szerokości) */
+.auth-form-section {
+    flex: 0 0 42%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* 
+   ============================================
+   SLIDER STYLES
+   ============================================
+*/
+
+.slider-container {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
 }
 
-.login-slider-inner {
+.slider-image-wrapper {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    position: relative;
 }
 
-/* Obrazki slidera */
-.login-slide-img {
+.slider-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     display: block;
+    animation: zoomIn 5s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Gradient overlay - lepsza czytelność tekstu */
+.slider-overlay {
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0;
-    transform: translateX(40px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.75) 0%,
+        rgba(0, 0, 0, 0.5) 40%,
+        rgba(0, 0, 0, 0.3) 70%,
+        transparent 100%
+    );
+    pointer-events: none;
 }
 
-.login-slide-img.slide-next {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.login-slide-img.slide-prev {
-    opacity: 1;
-    transform: translateX(-40px);
-}
-
-/* Przyciski slidera */
-.login-slider-controls {
+/* Tekst na sliderze */
+.slider-content {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    left: 60px;
+    transform: translateY(-50%);
+    max-width: 550px;
+    color: white;
+    z-index: 10;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+}
+
+.slider-title {
+    font-size: 52px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.slider-description {
+    font-size: 17px;
+    line-height: 1.7;
+    opacity: 0.95;
+    font-weight: 300;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+}
+
+/* 
+   Numeracja slajdów (01, 02, 03, 04)
+*/
+.slider-pagination {
+    position: absolute;
+    bottom: 100px;
+    left: 60px;
     display: flex;
     gap: 20px;
-    z-index: 10;
+    z-index: 20;
 }
 
-.login-slider-controls button {
-    background: rgba(0, 0, 0, 0.7);
-    color: white;
+.pagination-dot {
+    background: transparent;
     border: none;
-    padding: 10px 16px;
+    color: rgba(255, 255, 255, 0.4);
     font-size: 18px;
     cursor: pointer;
-    border-radius: 6px;
-    transition: background 0.3s ease;
+    padding: 8px 0;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: 'Inter', -apple-system, sans-serif;
 }
 
-.login-slider-controls button:hover {
-    background: rgba(0, 0, 0, 0.9);
+.pagination-dot::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: white;
+    transition: width 0.3s ease;
 }
 
-/* Responsywność */
+.pagination-dot.active {
+    color: white;
+    font-weight: 700;
+}
+
+.pagination-dot.active::after {
+    width: 100%;
+}
+
+.pagination-dot:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 
+   Przyciski kontrolne
+*/
+.slider-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 60px;
+    display: flex;
+    gap: 12px;
+    z-index: 20;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+/* 
+   Pasek postępu
+*/
+.slider-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.15);
+    z-index: 30;
+}
+
+.slider-progress-fill {
+    height: 100%;
+    background: white;
+    transition: width 0.05s linear;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* 
+   ============================================
+   RESPONSIVE DESIGN
+   ============================================
+*/
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .auth-layout-wrapper {
+        padding: 30px 0;
+    }
+
+    .auth-layout-container {
+        width: 95%;
+        height: 70vh;
+        min-height: 600px;
+    }
+
+    .auth-slider-section {
+        flex: 0 0 50%;
+    }
+    
+    .auth-form-section {
+        flex: 0 0 50%;
+        padding: 30px;
+    }
+
+    .slider-content {
+        left: 40px;
+        max-width: 450px;
+    }
+
+    .slider-title {
+        font-size: 42px;
+    }
+
+    .slider-description {
+        font-size: 15px;
+    }
+
+    .slider-pagination,
+    .slider-controls {
+        left: 40px;
+    }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
-    .login-wrapper {
-        margin-left: 5%;
-        margin-right: 5%;
+    .auth-layout-wrapper {
+        padding: 20px;
+        min-height: calc(100vh - 60px);
+    }
+
+    .auth-layout-container {
+        flex-direction: column;
+        width: 100%;
         height: auto;
+        min-height: auto;
+        border-radius: 12px;
     }
-    
-    .login-left {
-        display: none; /* Ukryj slider na mobile */
+
+    .auth-slider-section {
+        flex: 0 0 auto;
+        height: 350px;
     }
-    
-    .login-right {
-        min-height: 100vh;
+
+    .auth-form-section {
+        flex: 1;
+        min-height: auto;
+        padding: 30px 20px;
+    }
+
+    .slider-content {
+        left: 30px;
+        right: 30px;
+        max-width: 100%;
+    }
+
+    .slider-title {
+        font-size: 32px;
+    }
+
+    .slider-description {
+        font-size: 14px;
+        max-width: 90%;
+    }
+
+    .slider-pagination {
+        bottom: 70px;
+        left: 30px;
+        gap: 15px;
+    }
+
+    .pagination-dot {
+        font-size: 16px;
+    }
+
+    .slider-controls {
+        bottom: 20px;
+        left: 30px;
+        gap: 10px;
+    }
+
+    .control-btn {
+        width: 42px;
+        height: 42px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-layout-wrapper {
+        padding: 15px;
+    }
+
+    .auth-layout-container {
+        border-radius: 8px;
+    }
+
+    .slider {
+        font-size: 28px;
+    }
+
+    .slider-description {
+        font-size: 13px;
+    }
+
+    .slider-content {
+        left: 20px;
+        right: 20px;
+    }
+
+    .slider-pagination,
+    .slider-controls {
+        left: 20px;
+    }
+
+    .auth-form-section {
+        padding: 25px 20px;
     }
 }

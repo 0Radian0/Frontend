@@ -74,16 +74,20 @@ export default function RegisterForm() {
 
   return (
     <form className="register-form" onSubmit={handleRegister}>
-      <label>Email</label>
-      <input
-        type="email"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        disabled={loading}
-        required
-        placeholder="twoj@email.com"
-      />
+      {/* Email field */}
+      <div>
+        <label>Email</label>
+        <input
+          type="email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          disabled={loading}
+          required
+          placeholder="twoj@email.com"
+        />
+      </div>
 
+      {/* Name fields row */}
       <div className="name-row">
         <div className="name-field">
           <label>Imię</label>
@@ -94,7 +98,6 @@ export default function RegisterForm() {
             disabled={loading}
             required
             placeholder="Jan"
-            /* ❌ USUŃ pattern - przeniesione do JS */
           />
         </div>
         <div className="name-field">
@@ -106,57 +109,66 @@ export default function RegisterForm() {
             disabled={loading}
             required
             placeholder="Kowalski"
-            /* ❌ USUŃ pattern - przeniesione do JS */
           />
         </div>
       </div>
 
-      <label>Hasło</label>
-      <input
-        type="password"
-        value={formData.password}
-        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-        disabled={loading}
-        required
-        minLength="8"
-        placeholder="Co najmniej 8 znaków"
-      />
+      {/* Password field */}
+      <div>
+        <label>Hasło</label>
+        <input
+          type="password"
+          value={formData.password}
+          onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+          disabled={loading}
+          required
+          minLength="8"
+          placeholder="Co najmniej 8 znaków"
+        />
+      </div>
 
-      <label>Powtórz hasło</label>
-      <input
-        type="password"
-        value={formData.confirmPassword}
-        onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-        disabled={loading}
-        required
-        minLength="8"
-        placeholder="Powtórz hasło"
-      />
+      {/* Confirm password field */}
+      <div>
+        <label>Powtórz hasło</label>
+        <input
+          type="password"
+          value={formData.confirmPassword}
+          onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
+          disabled={loading}
+          required
+          minLength="8"
+          placeholder="Powtórz hasło"
+        />
+      </div>
 
-      {error && <p className="register-error" style={{ color: 'red' }}>{error}</p>}
-      {successMessage && <p className="success-message" style={{ color: 'green' }}>{successMessage}. Przekierowanie...</p>}
+      {/* Error & Success messages */}
+      {error && <p className="register-error">{error}</p>}
+      {successMessage && <p className="register-success">{successMessage}. Przekierowanie...</p>}
 
-      <div className="register-actions">
-        <button type="submit" className="register-btn" disabled={loading}>
-          {loading ? 'Rejestracja...' : 'Zarejestruj się'}  
-        </button>
-        <label className="terms-label">
+      {/* Terms checkbox */}
+      <div className="terms-wrapper">
+        <label className="terms-checkbox">
           <input
             type="checkbox"
             checked={formData.acceptedTerms}
             onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
             disabled={loading}
           />
-          Przeczytałem i akceptuję regulamin
+          <span>Przeczytałem i akceptuję regulamin</span>
         </label>
       </div>
 
-      <p className="login-register-text">
+      {/* Submit button */}
+      <button type="submit" className="register-btn" disabled={loading}>
+        {loading ? 'Rejestracja...' : 'Zarejestruj się'}
+      </button>
+
+      {/* Login link */}
+      <p className="register-login-text">
         Masz już konto?{" "}
         <span
-          className="login-register-link"
+          className="register-login-link"
           onClick={() => navigate("/login")}
-          style={{ cursor: "pointer", color: "#1a73e8" }}
         >
           Zaloguj się
         </span>
