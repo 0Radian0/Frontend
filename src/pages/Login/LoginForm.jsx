@@ -4,6 +4,7 @@ import { fetchAPI } from "../../config/api";
 
 export default function LoginForm() {
     const [formData, setFormData] = useState({ email: '', password: '' });
+    const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -40,8 +41,6 @@ export default function LoginForm() {
             window.dispatchEvent(new Event("storage"));
 
             console.log('✅ Zalogowano pomyślnie!');
-            
-            // ✅ POPRAWIONE: frontPage (wielka litera P)
             navigate("/frontPage");
 
         } catch (err) {
@@ -52,53 +51,74 @@ export default function LoginForm() {
     };
 
     return (
-        <form className="login-form" onSubmit={handleLogin}>
-            <label>E-mail</label>
-            <input
-                type="email"
-                value={formData.email}
-                onChange={e => setFormData({ ...formData, email: e.target.value })}
+        <div className="login-form" onSubmit={handleLogin}>
+            {/* Email field */}
+            <div>
+                <label>Email</label>
+                <input
+                    type="email"
+                    value={formData.email}
+                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                    disabled={loading}
+                    required
+                    placeholder="Enter your email"
+                />
+            </div>
+
+            {/* Password field */}
+            <div>
+                <label>Password</label>
+                <input
+                    type="password"
+                    value={formData.password}
+                    onChange={e => setFormData({ ...formData, password: e.target.value })}
+                    disabled={loading}
+                    required
+                    placeholder="Enter your password"
+                />
+            </div>
+
+            {/* Remember me & Forgot password */}
+            <div className="login-options">
+                <label className="remember-me-wrapper">
+                    <input
+                        type="checkbox"
+                        checked={rememberMe}
+                        onChange={e => setRememberMe(e.target.checked)}
+                    />
+                    <span className="remember-me-label">Remember me</span>
+                </label>
+                <span
+                    className="forgot-password-link"
+                    onClick={() => navigate("/forgotPass")}
+                >
+                    Forgot Password
+                </span>
+            </div>
+
+            {/* Error message */}
+            {error && <p className="login-error">{error}</p>}
+
+            {/* Submit button */}
+            <button 
+                type="button" 
+                className="login-btn" 
                 disabled={loading}
-                required
-                placeholder="Wprowadź email"
-            />
-
-            <label>Hasło</label>
-            <input
-                type="password"
-                value={formData.password}
-                onChange={e => setFormData({ ...formData, password: e.target.value })}
-                disabled={loading}
-                required
-                placeholder="Wprowadź hasło"
-            />
-
-            {error && <p className="login-error" style={{ color: 'red' }}>{error}</p>}
-
-            <button type="submit" className="login-btn" disabled={loading}>
-                {loading ? 'Logowanie...' : 'Zaloguj się'}
+                onClick={handleLogin}
+            >
+                {loading ? 'Logging in...' : 'Submit'}
             </button>
 
-             <p className="login-register-text">
+            {/* Register link */}
+            <p className="login-signup-text">
+                Don't have account?{" "}
                 <span
-                    className="login-register-link"
-                    onClick={() => navigate("/forgotPass")}
-                    style={{ cursor: "pointer", color: "#1a73e8" }}
-                >
-                    Zapomniałeś hasła?
-                </span>
-            </p> 
-
-            <p className="login-register-text">
-                Nie masz konta?{" "}
-                <span
-                    className="login-register-link"
+                    className="login-signup-link"
                     onClick={() => navigate("/register")}
-                    style={{ cursor: "pointer", color: "#1a73e8" }}
                 >
-                    Zarejestruj się
+                    Request a free trial
                 </span>
             </p>
-        </form>
+        </div>
     );
 }
