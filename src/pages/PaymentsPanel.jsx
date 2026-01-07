@@ -201,7 +201,7 @@ export default function PaymentsPanel() {
         try {
             const { data } = await fetchAPI('/payments/modifyPayment', {
                 method: 'PUT',
-                body: JSON.stringify({ paymentDate, dueDate, amount, id })
+                body: JSON.stringify({ paymentDate: paymentDate || null, dueDate, amount, id })
             });
             if (data.success) {
                 alert("Opłata zmodyfikowana");
