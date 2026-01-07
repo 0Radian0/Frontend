@@ -42,22 +42,22 @@ function App() {
       <NavMenu />
 
       <Routes>
-        {/* ✅ Strona główna i logowanie */}
+        {/*  Strona główna i logowanie */}
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
 
-        {/* ✅ Rejestracja */}
+        {/*  Rejestracja */}
         <Route path="/register" element={<Login />} />
 
-        {/* ✅ Publiczne (dostępne dla wszystkich) */}
+        {/*  Publiczne (dostępne dla wszystkich) */}
         <Route path="/appForm" element={<ApplicationForm />} />
         <Route path="/forgotPass" element={<ForgotPassword />} />
         <Route path="/resetPass/:token" element={<ResetPassword />} /> 
 
-        {/* ✅ Tylko dla niezalogowanych */}
+        {/*  Tylko dla niezalogowanych */}
         <Route path="/auth" element={<Authentication />} />
 
-        {/* ✅ Strefa zalogowana (poprawione wielkości liter) */}
+        {/*  Strefa zalogowana (poprawione wielkości liter) */}
         <Route
           path="/frontPage"
           element={
@@ -112,7 +112,7 @@ function App() {
           }
         />
 
-        {/* ✅ Strefa admina */}
+        {/*  Strefa admina */}
         <Route
           path="/UsersPanel"
           element={
@@ -122,7 +122,7 @@ function App() {
           }
         />
 
-        {/* ✅ 404 */}
+        {/*  404 */}
         <Route path="*" element={<NotFound />} />
       </Routes>
 

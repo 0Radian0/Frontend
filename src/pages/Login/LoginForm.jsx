@@ -26,7 +26,7 @@ export default function LoginForm() {
                 return;
             }
 
-            // ✅ Zapisz dane użytkownika
+            // Zapisz dane użytkownika
             localStorage.setItem("token", data.token);
             localStorage.setItem("userID", data.user.userID);
             localStorage.setItem("rankID", data.user.rankID);
@@ -78,7 +78,7 @@ export default function LoginForm() {
                 />
             </div>
 
-            {/* Remember me & Forgot password */}
+            {/*  Forgot password */}
             <div className="login-options">
                 <label className="remember-me-wrapper">
                     

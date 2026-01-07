@@ -29,7 +29,7 @@ export default function ApplicationForm() {
         setLoading(true);
 
         try {
-            // ✅ Poprawione: dodano fallback i lepsze logowanie
+            //  Poprawione: dodano fallback i lepsze logowanie
             const API_URL = process.env.REACT_APP_API_URL || 'https://backend-production-3aa9.up.railway.app/api';
             
             console.log('🔍 API_URL:', API_URL); // Debug
@@ -40,7 +40,7 @@ export default function ApplicationForm() {
                 headers: { 
                     "Content-Type": "application/json"
                 },
-                // ✅ DODANE: credentials dla CORS
+                //  DODANE: credentials dla CORS
                 credentials: 'include',
                 body: JSON.stringify({
                     toWho: "adrianpietka0481@gmail.com",
@@ -59,9 +59,9 @@ export default function ApplicationForm() {
             let data;
             try {
                 data = await res.json();
-                console.log('📦 Odpowiedź z backendu:', data); // Debug
+                console.log(' Odpowiedź z backendu:', data); // Debug
             } catch (parseError) {
-                console.error('❌ Błąd parsowania JSON:', parseError);
+                console.error(' Błąd parsowania JSON:', parseError);
                 setError(`Błąd backendu: odpowiedź nie jest JSON. Status: ${res.status}`);
                 setLoading(false);
                 return;
@@ -80,7 +80,7 @@ export default function ApplicationForm() {
             setTimeout(() => navigate("/"), 3000);
 
         } catch (err) {
-            console.error("❌ Mail error:", err);
+            console.error(" Mail error:", err);
             setError(`Błąd połączenia: ${err.message}`);
         } finally {
             setLoading(false);

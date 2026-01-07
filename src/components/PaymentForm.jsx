@@ -16,9 +16,9 @@ export default function PaymentForm({ payment, onChange }) {
 
     useEffect(() => {
         if (onChange) {
-            // Upewnij się, że przekazujesz pusty string zamiast NaN
+            
             onChange({ 
-                paymentDate: paymentDate || null,  // null zamiast pustego stringa
+                paymentDate: paymentDate || null,  
                 dueDate, 
                 amount: amount === "" ? "" : amount 
             });
@@ -84,7 +84,7 @@ export default function PaymentForm({ payment, onChange }) {
                     min="0"
                     required
                     value={amount}
-                    onChange={e => setAmount(e.target.value)} // Przechowuj jako string!
+                    onChange={e => setAmount(e.target.value)} 
                     style={{ 
                         width: '100%', 
                         padding: '10px', 
