@@ -769,24 +769,17 @@ export default function TrainingsPanel() {
                         {editTraining && (
                             <div className="form-container" ref={editFormRef}>
                                 <h3 style={{ marginBottom: '20px' }}>Edytowanie treningu</h3>
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={() => setEditTraining(null)}
-                                    style={{ 
-                        width: '100%', 
-                        padding: '10px', 
-                        borderRadius: '8px', 
-                        border: '2px solid #e0e0e0',
-                        fontSize: '14px'
-                    }}
-                                >
-                                    <FaTimes style={{ marginRight: '5px' }} /> Anuluj edytowanie
-                                </button>
                                 <form onSubmit={handleUpdate}>
                                     <TrainingForm training={editTraining} />
-                                    <button type="submit" className="btn btn-primary" style={{ marginTop: '15px' }}>
+                                    <button type="submit" className="btn btn-primary" style={{ marginTop: '15px', marginRight: '10px' }}>
                                         <FaCheck style={{ marginRight: '5px' }} /> Zapisz zmiany
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-secondary"
+                                        onClick={() => setEditTraining(null)}
+                                    >
+                                        <FaTimes style={{ marginRight: '5px' }} /> Anuluj
                                     </button>
                                 </form>
                             </div>
