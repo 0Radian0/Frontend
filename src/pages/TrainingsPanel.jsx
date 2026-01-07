@@ -773,7 +773,13 @@ export default function TrainingsPanel() {
                                     type="button"
                                     className="btn btn-secondary"
                                     onClick={() => setEditTraining(null)}
-                                    style={{ marginBottom: '15px' }}
+                                    style={{ 
+                        width: '100%', 
+                        padding: '10px', 
+                        borderRadius: '8px', 
+                        border: '2px solid #e0e0e0',
+                        fontSize: '14px'
+                    }}
                                 >
                                     <FaTimes style={{ marginRight: '5px' }} /> Anuluj edytowanie
                                 </button>
