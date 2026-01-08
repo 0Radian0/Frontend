@@ -3,20 +3,20 @@ import TrainingsCalendar from "../components/Calendar";
 import { Link } from 'react-router-dom';
 import { fetchAPI } from "../config/api";
 import "../components/FrontPage.css";
-import { FaCheck } from 'react-icons/fa';
+import { FaCheck, FaLock, FaUser, FaEdit, FaStickyNote } from 'react-icons/fa';
 
 export default function FrontPage() {
     const [sumToPay, setSumToPay] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [selectedTraining, setSelectedTraining] = useState(null);
-    
+
     const rawDescription = localStorage.getItem("description");
     const description =
         rawDescription && rawDescription !== "undefined" && rawDescription.trim() !== ""
             ? rawDescription
             : "Brak opisu użytkownika :(";
-    
+
     const userID = Number(localStorage.getItem("userID"));
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function FrontPage() {
                 setLoading(false);
 
             } catch (err) {
-                console.error("❌ Błąd wyświetlania statusu płatności:", err);
+                console.error("Błąd wyświetlania statusu płatności:", err);
                 setError(err.message || "Nie udało się pobrać statusu płatności");
                 setLoading(false);
             }
@@ -91,7 +91,7 @@ export default function FrontPage() {
                                 <p><strong> Godzina:</strong> {selectedTraining.time}</p>
                                 <p><strong> Miejsce:</strong> {selectedTraining.place}</p>
                                 <p><strong> Opis:</strong> {selectedTraining.description}</p>
-                                
+
                                 {selectedTraining.allTrainings && selectedTraining.allTrainings.length > 1 && (
                                     <p style={{ marginTop: '10px', fontSize: '14px', opacity: 0.9 }}>
                                         ℹ Tego dnia odbywają się {selectedTraining.allTrainings.length} treningi
@@ -100,7 +100,7 @@ export default function FrontPage() {
                             </div>
                         ) : (
                             <div className="no-training-selected">
-                                 Kliknij datę w kalendarzu, aby zobaczyć szczegóły treningu
+                                Kliknij datę w kalendarzu, aby zobaczyć szczegóły treningu
                             </div>
                         )}
                     </div>
@@ -110,20 +110,20 @@ export default function FrontPage() {
                         <h3> Zarządzanie Kontem</h3>
                         <div className="action-buttons">
                             <Link to="/changePassword" className="action-button">
-                                🔒 Zmiana hasła
+                                <FaLock style={{ marginRight: '6px' }} /> Zmiana hasła
                             </Link>
                             <Link to="/changeDescription" className="action-button">
-                                ✏️ Zmiana opisu
+                                <FaEdit style={{ marginRight: '6px' }} /> Zmiana opisu
                             </Link>
                             <Link to="/changeData" className="action-button">
-                                👤 Zmiana danych
+                                <FaUser style={{ marginRight: '6px' }} /> Zmiana danych
                             </Link>
                         </div>
                     </div>
 
                     {/* Opis użytkownika */}
                     <div className="info-card">
-                        <h3>📝 O Mnie</h3>
+                        <h3><FaStickyNote style={{ marginRight: '6px' }} /> O Mnie</h3>
                         <div className="user-description-content">
                             {description}
                         </div>

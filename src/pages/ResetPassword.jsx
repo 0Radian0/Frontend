@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchAPI } from "../config/api";
+import { FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function ResetPassword() {
     const [newPassword, setNewPassword] = useState("");
@@ -362,7 +363,7 @@ export default function ResetPassword() {
                 <div className="reset-password-container">
                     {message ? (
                         <div className="success-message">
-                            <div className="icon">✅</div>
+                            <div className="icon">✔️</div>
                             <h3>Sukces!</h3>
                             <p>{message}</p>
                             <p style={{ marginTop: '10px', fontSize: '13px' }}>
@@ -372,7 +373,7 @@ export default function ResetPassword() {
                     ) : (
                         <>
                             <div className="reset-password-header">
-                                <div className="reset-password-icon">🔒</div>
+                                <div className="reset-password-icon"><FaLock style={{ marginRight: '5px' }}/></div>
                                 <h2>Zmiana hasła</h2>
                                 <p>Wprowadź nowe, bezpieczne hasło do swojego konta</p>
                             </div>
@@ -398,7 +399,7 @@ export default function ResetPassword() {
                                             onClick={() => setShowPassword(!showPassword)}
                                             tabIndex="-1"
                                         >
-                                            {showPassword ? "👁️" : "👁️‍🗨️"}
+                                            {showPassword ? <FaEye style={{ marginRight: '5px' }}/> : <FaEyeSlash style={{ marginRight: '5px' }}/>}
                                         </button>
                                     </div>
                                     

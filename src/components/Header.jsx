@@ -27,7 +27,7 @@ export default function Header() {
           {/* Prawy logotyp */}
           <div className="  col-md-6 d-flex justify-content-end">
             <div className="block-content clearfix block-description">
-              <a href="https://pollub.pl/">
+              <a href="https://szermierka.pollub.pl/">
                 <img
                   src={rightLogo}
                   alt="Logo Politechniki Lubelskiej"

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAPI } from "../config/api"; // ✅ Import API config
+import { fetchAPI } from "../config/api"; // Import API config
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -22,7 +22,7 @@ export default function ForgotPassword() {
         setLoading(true);
 
         try {
-            // ✅ Używamy fetchAPI zamiast hardcoded URL
+            // Używamy fetchAPI zamiast hardcoded URL
             const { data } = await fetchAPI('/auth/users/sendForgotPasswordEmail', {
                 method: 'POST',
                 body: JSON.stringify({ email }),
@@ -32,7 +32,7 @@ export default function ForgotPassword() {
             setError(null);
 
         } catch (err) {
-            console.error("❌ Błąd wysyłki maila resetującego:", err);
+            console.error(" Błąd wysyłki maila resetującego:", err);
             setError(err.message || "Nie udało się wysłać maila. Sprawdź poprawność adresu e-mail.");
             setMessage(null);
         } finally {

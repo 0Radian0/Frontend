@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchAPI } from "../config/api";
+import { FaLock, FaLightbulb, FaEye, FaEyeSlash, FaSave } from 'react-icons/fa';
+
 
 export default function ChangePassword() {
     const [oldPassword, setOldPassword] = useState("");
@@ -59,7 +61,7 @@ export default function ChangePassword() {
             setTimeout(() => navigate("/frontPage"), 1000);
 
         } catch (err) {
-            console.error("❌ Błąd zmiany hasła:", err);
+            console.error(" Błąd zmiany hasła:", err);
             setError(err.message || "Nie udało się zmienić hasła");
             setLoading(false);
         }
@@ -430,7 +432,7 @@ export default function ChangePassword() {
 
                 <div className="change-password-header">
                     <h2>
-                        <span>🔒</span>
+                        <span><FaLock style={{ marginRight: '5px' }}/></span>
                         Zmiana hasła
                     </h2>
                     <p>Zaktualizuj hasło do swojego konta</p>
@@ -466,7 +468,7 @@ export default function ChangePassword() {
                                     onClick={() => setShowPasswords({...showPasswords, old: !showPasswords.old})}
                                     tabIndex="-1"
                                 >
-                                    {showPasswords.old ? "👁️" : "👁️‍🗨️"}
+                                    {showPasswords.old ? <FaEye style={{ marginRight: '5px' }}/> : <FaEyeSlash style={{ marginRight: '5px' }}/>}
                                 </button>
                             </div>
                         </div>
@@ -491,7 +493,7 @@ export default function ChangePassword() {
                                     onClick={() => setShowPasswords({...showPasswords, new: !showPasswords.new})}
                                     tabIndex="-1"
                                 >
-                                    {showPasswords.new ? "👁️" : "👁️‍🗨️"}
+                                    {showPasswords.new ? <FaEye style={{ marginRight: '5px' }}/> : <FaEyeSlash style={{ marginRight: '5px' }}/>}
                                 </button>
                             </div>
                             
@@ -536,13 +538,13 @@ export default function ChangePassword() {
                                     onClick={() => setShowPasswords({...showPasswords, confirm: !showPasswords.confirm})}
                                     tabIndex="-1"
                                 >
-                                    {showPasswords.confirm ? "👁️" : "👁️‍🗨️"}
+                                    {showPasswords.confirm ? <FaEye style={{ marginRight: '5px' }}/> : <FaEyeSlash style={{ marginRight: '5px' }}/>}
                                 </button>
                             </div>
                         </div>
 
                         <div className="info-box">
-                            <strong>💡 Wskazówki dotyczące bezpiecznego hasła:</strong>
+                            <strong><FaLightbulb style={{ marginRight: '5px' }}/> Wskazówki dotyczące bezpiecznego hasła:</strong>
                             <ul>
                                 <li>Używaj co najmniej 8 znaków</li>
                                 <li>Połącz małe i wielkie litery</li>
@@ -564,7 +566,7 @@ export default function ChangePassword() {
                                 disabled={loading}
                             >
                                 {loading && <span className="loading-spinner"></span>}
-                                {loading ? 'Zmiana hasła...' : 'Zmień hasło'}
+                                {loading ? 'Zmiana hasła...' : 'Zmień hasło'} <FaSave />
                             </button>
                             <button 
                                 type="button" 

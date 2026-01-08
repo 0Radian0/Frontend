@@ -17,14 +17,14 @@ export default function TrainingsCalendar({ onDateSelect }) {
         setLoading(true);
         setError(null);
         
-        const { data } = await fetchAPI('/trainings/AllTrainings', {
+        const { data } = await fetchAPI('/trainings/AllTrainings?newTrainings=false', {
           method: 'GET'
         });
         
         setTrainings(data);
         setLoading(false);
       } catch (err) {
-        console.error("❌ Błąd przy pobieraniu treningów:", err);
+        console.error(" Błąd przy pobieraniu treningów:", err);
         setError("Nie udało się pobrać treningów");
         setLoading(false);
       }
@@ -47,7 +47,7 @@ export default function TrainingsCalendar({ onDateSelect }) {
 
     setSelectedTrainings(filtered);
 
-    // ✅ WAŻNE: Wywołaj callback dla FrontPage
+    // WAŻNE: Wywołaj callback dla FrontPage
     if (onDateSelect && filtered.length > 0) {
       const firstTraining = filtered[0];
       onDateSelect({

@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import TrainingForm from "../components/TrainingForm";
 import { fetchAPI } from "../config/api";
-import { FaCheck, FaTimes, FaEdit, FaTrash, FaPlus, FaCog, FaUser } from 'react-icons/fa';
+import {
+    FaCheck, FaTimes, FaEdit, FaTrash, FaPlus,
+    FaCog, FaUser, FaCalendarAlt,
+    FaSyncAlt, FaSortAmountUp, FaClock,
+    FaMapMarkerAlt, FaStickyNote, FaIdCard,
+    FaTable, FaChevronDown, FaChevronRight 
+} from 'react-icons/fa';
 
 export default function TrainingsPanel() {
     const editFormRef = useRef(null)
@@ -72,7 +78,7 @@ export default function TrainingsPanel() {
             setTrainings(data);
             setLoading(false);
         } catch (err) {
-            console.error("❌ Błąd podczas pobierania treningów:", err);
+            console.error("Błąd podczas pobierania treningów:", err);
             alert("Nie udało się pobrać listy treningów.");
             setLoading(false);
         }
@@ -99,7 +105,7 @@ export default function TrainingsPanel() {
             setParticipants(data.data || data);
             setActiveTrainingID(trainingID);
         } catch (err) {
-            console.error("❌ Błąd podczas pobierania uczestników treningu:", err);
+            console.error("Błąd podczas pobierania uczestników treningu:", err);
             alert("Błąd podczas pobierania uczestników treningu.");
         }
     };
@@ -133,7 +139,7 @@ export default function TrainingsPanel() {
                 setTrainings(p => p.filter(t => t.trainingID !== id));
             }
         } catch (err) {
-            console.error("❌ Błąd przy usuwaniu treningu:", err);
+            console.error("Błąd przy usuwaniu treningu:", err);
             alert(err.message || "Błąd podczas usuwania treningu");
         }
     };
@@ -160,7 +166,7 @@ export default function TrainingsPanel() {
                 setForm(false);
             }
         } catch (err) {
-            console.error("❌ Błąd przy dodawaniu treningu:", err);
+            console.error("Błąd przy dodawaniu treningu:", err);
             alert(err.message || "Błąd podczas dodawania treningu");
         }
     };
@@ -187,7 +193,7 @@ export default function TrainingsPanel() {
                 setEditTraining(null);
             }
         } catch (err) {
-            console.error("❌ Błąd przy modyfikacji treningu:", err);
+            console.error("Błąd przy modyfikacji treningu:", err);
             alert(err.message || "Nie udało się zmodyfikować treningu");
         }
     };
@@ -205,11 +211,11 @@ export default function TrainingsPanel() {
             });
 
             if (data.success) {
-                alert("Zapisano na trening!");
+                alert(data.message);
                 showParticipants(trainingID);
             }
         } catch (err) {
-            console.error("❌ Błąd podczas zapisywania na trening:", err);
+            console.error("Błąd podczas zapisywania na trening:", err);
             alert(err.message || "Nie udało się zapisać na trening");
         }
     };
@@ -231,7 +237,7 @@ export default function TrainingsPanel() {
                 showParticipants(trainingID);
             }
         } catch (err) {
-            console.error("❌ Błąd przy usuwaniu użytkownika z treningu:", err);
+            console.error("Błąd przy usuwaniu użytkownika z treningu:", err);
             alert(err.message || "Błąd podczas usuwania użytkownika z treningu");
         }
     };
@@ -590,7 +596,7 @@ export default function TrainingsPanel() {
                 <div className="filters-container">
                     <div className="filters-grid">
                         <div className="filter-group">
-                            <label>📅 Filtruj treningi</label>
+                            <label><FaCalendarAlt style={{ marginRight: '5px' }} /> Filtruj treningi</label>
                             <select value={filter} onChange={e => setFilter(e.target.value)}>
                                 <option value="all">Wszystkie treningi</option>
                                 <option value="new">Przyszłe treningi</option>
@@ -609,7 +615,7 @@ export default function TrainingsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>🔄 Sortuj po</label>
+                            <label><FaSyncAlt style={{ marginRight: '5px' }} /> Sortuj po</label>
                             <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
                                 <option value="trainingDate">Data</option>
                                 <option value="trainingPlace">Miejsce</option>
@@ -618,7 +624,7 @@ export default function TrainingsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>⬆️ Kolejność</label>
+                            <label><FaSortAmountUp style={{ marginRight: '5px' }} /> Kolejność</label>
                             <select value={order} onChange={e => setOrder(e.target.value)}>
                                 <option value="ASC">Rosnąco</option>
                                 <option value="DESC">Malejąco</option>
@@ -631,13 +637,13 @@ export default function TrainingsPanel() {
                             className={`view-button ${viewMode === 'cards' ? 'active' : ''}`}
                             onClick={() => setViewMode('cards')}
                         >
-                            📇 Karty
+                            <FaIdCard style={{ marginRight: '5px' }} />  Karty
                         </button>
                         <button
                             className={`view-button ${viewMode === 'table' ? 'active' : ''}`}
                             onClick={() => setViewMode('table')}
                         >
-                            📊 Tabela
+                            <FaTable style={{ marginRight: '5px' }} /> Tabela
                         </button>
                     </div>
                 </div>
@@ -659,9 +665,9 @@ export default function TrainingsPanel() {
                             <div key={el.trainingID} className={`training-card ${isTrainingPast(el.trainingDate) ? 'past' : ''}`}>
                                 <div className="training-header">
                                     <div className="training-date">
-                                        📅 {new Date(el.trainingDate).toLocaleDateString('pl-PL')}
+                                        <FaCalendarAlt style={{ marginRight: '5px' }} />  {new Date(el.trainingDate).toLocaleDateString('pl-PL')}
                                         <div style={{ fontSize: '14px', fontWeight: '400', color: '#666', marginTop: '4px' }}>
-                                            ⏰ {new Date(el.trainingDate).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })}
+                                            <FaClock style={{ marginRight: '5px' }} />  {new Date(el.trainingDate).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })}
                                         </div>
                                     </div>
                                     <span className={`training-badge ${isTrainingPast(el.trainingDate) ? 'past' : 'upcoming'}`}>
@@ -671,14 +677,14 @@ export default function TrainingsPanel() {
 
                                 <div className="training-info">
                                     <div className="training-info-item">
-                                        <span>📍</span>
+                                        <span><FaMapMarkerAlt style={{ marginRight: '5px' }} /></span>
                                         <div>
                                             <strong>Miejsce:</strong> {el.trainingPlace}
                                         </div>
                                     </div>
                                     {el.trainingDetails && (
                                         <div className="training-info-item">
-                                            <span>📝</span>
+                                            <span><FaStickyNote style={{ marginRight: '4px' }} /></span>
                                             <div>
                                                 <strong>Szczegóły:</strong> {el.trainingDetails}
                                             </div>
@@ -711,7 +717,10 @@ export default function TrainingsPanel() {
                                         onClick={() => showParticipants(el.trainingID)}
                                         style={{ width: '100%' }}
                                     >
-                                        {activeTrainingID === el.trainingID ? '▼ Ukryj uczestników' : '▶ Pokaż uczestników'}
+                                        {activeTrainingID === el.trainingID
+                                            ? <><FaChevronDown style={{ marginRight: '5px' }} /> Ukryj uczestników</>
+                                            : <><FaChevronRight style={{ marginRight: '5px' }} /> Pokaż uczestników</>
+                                        }
                                     </button>
                                     {activeTrainingID === el.trainingID && (
                                         participants.length === 0 ? (

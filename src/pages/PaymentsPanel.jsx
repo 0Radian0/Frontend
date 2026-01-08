@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import PaymentForm from "../components/PaymentForm";
 import { fetchAPI } from "../config/api";
-import { FaCheck, FaTimes, FaPlus, FaExclamationTriangle, FaClock, FaTrash, FaEdit, FaCog, FaUser, FaUsers} from 'react-icons/fa';
+import { FaCheck, FaEnvelope, FaTimes, FaPlus, FaExclamationTriangle, 
+    FaClock, FaTrash, FaEdit, FaCog, FaUser, FaUsers, FaCalendarAlt, 
+    FaMoneyBillWave, FaChartBar, FaCreditCard, FaScroll, FaSyncAlt, 
+    FaSortAmountUp, FaSave} from 'react-icons/fa';
 
 
 export default function PaymentsPanel() {
@@ -78,7 +81,7 @@ export default function PaymentsPanel() {
             setPayments(data.userPayments || []);
             setLoading(false);
         } catch (err) {
-            console.error("❌ Błąd podczas pobierania historii płatności:", err);
+            console.error("Błąd podczas pobierania historii płatności:", err);
             alert("Nie udało się pobrać historii płatności.");
             setLoading(false);
         }
@@ -90,7 +93,7 @@ export default function PaymentsPanel() {
             const { data } = await fetchAPI('/auth/users', { method: 'GET' });
             setUsersList(Array.isArray(data) ? data : []);
         } catch (err) {
-            console.error("❌ Błąd pobierania listy użytkowników:", err);
+            console.error("Błąd pobierania listy użytkowników:", err);
             setUsersList([]);
         }
     };
@@ -101,7 +104,7 @@ export default function PaymentsPanel() {
             const { data } = await fetchAPI('/auth/users?statusFilter=payActive', { method: 'GET' });
             setUsersListToPick(Array.isArray(data) ? data : []);
         } catch (err) {
-            console.error("❌ Błąd pobierania listy użytkowników:", err);
+            console.error("Błąd pobierania listy użytkowników:", err);
             setUsersListToPick([]);
         }
     };
@@ -129,7 +132,7 @@ export default function PaymentsPanel() {
                 fetchPayments();
             }
         } catch (err) {
-            console.error("❌ Błąd podczas dodawania płatności:", err);
+            console.error("Błąd podczas dodawania płatności:", err);
             alert(err.message || "Błąd podczas dodawania płatności");
         }
     };
@@ -156,7 +159,7 @@ export default function PaymentsPanel() {
                 fetchPayments();
             }
         } catch (err) {
-            console.error("❌ Błąd podczas dodawania płatności:", err);
+            console.error("Błąd podczas dodawania płatności:", err);
             alert(err.message || "Błąd podczas dodawania płatności");
         }
     };
@@ -177,7 +180,7 @@ export default function PaymentsPanel() {
                 setPayments(p => p.filter(t => t.paymentID !== id));
             }
         } catch (err) {
-            console.error("❌ Błąd przy usuwaniu płatności:", err);
+            console.error("Błąd przy usuwaniu płatności:", err);
             alert(err.message || "Błąd podczas usuwania płatności");
         }
     };
@@ -191,7 +194,7 @@ export default function PaymentsPanel() {
                 fetchPayments();
             }
         } catch (err) {
-            console.error("❌ Błąd przy aktualizacji płatności:", err);
+            console.error("Błąd przy aktualizacji płatności:", err);
             alert(err.message || "Błąd podczas aktualizacji płatności");
         }
     };
@@ -210,7 +213,7 @@ export default function PaymentsPanel() {
                 setEditingPayment(null);
             }
         } catch (err) {
-            console.error("❌ Błąd przy modyfikacji płatności:", err);
+            console.error("Błąd przy modyfikacji płatności:", err);
             alert(err.message || "Błąd przy modyfikacji płatności");
         }
     };
@@ -222,7 +225,7 @@ export default function PaymentsPanel() {
             if (data.success) setPayments(data.userPayments || []);
             else setPayments([]);
         } catch (err) {
-            console.error("❌ Błąd przy pobieraniu płatności:", err);
+            console.error("Błąd przy pobieraniu płatności:", err);
             setPayments([]);
         }
     };
@@ -233,7 +236,7 @@ export default function PaymentsPanel() {
             const { data } = await fetchAPI(`/payments/paymentStatus/${id}`, { method: 'GET' });
             setSumToPay(Number(data.sumToPay) || 0);
         } catch (err) {
-            console.error("❌ Błąd wyświetlania statusu płatności:", err);
+            console.error("Błąd wyświetlania statusu płatności:", err);
         }
     };
 
@@ -255,7 +258,7 @@ export default function PaymentsPanel() {
             });
             alert("Wiadomość została wysłana");
         } catch (err) {
-            console.error("❌ Błąd wysyłki maila:", err);
+            console.error("Błąd wysyłki maila:", err);
             alert(err.message || "Nie udało się wysłać przypomnienia");
         }
     };
@@ -265,7 +268,7 @@ export default function PaymentsPanel() {
             const { data } = await fetchAPI('/payments/showUserPaymentStatus', { method: 'GET' });
             setStatusTab(Array.isArray(data.paymentsTab) ? data.paymentsTab : []);
         } catch (err) {
-            console.error("❌ Błąd pobierania listy statusów:", err);
+            console.error("Błąd pobierania listy statusów:", err);
             setStatusTab([]);
         }
     };
@@ -664,7 +667,7 @@ export default function PaymentsPanel() {
             <div className="payments-panel-container">
                 {/* HEADER */}
                 <div className="panel-header">
-                    <h1><span>💳</span> Panel Płatności</h1>
+                    <h1><span><FaCreditCard style={{ marginRight: 5 }} /></span> Panel Płatności</h1>
                     <p>Zarządzaj płatnościami i składkami członkowskimi</p>
                 </div>
 
@@ -689,7 +692,7 @@ export default function PaymentsPanel() {
                 <div className="filters-container">
                     <div className="filters-grid">
                         <div className="filter-group">
-                            <label>📊 Filtruj płatności</label>
+                            <label><FaCreditCard style={{ marginRight: 5 }} /> Filtruj płatności</label>
                             <select value={filter} onChange={e => setFilter(e.target.value)}>
                                 <option value="all">Wszystkie płatności</option>
                                 <option value="paid">Opłacone</option>
@@ -699,7 +702,7 @@ export default function PaymentsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>🔄 Sortuj po</label>
+                            <label><FaSyncAlt style={{ marginRight: 5 }} /> Sortuj po</label>
                             <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
                                 <option value="paymentDate">Data płatności</option>
                                 <option value="dueDate">Termin</option>
@@ -708,7 +711,7 @@ export default function PaymentsPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label>⬆️ Kolejność</label>
+                            <label><FaSortAmountUp style={{ marginRight: 5 }} /> Kolejność</label>
                             <select value={order} onChange={e => setOrder(e.target.value)}>
                                 <option value="ASC">Rosnąco</option>
                                 <option value="DESC">Malejąco</option>
@@ -717,7 +720,7 @@ export default function PaymentsPanel() {
 
                         {isAdmin && (
                             <div className="filter-group">
-                                <label>👤 Użytkownik</label>
+                                <label><FaUser style={{ marginRight: 5 }} /> Użytkownik</label>
                                 <select value={userToShowHistory} onChange={e => setUserToShowHistory(e.target.value)}>
                                     <option value="all">Wszyscy</option>
                                     {usersList.map(u => (
@@ -733,7 +736,7 @@ export default function PaymentsPanel() {
 
                 {/* TABELA PŁATNOŚCI */}
                 <div className="payments-table-container">
-                    <h2 style={{ marginBottom: '20px' }}>📜 Historia Płatności</h2>
+                    <h2 style={{ marginBottom: '20px' }}><FaScroll  style={{ marginRight: 5 }} /> Historia Płatności</h2>
                     {loading ? (
                         <div className="loading-container">
                             <div className="loading-spinner"></div>
@@ -747,12 +750,12 @@ export default function PaymentsPanel() {
                         <table className="payments-table">
                             <thead>
                                 <tr>
-                                    {isAdmin && <th>👤 Użytkownik</th>}
-                                    <th>📅 Data płatności</th>
-                                    <th>⏰ Termin</th>
-                                    <th>💵 Kwota</th>
-                                    <th>📊 Status</th>
-                                    {isAdmin && <th>⚙️ Opcje</th>}
+                                    {isAdmin && <th><FaUser style={{ marginRight: 5 }} /> Użytkownik</th>}
+                                    <th><FaCalendarAlt style={{ marginRight: 5 }} /> Data płatności</th>
+                                    <th><FaClock style={{ marginRight: 5 }} />  Termin</th>
+                                    <th><FaMoneyBillWave style={{ marginRight: 5 }} /> Kwota</th>
+                                    <th><FaChartBar style={{ marginRight: 5 }} /> Status</th>
+                                    {isAdmin && <th><FaCog style={{ marginRight: 5 }} /> Opcje</th>}
                                 </tr>
                             </thead>
                             <tbody>
@@ -845,8 +848,8 @@ export default function PaymentsPanel() {
                                         );
                                     }}>
                                         <PaymentForm payment={editingPayment} onChange={setEditingValues} />
-                                        <button type="submit" className="btn btn-primary" style={{ marginTop: '15px', marginRight: '10px' }}>💾 Zapisz</button>
-                                        <button type="button" className="btn btn-secondary" onClick={() => setEditingPayment(null)}>❌ Anuluj</button>
+                                        <button type="submit" className="btn btn-primary" style={{ marginTop: '15px', marginRight: '10px' }}><FaSave style={{ marginRight: '5px' }}/> Zapisz</button>
+                                        <button type="button" className="btn btn-secondary" onClick={() => setEditingPayment(null)}><FaTimes style={{ marginRight: '5px' }}/> Anuluj</button>
                                     </form>
                                 </div>
                             )}
@@ -889,7 +892,7 @@ export default function PaymentsPanel() {
                                             {/* Email info */}
                                             {userEmail && (
                                                 <div style={{ fontSize: '12px', color: '#888', marginBottom: '10px' }}>
-                                                    📧 {userEmail}
+                                                    <FaEnvelope style={{ marginRight: '5px' }}/> {userEmail}
                                                 </div>
                                             )}
 
@@ -901,7 +904,7 @@ export default function PaymentsPanel() {
                                                         style={{ width: '100%' }}
                                                         onClick={() => sendReminderToUser(userEmail, debt.toFixed(2))}
                                                     >
-                                                        📧 Wyślij przypomnienie
+                                                        <FaEnvelope style={{ marginRight: '5px' }}/> Wyślij przypomnienie
                                                     </button>
                                                 ) : (
                                                     <div style={{
@@ -913,7 +916,7 @@ export default function PaymentsPanel() {
                                                         color: '#856404',
                                                         textAlign: 'center'
                                                     }}>
-                                                        ⚠️ Użytkownik nie ma przypisanego emaila
+                                                        <FaExclamationTriangle style={{ marginRight: '5px' }}/> Użytkownik nie ma przypisanego emaila
                                                     </div>
                                                 )
                                             )}

@@ -145,7 +145,7 @@ export default function RegisterForm() {
       {error && <p className="register-error">{error}</p>}
       {successMessage && <p className="register-success">{successMessage}. Przekierowanie...</p>}
 
-      {/* Terms checkbox */}
+      {/* Terms checkbox
       <div className="terms-wrapper">
         <label className="terms-checkbox">
           <input
@@ -156,7 +156,7 @@ export default function RegisterForm() {
           />
           <span>Przeczytałem i akceptuję regulamin</span>
         </label>
-      </div>
+      </div> */}
 
       {/* Submit button */}
       <button type="submit" className="register-btn" disabled={loading}>

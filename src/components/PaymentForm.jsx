@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FaInfoCircle } from 'react-icons/fa';
 
 export default function PaymentForm({ payment, onChange }) {
     const [paymentDate, setPaymentDate] = useState("");
@@ -47,7 +48,7 @@ export default function PaymentForm({ payment, onChange }) {
                     }}
                 />
                 <small style={{ color: '#666', fontSize: '12px', display: 'block', marginTop: '5px' }}>
-                    ℹ️ Pozostaw puste dla płatności nieopłaconych
+                     <FaInfoCircle style={{ marginRight: '5px' }} /> Pozostaw puste dla płatności nieopłaconych
                 </small>
             </div>
             

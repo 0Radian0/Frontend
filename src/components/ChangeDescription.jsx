@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { fetchAPI } from "../config/api";
+import {FaStickyNote, FaFileAlt, FaLightbulb, FaEdit, FaEye, FaSave } from 'react-icons/fa';
 
 export default function ChangeDescription() {
     const [newDescription, setNewDescription] = useState("");
@@ -64,7 +65,7 @@ export default function ChangeDescription() {
             setTimeout(() => navigate("/frontPage"), 1500);
 
         } catch (err) {
-            console.error("❌ Błąd przy zmianie opisu:", err);
+            console.error(" Błąd przy zmianie opisu:", err);
             setError(err.message || "Wystąpił błąd połączenia z serwerem.");
             setLoading(false);
         }
@@ -468,7 +469,6 @@ export default function ChangeDescription() {
 
                 <div className="change-description-header">
                     <h2>
-                        <span>📝</span>
                         Zmiana opisu użytkownika
                     </h2>
                     <p>Opowiedz społeczności o sobie i swojej przygodzie z HEMA</p>
@@ -487,7 +487,7 @@ export default function ChangeDescription() {
                     <>
                         <div className="current-description-box">
                             <h3>
-                                <span>📄</span>
+                                <span><FaFileAlt style={{ marginRight: '5px' }}/></span>
                                 Twój obecny opis:
                             </h3>
                             <div className="current-description-text">
@@ -496,7 +496,7 @@ export default function ChangeDescription() {
                         </div>
 
                         <div className="info-box">
-                            <strong>💡 Co warto zawrzeć w opisie:</strong>
+                            <strong><FaLightbulb style={{ marginRight: '5px' }}/> Co warto zawrzeć w opisie:</strong>
                             <ul>
                                 <li>Jak zaczęła się Twoja przygoda z HEMA</li>
                                 <li>Jaką bronią się interesujesz</li>
@@ -508,7 +508,7 @@ export default function ChangeDescription() {
                         <form className="change-description-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="newDescription">
-                                    <span>✏️ Nowy opis</span>
+                                    <span><FaEdit style={{ marginRight: '5px' }}/> Nowy opis</span>
                                     <span className={`char-counter ${charRemaining < 100 ? 'warning' : ''} ${charRemaining < 0 ? 'danger' : ''}`}>
                                         {charCount} / {MAX_LENGTH} znaków
                                         {charRemaining < 0 && ` (${Math.abs(charRemaining)} za dużo)`}
@@ -531,7 +531,7 @@ export default function ChangeDescription() {
                             {newDescription.trim() && (
                                 <div className="live-preview">
                                     <h4>
-                                        <span>👁️</span>
+                                        <span><FaEye /></span>
                                         Podgląd na żywo:
                                     </h4>
                                     <div className="preview-content">
@@ -559,7 +559,7 @@ export default function ChangeDescription() {
                                         </>
                                     ) : (
                                         <>
-                                            💾 Zapisz nowy opis
+                                            <FaSave style={{ marginRight: '5px' }}/> Zapisz nowy opis
                                         </>
                                     )}
                                 </button>

@@ -40,11 +40,11 @@ export default function LoginForm() {
 
             window.dispatchEvent(new Event("storage"));
 
-            console.log('✅ Zalogowano pomyślnie!');
+            console.log('Zalogowano pomyślnie!');
             navigate("/frontPage");
 
         } catch (err) {
-            console.error('❌ Błąd logowania:', err);
+            console.error('Błąd logowania:', err);
             setError(err.message || "Wystąpił błąd logowania");
             setLoading(false);
         }
@@ -54,7 +54,7 @@ export default function LoginForm() {
         <div className="login-form" onSubmit={handleLogin}>
             {/* Email field */}
             <div>
-                <label>Login</label>
+                <label>E-mail</label>
                 <input
                     type="email"
                     value={formData.email}
