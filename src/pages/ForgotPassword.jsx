@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchAPI } from "../config/api"; 
+import { fetchAPI } from "../config/api"; // Import API config
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ export default function ForgotPassword() {
             setError(null);
 
         } catch (err) {
-            console.error("❌ Błąd wysyłki maila resetującego:", err);
+            console.error(" Błąd wysyłki maila resetującego:", err);
             setError(err.message || "Nie udało się wysłać maila. Sprawdź poprawność adresu e-mail.");
             setMessage(null);
         } finally {

@@ -18,13 +18,13 @@ const slides = [
     id: 3,
     image: "https://plus.unsplash.com/premium_photo-1661963063875-7f131e02bf75?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "TRENINGI",
-    description: "Profesjonalne zajęcia prowadzone przez doświadczonych instruktorów."
+    description: "Profesjonalne zajęcia prowadzone przez doświadczonych instruktorów w nowoczesnych salach treningowych."
   },
   {
     id: 4,
     image: "https://images.unsplash.com/photo-1635365737298-3a64d9459d83?q=80&w=1177&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "EKWIPUNEK",
-    description: "Wyposażenie treningowe dostępne dla wszystkich członków klubu."
+    description: "Pełne wyposażenie treningowe dostępne dla wszystkich członków klubu."
   }
 ];
 

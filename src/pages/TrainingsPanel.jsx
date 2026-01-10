@@ -587,7 +587,7 @@ export default function TrainingsPanel() {
             <div className="trainings-panel-container">
                 <div className="panel-header">
                     <h1>
-                        
+                        <span>🥋</span>
                         Panel Treningów
                     </h1>
                     <p>Zarządzaj treningami, zapisuj się i sprawdzaj uczestników</p>
@@ -639,7 +639,12 @@ export default function TrainingsPanel() {
                         >
                             <FaIdCard style={{ marginRight: '5px' }} />  Karty
                         </button>
-                        
+                        <button
+                            className={`view-button ${viewMode === 'table' ? 'active' : ''}`}
+                            onClick={() => setViewMode('table')}
+                        >
+                            <FaTable style={{ marginRight: '5px' }} /> Tabela
+                        </button>
                     </div>
                 </div>
 

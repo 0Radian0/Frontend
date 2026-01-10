@@ -341,7 +341,7 @@ export default function PaymentsPanel() {
     PAYMENT STATUS CARD
      */
     .payment-status-card {
-        background: linear-gradient(135deg, #000000 0%, #4ba276 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         padding: 30px;
         border-radius: 16px;
@@ -674,7 +674,7 @@ export default function PaymentsPanel() {
                 {/* STATUS CARD - tylko dla użytkownika */}
                 {!isAdmin && (
                     <div className="payment-status-card">
-                        <h3> Twój status płatności</h3>
+                        <h3>💰 Twój status płatności</h3>
                         <div className="payment-amount-display">
                             {sumToPay > 0 ? `${sumToPay.toFixed(2)} zł` : '0.00 zł'}
                         </div>
