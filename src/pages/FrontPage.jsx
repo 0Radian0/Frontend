@@ -81,30 +81,7 @@ export default function FrontPage() {
                         )}
                     </div>
 
-                    {/* Szczegóły treningu */}
-                    <div className="info-card">
-                        <h3> Szczegóły Treningu</h3>
-                        {selectedTraining ? (
-                            <div className="training-details">
-                                <h3>{selectedTraining.title || "Trening"}</h3>
-                                <p><strong> Data:</strong> {selectedTraining.date}</p>
-                                <p><strong> Godzina:</strong> {selectedTraining.time}</p>
-                                <p><strong> Miejsce:</strong> {selectedTraining.place}</p>
-                                <p><strong> Opis:</strong> {selectedTraining.description}</p>
-
-                                {selectedTraining.allTrainings && selectedTraining.allTrainings.length > 1 && (
-                                    <p style={{ marginTop: '10px', fontSize: '14px', opacity: 0.9 }}>
-                                        ℹ Tego dnia odbywają się {selectedTraining.allTrainings.length} treningi
-                                    </p>
-                                )}
-                            </div>
-                        ) : (
-                            <div className="no-training-selected">
-                                Kliknij datę w kalendarzu, aby zobaczyć szczegóły treningu
-                            </div>
-                        )}
-                    </div>
-
+                    
                     {/* Zarządzanie kontem */}
                     <div className="info-card">
                         <h3> Zarządzanie Kontem</h3>

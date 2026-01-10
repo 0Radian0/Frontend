@@ -1,6 +1,6 @@
-/* =========================================
-   React Calendar – Modern Minimal
-   ========================================= */
+/*
+   React Calendar 
+  */
 
 .react-calendar {
     background-color: #0e1f1e;
@@ -13,7 +13,7 @@
     font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* ======= Nawigacja ======= */
+/*  Nawigacja  */
 .react-calendar__navigation {
     display: flex;
     justify-content: space-between;
@@ -36,7 +36,7 @@
     background: rgba(255,255,255,0.08);
 }
 
-/* ======= Dni tygodnia ======= */
+/*  Dni tygodnia  */
 .react-calendar__month-view__weekdays {
     text-transform: uppercase;
     color: #9fb8b6;
@@ -47,14 +47,14 @@
     margin-bottom: 6px;
 }
 
-/* ======= Siatka dni ======= */
+/*  Siatka dni  */
 .react-calendar__month-view__days {
     display: grid !important;
     grid-template-columns: repeat(7, 1fr);
     gap: 6px;
 }
 
-/* ======= Kafelki ======= */
+/*  Kafelki  */
 .react-calendar__tile {
     background: transparent;
     color: #e5f2f1;
@@ -76,7 +76,7 @@
     font-weight: 600;
 }
 
-/* ======= Dni z treningiem ======= */
+/*  Dni z treningiem  */
 .has-training {
     background: rgba(31, 183, 166, 0.25) !important;
     color: #ffffff !important;
@@ -88,7 +88,7 @@
     background: rgba(31, 183, 166, 0.35) !important;
 }
 
-/* ======= Widoki roczne ======= */
+/*  Widoki roczne  */
 .react-calendar__year-view__months,
 .react-calendar__decade-view__years,
 .react-calendar__century-view__decades {
@@ -97,7 +97,7 @@
     gap: 8px;
 }
 
-/* ======= Szczegóły treningów ======= */
+/*  Szczegóły treningów  */
 
 .training-details {
     margin-top: 28px;

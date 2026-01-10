@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { fetchAPI } from "../config/api";
-import {
-    FaUserTie, FaSearch, FaSyncAlt, FaSortAmountUp,
-    FaCalendarAlt, FaClock, FaMoneyBillWave, FaCreditCard,
-    FaStickyNote, FaKey, FaLock, FaCheck, FaTrash,
-    FaExclamationTriangle, FaUser, FaUsers, FaTimes,
-    FaTable, FaIdCard 
-} from 'react-icons/fa';
+import { FaLock, FaCheck, FaExclamationTriangle, FaCreditCard, FaUser, FaUsers } from 'react-icons/fa';
 
 
 export default function UsersPanel() {
@@ -62,7 +56,7 @@ export default function UsersPanel() {
             setUsers(data);
             setLoading(false);
         } catch (err) {
-            console.error("Błąd pobierania użytkowników:", err);
+            console.error("❌ Błąd pobierania użytkowników:", err);
             alert("Nie udało się pobrać listy użytkowników");
             setLoading(false);
         }
@@ -85,7 +79,7 @@ export default function UsersPanel() {
                 setUsers(prev => prev.filter(u => u.userID !== userID));
             }
         } catch (err) {
-            console.error("Błąd przy usuwaniu użytkownika:", err);
+            console.error("❌ Błąd przy usuwaniu użytkownika:", err);
             alert(err.message || "Błąd serwera. Usuwanie użytkownika nie powiodło się");
             fetchUsers();
         }
@@ -106,7 +100,7 @@ export default function UsersPanel() {
                 setchangingRanksUserID(null);
             }
         } catch (err) {
-            console.error("Błąd przy zmianie uprawnień:", err);
+            console.error("❌ Błąd przy zmianie uprawnień:", err);
             alert(err.message || "Błąd serwera. Nie udało się zmienić uprawnień");
         }
     };
@@ -124,7 +118,7 @@ export default function UsersPanel() {
                 alert(data.message || "Hasło zostało zresetowane i wysłane na email");
             }
         } catch (err) {
-            console.error("Błąd przy resecie hasła:", err);
+            console.error("❌ Błąd przy resecie hasła:", err);
             alert(err.message || "Błąd serwera. Nie udało się zresetować hasła");
         }
     };
@@ -146,7 +140,7 @@ export default function UsersPanel() {
             alert(data.message || `Użytkownik został ${newStatus === 1 ? "zablokowany" : "odblokowany"}`);
             fetchUsers();
         } catch (err) {
-            console.error("Błąd przy zmianie statusu użytkownika:", err);
+            console.error("❌ Błąd przy zmianie statusu użytkownika:", err);
             alert(err.message || "Błąd serwera. Nie udało się zmienić statusu użytkownika");
         }
     };
@@ -168,7 +162,7 @@ export default function UsersPanel() {
             alert(data.message || `Użytkownik został ${newStatus === 1 ? "wyłączony z płatności" : "włączony do opłat"}`);
             fetchUsers();
         } catch (err) {
-            console.error("Błąd przy zmianie statusu płatności:", err);
+            console.error("❌ Błąd przy zmianie statusu płatności:", err);
             alert(err.message || "Błąd serwera. Nie udało się zmienić statusu płatności");
         }
     };
@@ -826,7 +820,7 @@ export default function UsersPanel() {
                 <div className="filters-container">
                     <div className="filters-grid">
                         <div className="filter-group">
-                            <label><FaUserTie style={{ marginRight: 5 }} /> Uprawnienia</label>
+                            <label>👔 Uprawnienia</label>
                             <select value={filter} onChange={e => setFilter(e.target.value)}>
                                 <option value="all">Wszystkie</option>
                                 <option value="admin">Administratorzy</option>
@@ -836,7 +830,7 @@ export default function UsersPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label><FaSearch style={{ marginRight: 5 }} /> Status</label>
+                            <label>🔍 Status</label>
                             <select value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
                                 <option value="all">Wszyscy</option>
                                 <option value="active">Aktywni</option>
@@ -848,7 +842,7 @@ export default function UsersPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label><FaSyncAlt style={{ marginRight: 5 }} /> Sortuj po</label>
+                            <label>🔄 Sortuj po</label>
                             <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
                                 <option value="regDate">Data rejestracji</option>
                                 <option value="lastLog">Ostatnie logowanie</option>
@@ -859,7 +853,7 @@ export default function UsersPanel() {
                         </div>
 
                         <div className="filter-group">
-                            <label><FaSortAmountUp style={{ marginRight: 5 }} /> Kolejność</label>
+                            <label>⬆️ Kolejność</label>
                             <select value={order} onChange={e => setOrder(e.target.value)}>
                                 <option value="asc">Rosnąco</option>
                                 <option value="desc">Malejąco</option>
@@ -872,13 +866,13 @@ export default function UsersPanel() {
                             className={`view-button ${viewMode === 'cards' ? 'active' : ''}`}
                             onClick={() => setViewMode('cards')}
                         >
-                            <FaIdCard style={{ marginRight: '5px' }} /> Karty
+                            📇 Karty
                         </button>
                         <button
                             className={`view-button ${viewMode === 'table' ? 'active' : ''}`}
                             onClick={() => setViewMode('table')}
                         >
-                            <FaTable style={{ marginRight: '5px' }} /> Tabela
+                            📊 Tabela
                         </button>
                     </div>
                 </div>
@@ -912,7 +906,7 @@ export default function UsersPanel() {
 
                                 <div className="user-details">
                                     <div className="detail-item">
-                                        <span className="detail-icon"><FaCalendarAlt color='grey' style={{ marginRight: 5 }} /></span>
+                                        <span className="detail-icon">📅</span>
                                         <div>
                                             <div className="detail-label">Rejestracja</div>
                                             <div className="detail-value">{new Date(user.registrationDate).toLocaleDateString('pl-PL')}</div>
@@ -920,7 +914,7 @@ export default function UsersPanel() {
                                     </div>
 
                                     <div className="detail-item">
-                                        <span className="detail-icon"><FaClock color='grey' style={{ marginRight: 5 }} /></span>
+                                        <span className="detail-icon">🕐</span>
                                         <div>
                                             <div className="detail-label">Ostatnie logowanie</div>
                                             <div className="detail-value">{user.lastLog ? new Date(user.lastLog).toLocaleDateString('pl-PL') : 'Brak danych'}</div>
@@ -928,7 +922,7 @@ export default function UsersPanel() {
                                     </div>
 
                                     <div className="detail-item">
-                                        <span className="detail-icon"><FaMoneyBillWave color='grey' style={{ marginRight: 5 }} /></span>
+                                        <span className="detail-icon">💰</span>
                                         <div>
                                             <div className="detail-label">Do zapłaty</div>
                                             <div className={`detail-value ${user.sumToPay > 0 ? 'debt' : 'paid'}`}>
@@ -938,20 +932,18 @@ export default function UsersPanel() {
                                     </div>
 
                                     <div className="detail-item">
-                                        <span className="detail-icon"><FaCreditCard color='grey' style={{ marginRight: 5 }} /></span>
+                                        <span className="detail-icon">💳</span>
                                         <div>
                                             <div className="detail-label">Status płatności</div>
                                             <div className="detail-value">
-                                                {user.paymentActive === 1
-                                                    ? <><FaCheck color='grey' style={{ marginRight: 5 }} /> Aktywny</>
-                                                    : <><FaTimes color='grey' style={{ marginRight: 5 }} /> Nieaktywny</>}
+                                                {user.paymentActive === 1 ? '✅ Aktywny' : '❌ Nieaktywny'}
                                             </div>
                                         </div>
                                     </div>
 
                                     {user.description && (
                                         <div className="user-description">
-                                            <div className="detail-label"><FaCreditCard color='grey' style={{ marginRight: 5 }} /> Opis:</div>
+                                            <div className="detail-label">📝 Opis:</div>
                                             <div className="description-text">{user.description}</div>
                                         </div>
                                     )}
@@ -974,33 +966,28 @@ export default function UsersPanel() {
                                     ) : (
                                         <>
                                             <button className="btn btn-sm btn-secondary" onClick={() => setchangingRanksUserID(user.userID)}>
-                                                <FaUserTie style={{ marginRight: 5 }} /> Uprawnienia
+                                                👔 Uprawnienia
                                             </button>
                                             <button className="btn btn-sm btn-primary" onClick={() => handleResetPassword(user.userID)}>
-                                                <FaKey style={{ marginRight: 5 }} /> Reset hasła
+                                                🔑 Reset hasła
                                             </button>
                                             <button
                                                 className={`btn btn-sm ${user.deactivated === 1 ? 'btn-success' : 'btn-warning'}`}
                                                 onClick={() => handleDeactivate(user.userID, user.deactivated)}
                                             >
-                                                {user.deactivated === 1
-                                                    ? <><FaCheck style={{ marginRight: 5 }} /> Odblokuj</>
-                                                    : <><FaLock style={{ marginRight: 5 }} /> Zablokuj</>}
+                                                {user.deactivated === 1 ? '✅ Odblokuj' : '🔒 Zablokuj'}
                                             </button>
                                             <button
                                                 className={`btn btn-sm ${user.paymentActive === 1 ? 'btn-warning' : 'btn-success'}`}
                                                 onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)}
                                             >
-                                                {user.paymentActive === 1
-                                                    ? <><FaCreditCard style={{ marginRight: 5 }} /> Wyłącz płatności</>
-                                                    : <><FaMoneyBillWave style={{ marginRight: 5 }} /> Włącz płatności</>}
+                                                {user.paymentActive === 1 ? '💳 Wyłącz płatności' : '💰 Włącz płatności'}
                                             </button>
-                                            {/* DODANY przycisk usuwania */}
                                             <button
                                                 className="btn btn-sm btn-danger"
                                                 onClick={() => handleDelete(user.userID)}
                                             >
-                                                <FaTrash style={{ marginRight: 5 }} /> Usuń
+                                                🗑️ Usuń
                                             </button>
                                         </>
                                     )}
@@ -1050,15 +1037,13 @@ export default function UsersPanel() {
                                         </td>
                                         <td>
                                             <div className="table-actions">
-                                                <button className="btn-icon" onClick={() => setchangingRanksUserID(user.userID)} title="Uprawnienia"><FaUserTie style={{ marginRight: 5 }} /></button>
-                                                <button className="btn-icon" onClick={() => handleResetPassword(user.userID)} title="Reset hasła"><FaKey style={{ marginRight: 5 }} /></button>
+                                                <button className="btn-icon" onClick={() => setchangingRanksUserID(user.userID)} title="Uprawnienia">👔</button>
+                                                <button className="btn-icon" onClick={() => handleResetPassword(user.userID)} title="Reset hasła">🔑</button>
                                                 <button className="btn-icon" onClick={() => handleDeactivate(user.userID, user.deactivated)} title={user.deactivated === 1 ? 'Odblokuj' : 'Zablokuj'}>
-                                                    {user.deactivated === 1
-                                                        ? <><FaCheck style={{ marginRight: 5 }} /></>
-                                                        : <><FaLock style={{ marginRight: 5 }} /></>}
+                                                    {user.deactivated === 1 ? '✅' : '🔒'}
                                                 </button>
-                                                <button className="btn-icon" onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)} title="Płatności"><FaCreditCard color='black' style={{ marginRight: 5 }} /></button>
-                                                <button className="btn-icon btn-danger" onClick={() => handleDelete(user.userID)} title="Usuń"><FaTrash color='black' style={{ marginRight: 5 }} /></button>
+                                                <button className="btn-icon" onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)} title="Płatności">💳</button>
+                                                <button className="btn-icon btn-danger" onClick={() => handleDelete(user.userID)} title="Usuń">🗑️</button>
                                             </div>
                                         </td>
                                     </tr>
