@@ -1,28 +1,33 @@
 import { useState, useEffect, useRef } from "react";
+import slide1 from "../../assets/images/FB_IMG_1768039367417.jpg";
+import slide2 from "../../assets/images/FB_IMG_1768042700010.jpg";
+import slide3 from "../../assets/images/96b.jpg";
+import slide4 from "../../assets/images/14092025_fot_michal_basaj_8.jpg";
+
 
 // Dane slajdów z tekstami
 const slides = [
   {
-    id: 1,
-    image: "https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=1200",
+    id: 1,  
+    image: slide1,
     title: "SZERMIERKA HISTORYCZNA",
     description: "Dawne europejskie sztuki walki – sport walki oparty na odtwarzaniu dawnych europejskich technik bojowych."
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=1200",
+    image: slide2,
     title: "HEMA",
     description: "Dawne europejskie sztuki walki – sport walki oparty na odtwarzaniu dawnych europejskich technik bojowych. Łączy badania historyczne z praktyką, odtwarzając tradycyjne style szermierki i walki przy użyciu symulatorów broni historycznej, takich jak miecze, szable i inne."
   },
   {
     id: 3,
-    image: "https://plus.unsplash.com/premium_photo-1661963063875-7f131e02bf75?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: slide3,
     title: "TRENINGI",
     description: "Profesjonalne zajęcia prowadzone przez doświadczonych instruktorów w nowoczesnych salach treningowych."
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1635365737298-3a64d9459d83?q=80&w=1177&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image: slide4,
     title: "EKWIPUNEK",
     description: "Pełne wyposażenie treningowe dostępne dla wszystkich członków klubu."
   }
