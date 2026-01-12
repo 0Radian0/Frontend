@@ -1,5 +1,5 @@
 import leftLogo from "../assets/images/lewo.jpg";
-import rightLogo from "../assets/images/prawo.png";
+import rightLogo from "../assets/images/logo_politechniki_lubelskiej.jpg";
 
 export default function Header() {
   return (

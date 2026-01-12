@@ -104,7 +104,7 @@ export default function ApplicationForm() {
                     <div className="card-body premium-left">
 
                         <h3 className="mb-3">
-                            Jesteśmy gotowi pomóc <i className="fas fa-paw text-primary"></i>
+                            Jesteśmy gotowi pomóc 
                         </h3>
                         <p className="text-muted mb-4">
                             Masz pytanie? Chcesz zapisać się na zajęcia? Skontaktuj się z nami!
