@@ -21,6 +21,7 @@ export default function TrainingsPanel() {
     const [userTrainingFilter, setUserTrainingFilter] = useState("all");
     const [activeTrainingID, setActiveTrainingID] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [viewMode, setViewMode] = useState('cards'); // 'cards' or 'table'
 
     const rank = localStorage.getItem("rankID");
     const userID = localStorage.getItem("userID");
@@ -631,7 +632,10 @@ export default function TrainingsPanel() {
                         </div>
                     </div>
 
-                    
+                    <div className="view-toggle">
+                        
+                        
+                    </div>
                 </div>
 
                 {loading ? (
