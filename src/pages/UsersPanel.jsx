@@ -35,6 +35,7 @@ export default function UsersPanel() {
         3: "Użytkownik"
     };
 
+    // 1. Funkcja odświeżająca dane - używana wszędzie
     const fetchUsers = async () => {
         const sortColumn = sortColumnsMap[sortBy] || "registrationDate";
         const orderValue = order === "asc" ? "ASC" : "DESC";
@@ -75,6 +76,7 @@ export default function UsersPanel() {
         return (payment.getMonth() === due.getMonth() && payment.getFullYear() === due.getFullYear());
     };
 
+    // 2. POPRAWIONE: Usuwanie użytkownika
     const handleDelete = async (userID) => {
         if (!window.confirm("Czy na pewno chcesz usunąć tego użytkownika? Operacja jest nieodwracalna i spowoduje usunięcie wszystkich powiązanych danych.")) return;
 
@@ -82,15 +84,24 @@ export default function UsersPanel() {
             const { data } = await fetchAPI(`/auth/users/${userID}`, { method: 'DELETE' });
             if (data.success) {
                 alert("Użytkownik został usunięty");
-                setUsers(prev => prev.filter(u => u.userID !== userID));
+                // ← ZMIANA: Zamiast lokalnego filtrowania, odśwież z serwera
+                await fetchUsers();
+                
+                // ← DODANE: Jeśli usunięty użytkownik miał otwarte uprawnienia, zamknij
+                if (changingRanksUserID === userID) {
+                    setchangingRanksUserID(null);
+                }
             }
         } catch (err) {
             console.error("Błąd przy usuwaniu użytkownika:", err);
             alert(err.message || "Błąd serwera. Usuwanie użytkownika nie powiodło się");
-            fetchUsers();
+            // ← ZMIANA: Zamiast fetchUsers() po błędzie, możesz zostawić lub usunąć
+            // W oryginalnym kodzie było fetchUsers() - zostawiam dla spójności
+            await fetchUsers();
         }
     };
 
+    // 3. POPRAWIONE: Zmiana uprawnień
     const handleChangeRanks = async (rankID, userID) => {
         if (!window.confirm("Czy na pewno chcesz zmienić uprawnienia użytkownika?")) return;
 
@@ -102,8 +113,13 @@ export default function UsersPanel() {
 
             if (data.success) {
                 alert(data.message || "Zmieniono uprawnienia użytkownika");
-                fetchUsers();
+                // ← ZMIANA: Odśwież dane z aktywnym filtrem
+                await fetchUsers();
                 setchangingRanksUserID(null);
+                
+                // ← WYJAŚNIENIE: Po zmianie rangi użytkownik może zniknąć z listy
+                // jeśli mamy aktywny filtr np. "tylko administratorzy"
+                // fetchUsers() zapewni że lista będzie zgodna z filtrem
             }
         } catch (err) {
             console.error("Błąd przy zmianie uprawnień:", err);
@@ -111,6 +127,7 @@ export default function UsersPanel() {
         }
     };
 
+    // 4. Reset hasła - bez zmian (nie wpływa na listę)
     const handleResetPassword = async (userID) => {
         if (!window.confirm("Czy na pewno chcesz zresetować hasło tego użytkownika? Nowe hasło zostanie wysłane na jego e-mail.")) return;
 
@@ -122,6 +139,7 @@ export default function UsersPanel() {
 
             if (data.success) {
                 alert(data.message || "Hasło zostało zresetowane i wysłane na email");
+                // ← BRAK fetchUsers() - reset hasła nie zmienia danych wyświetlanych w liście
             }
         } catch (err) {
             console.error("Błąd przy resecie hasła:", err);
@@ -129,6 +147,7 @@ export default function UsersPanel() {
         }
     };
 
+    // 5. POPRAWIONE: Blokowanie/odblokowanie użytkownika
     const handleDeactivate = async (userID, currentStatus) => {
         const newStatus = currentStatus === 1 ? 0 : 1;
 
@@ -144,13 +163,19 @@ export default function UsersPanel() {
             });
 
             alert(data.message || `Użytkownik został ${newStatus === 1 ? "zablokowany" : "odblokowany"}`);
-            fetchUsers();
+            // ← ZMIANA: Odśwież dane z serwera
+            await fetchUsers();
+            
+            // ← WYJAŚNIENIE: Po zablokowaniu użytkownika może on zniknąć z listy
+            // jeśli mamy aktywny filtr "aktywni" lub "zablokowani"
+            // fetchUsers() zapewni że lista będzie zgodna z filtrem
         } catch (err) {
             console.error("Błąd przy zmianie statusu użytkownika:", err);
             alert(err.message || "Błąd serwera. Nie udało się zmienić statusu użytkownika");
         }
     };
 
+    // 6. POPRAWIONE: Zmiana statusu płatności
     const handleChangePaymentStatus = async (userID, paymentStatus) => {
         const newStatus = paymentStatus === 1 ? 0 : 1;
 
@@ -166,13 +191,19 @@ export default function UsersPanel() {
             });
 
             alert(data.message || `Użytkownik został ${newStatus === 1 ? "wyłączony z płatności" : "włączony do opłat"}`);
-            fetchUsers();
+            // ← ZMIANA: Odśwież dane z serwera
+            await fetchUsers();
+            
+            // ← WYJAŚNIENIE: Po zmianie statusu płatności użytkownik może zniknąć z listy
+            // jeśli mamy aktywny filtr "z płatnościami" lub "bez płatności"
+            // fetchUsers() zapewni że lista będzie zgodna z filtrem
         } catch (err) {
             console.error("Błąd przy zmianie statusu płatności:", err);
             alert(err.message || "Błąd serwera. Nie udało się zmienić statusu płatności");
         }
     };
 
+    // 7. useEffect - automatyczne odświeżanie przy zmianie filtrów
     useEffect(() => {
         fetchUsers();
     }, [filter, statusFilter, sortBy, order]);
@@ -891,7 +922,7 @@ export default function UsersPanel() {
                     </div>
                 ) : users.length === 0 ? (
                     <div className="empty-state">
-                        <div className="empty-state-icon">📭</div>
+                        
                         <h3>Brak użytkowników</h3>
                         <p>Nie znaleziono użytkowników spełniających kryteria</p>
                     </div>
@@ -995,7 +1026,6 @@ export default function UsersPanel() {
                                                     ? <><FaCreditCard style={{ marginRight: 5 }} /> Wyłącz płatności</>
                                                     : <><FaMoneyBillWave style={{ marginRight: 5 }} /> Włącz płatności</>}
                                             </button>
-                                            {/* DODANY przycisk usuwania */}
                                             <button
                                                 className="btn btn-sm btn-danger"
                                                 onClick={() => handleDelete(user.userID)}

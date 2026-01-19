@@ -136,7 +136,12 @@ export default function TrainingsPanel() {
 
             if (data.success) {
                 alert("Trening został usunięty");
-                setTrainings(p => p.filter(t => t.trainingID !== id));
+                await showTrainings(); // Odśwież listę treningów zamiast lokalnego filtrowania
+                // Zamknij listę uczestników jeśli był to aktywny trening
+                if (activeTrainingID === id) {
+                    setActiveTrainingID(null);
+                    setParticipants([]);
+                }
             }
         } catch (err) {
             console.error("Błąd przy usuwaniu treningu:", err);
@@ -198,9 +203,24 @@ export default function TrainingsPanel() {
         }
     };
 
-    const handleSign = async (trainingID) => {
+    // Funkcja sprawdzająca czy trening jest z przeszłości (wczoraj i wcześniej)
+    const isTrainingPast = (trainingDate) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Ustaw na początek dzisiejszego dnia
+        const training = new Date(trainingDate);
+        training.setHours(0, 0, 0, 0); // Ustaw na początek dnia treningu
+        return training < today; // True jeśli trening jest przed dzisiejszym dniem
+    };
+
+    const handleSign = async (trainingID, trainingDate) => {
         if (!userID) {
             alert("Brak ID użytkownika — zaloguj się ponownie.");
+            return;
+        }
+
+        // Sprawdź czy trening nie jest z przeszłości
+        if (isTrainingPast(trainingDate)) {
+            alert("Nie możesz zapisać się na trening, który już się odbył.");
             return;
         }
 
@@ -212,6 +232,7 @@ export default function TrainingsPanel() {
 
             if (data.success) {
                 alert(data.message);
+                await showTrainings(); // Odśwież listę treningów
                 showParticipants(trainingID);
             }
         } catch (err) {
@@ -234,16 +255,19 @@ export default function TrainingsPanel() {
 
             if (data.success) {
                 alert("Zrezygnowano z treningu");
-                showParticipants(trainingID);
+                await showTrainings(); // Odśwież listę treningów
+                // Zamknij listę uczestników, bo możemy już nie widzieć tego treningu
+                if (activeTrainingID === trainingID && userTrainingFilter === "userTrainings") {
+                    setActiveTrainingID(null);
+                    setParticipants([]);
+                } else {
+                    showParticipants(trainingID);
+                }
             }
         } catch (err) {
             console.error("Błąd przy usuwaniu użytkownika z treningu:", err);
             alert(err.message || "Błąd podczas usuwania użytkownika z treningu");
         }
-    };
-
-    const isTrainingPast = (trainingDate) => {
-        return new Date(trainingDate) < new Date();
     };
 
     return (
@@ -683,8 +707,17 @@ export default function TrainingsPanel() {
                                 </div>
 
                                 <div className="training-actions">
-                                    <button className="btn btn-success" onClick={() => handleSign(el.trainingID)}>
-                                        <FaCheck style={{ marginRight: '5px' }} /> Zapisz się
+                                    <button 
+                                        className="btn btn-success" 
+                                        onClick={() => handleSign(el.trainingID, el.trainingDate)}
+                                        disabled={isTrainingPast(el.trainingDate)}
+                                        style={{
+                                            opacity: isTrainingPast(el.trainingDate) ? 0.5 : 1,
+                                            cursor: isTrainingPast(el.trainingDate) ? 'not-allowed' : 'pointer'
+                                        }}
+                                    >
+                                        <FaCheck style={{ marginRight: '5px' }} /> 
+                                        {isTrainingPast(el.trainingDate) ? 'Nieaktywny' : 'Zapisz się'}
                                     </button>
                                     <button className="btn btn-secondary" onClick={() => removeFromTraining(el.trainingID)}>
                                         <FaTimes style={{ marginRight: '5px' }} /> Zrezygnuj
