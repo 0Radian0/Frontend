@@ -155,8 +155,15 @@ export default function RegisterForm() {
             disabled={loading}
           />
           <span>
-            <Link to="https://szermierka.pollub.pl/regulamin" > Przeczytałem i akceptuję regulamin </Link> 
+            <a
+              href="https://szermierka.pollub.pl/regulamin"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Przeczytałem i akceptuję regulamin
+            </a>
           </span>
+
         </label>
       </div> }
 
