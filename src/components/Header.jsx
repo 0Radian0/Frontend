@@ -15,7 +15,7 @@ export default function Header() {
                 src={leftLogo}
                 alt="Klub Szermierki Historycznej przy Politechnice Lubelskiej"
                 className="img-fluid"
-                style={{ maxHeight: "90px", objectFit: "contain" }}
+                style={{ maxHeight: "75px", objectFit: "contain" }}
               />
             </a>
           </div>
@@ -29,6 +29,7 @@ export default function Header() {
                 width="66"
                 height="66"
                 className="img-fluid"
+                style={{ maxHeight: "75px", objectFit: "contain" }}
               />
             </a>
           </div>
