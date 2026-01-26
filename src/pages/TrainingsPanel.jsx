@@ -136,7 +136,12 @@ export default function TrainingsPanel() {
 
             if (data.success) {
                 alert("Trening został usunięty");
-                setTrainings(p => p.filter(t => t.trainingID !== id));
+                await showTrainings(); // Odśwież listę treningów zamiast lokalnego filtrowania
+                // Zamknij listę uczestników jeśli był to aktywny trening
+                if (activeTrainingID === id) {
+                    setActiveTrainingID(null);
+                    setParticipants([]);
+                }
             }
         } catch (err) {
             console.error("Błąd przy usuwaniu treningu:", err);
@@ -227,6 +232,7 @@ export default function TrainingsPanel() {
 
             if (data.success) {
                 alert(data.message);
+                await showTrainings(); // Odśwież listę treningów
                 showParticipants(trainingID);
             }
         } catch (err) {
@@ -249,7 +255,14 @@ export default function TrainingsPanel() {
 
             if (data.success) {
                 alert("Zrezygnowano z treningu");
-                showParticipants(trainingID);
+                await showTrainings(); // Odśwież listę treningów
+                // Zamknij listę uczestników, bo możemy już nie widzieć tego treningu
+                if (activeTrainingID === trainingID && userTrainingFilter === "userTrainings") {
+                    setActiveTrainingID(null);
+                    setParticipants([]);
+                } else {
+                    showParticipants(trainingID);
+                }
             }
         } catch (err) {
             console.error("Błąd przy usuwaniu użytkownika z treningu:", err);
