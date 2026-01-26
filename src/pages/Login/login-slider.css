@@ -5,6 +5,50 @@
 */
 
 /* Wrapper - centruje i ogranicza zawartość */
+
+.auth-layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-layout-container {
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  min-height: 600px;
+}
+
+/* LEWA CZĘŚĆ – SLIDER */
+.auth-slider-section {
+  flex: 1;
+}
+
+/* PRAWA CZĘŚĆ – FORMULARZ */
+.auth-form-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+  .auth-slider-section {
+    display: none; /* ← KLUCZOWE */
+  }
+
+  .auth-layout-container {
+    flex-direction: column;
+  }
+
+  .auth-form-section {
+    width: 100%;
+  }
+}
+
+
 .auth-layout-wrapper {
     display: flex;
     justify-content: center;

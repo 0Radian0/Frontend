@@ -145,8 +145,16 @@ export default function RegisterForm() {
       {error && <p className="register-error">{error}</p>}
       {successMessage && <p className="register-success">{successMessage}. Przekierowanie...</p>}
 
-      {/* Terms checkbox */
-            <span>
+      {/* Terms checkboxn*/
+      <div className="terms-wrapper">
+        <label className="terms-checkbox">
+          <input
+            type="checkbox"
+            checked={formData.acceptedTerms}
+            onChange={(e) => setFormData({ ...formData, acceptedTerms: e.target.checked })}
+            disabled={loading}
+          />
+          <span>
             <a
               href="https://szermierka.pollub.pl/regulamin"
               target="_blank"
@@ -155,7 +163,8 @@ export default function RegisterForm() {
               Przeczytałem i akceptuję regulamin
             </a>
           </span>
-           }
+        </label>
+      </div> }
 
       {/* Submit button */}
       <button type="submit" className="register-btn" disabled={loading}>

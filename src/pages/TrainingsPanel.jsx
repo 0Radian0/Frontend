@@ -198,9 +198,24 @@ export default function TrainingsPanel() {
         }
     };
 
-    const handleSign = async (trainingID) => {
+    // Funkcja sprawdzająca czy trening jest z przeszłości (wczoraj i wcześniej)
+    const isTrainingPast = (trainingDate) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Ustaw na początek dzisiejszego dnia
+        const training = new Date(trainingDate);
+        training.setHours(0, 0, 0, 0); // Ustaw na początek dnia treningu
+        return training < today; // True jeśli trening jest przed dzisiejszym dniem
+    };
+
+    const handleSign = async (trainingID, trainingDate) => {
         if (!userID) {
             alert("Brak ID użytkownika — zaloguj się ponownie.");
+            return;
+        }
+
+        // Sprawdź czy trening nie jest z przeszłości
+        if (isTrainingPast(trainingDate)) {
+            alert("Nie możesz zapisać się na trening, który już się odbył.");
             return;
         }
 
@@ -242,13 +257,10 @@ export default function TrainingsPanel() {
         }
     };
 
-    const isTrainingPast = (trainingDate) => {
-        return new Date(trainingDate) < new Date();
-    };
-
     return (
         <>
-            <style>{`
+            <style>{
+                `
                 /* KONTENER GŁÓWNY */
                 .trainings-panel-container {
                     max-width: 1400px;
@@ -582,7 +594,8 @@ export default function TrainingsPanel() {
                         font-size: 24px;
                     }
                 }
-            `}</style>
+            `
+                }</style>
 
             <div className="trainings-panel-container">
                 <div className="panel-header">
@@ -645,7 +658,6 @@ export default function TrainingsPanel() {
                     </div>
                 ) : trainings.length === 0 ? (
                     <div className="empty-state">
-                        <div className="empty-state-icon">📭</div>
                         <h3>Brak treningów</h3>
                         <p>Nie znaleziono treningów spełniających kryteria</p>
                     </div>
@@ -683,8 +695,17 @@ export default function TrainingsPanel() {
                                 </div>
 
                                 <div className="training-actions">
-                                    <button className="btn btn-success" onClick={() => handleSign(el.trainingID)}>
-                                        <FaCheck style={{ marginRight: '5px' }} /> Zapisz się
+                                    <button 
+                                        className="btn btn-success" 
+                                        onClick={() => handleSign(el.trainingID, el.trainingDate)}
+                                        disabled={isTrainingPast(el.trainingDate)}
+                                        style={{
+                                            opacity: isTrainingPast(el.trainingDate) ? 0.5 : 1,
+                                            cursor: isTrainingPast(el.trainingDate) ? 'not-allowed' : 'pointer'
+                                        }}
+                                    >
+                                        <FaCheck style={{ marginRight: '5px' }} /> 
+                                        {isTrainingPast(el.trainingDate) ? 'Nieaktywny' : 'Zapisz się'}
                                     </button>
                                     <button className="btn btn-secondary" onClick={() => removeFromTraining(el.trainingID)}>
                                         <FaTimes style={{ marginRight: '5px' }} /> Zrezygnuj

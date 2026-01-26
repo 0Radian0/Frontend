@@ -891,7 +891,7 @@ export default function UsersPanel() {
                     </div>
                 ) : users.length === 0 ? (
                     <div className="empty-state">
-                        <div className="empty-state-icon">📭</div>
+
                         <h3>Brak użytkowników</h3>
                         <p>Nie znaleziono użytkowników spełniających kryteria</p>
                     </div>
