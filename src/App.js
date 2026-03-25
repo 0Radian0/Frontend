@@ -14,7 +14,7 @@ import LoggedUsersRoute from "./components/LoggedUsersRoute";
 import TrainingsPanel from "./pages/TrainingsPanel";
 import ChangePassword from "./components/ChangePassword";
 import PaymentsPanel from "./pages/PaymentsPanel";
-import ChangeDescription from "./components/ChangeDescription";
+import ChangeNotes from "./components/ChangeNotes";
 import FrontPage from "./pages/FrontPage";
 import NotFound from "./components/NotFound";
 import ChangeUserData from "./components/ChangeUserData";
@@ -77,10 +77,10 @@ function App() {
         />
 
         <Route
-          path="/changeDescription"
+          path="/changeNotes"
           element={
             <LoggedUsersRoute>
-              <ChangeDescription />
+              <ChangeNotes />
             </LoggedUsersRoute>
           }
         />

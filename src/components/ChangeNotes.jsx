@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { fetchAPI } from "../config/api";
 import {FaStickyNote, FaFileAlt, FaLightbulb, FaEdit, FaEye, FaSave } from 'react-icons/fa';
 
-export default function ChangeDescription() {
+export default function ChangeNotes() {
     const [newDescription, setNewDescription] = useState("");
     const [currentDescription, setCurrentDescription] = useState(() => {
         const rawDescription = localStorage.getItem("description");
         return rawDescription && rawDescription !== "undefined" && rawDescription.trim() !== ""
             ? rawDescription
-            : "Brak poprzedniego opisu.";
+            : "Brak poprzedniej notatki.";
     });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -39,19 +39,19 @@ export default function ChangeDescription() {
         setError("");
         
         if (!newDescription.trim()) {
-            setError("Opis nie może być pusty!");
+            setError("Notatka nie może być pusta!");
             return;
         }
 
         if (newDescription.length > MAX_LENGTH) {
-            setError(`Opis jest za długi! Maksymalnie ${MAX_LENGTH} znaków.`);
+            setError(`Notatka jest za długa. Maksymalnie ${MAX_LENGTH} znaków.`);
             return;
         }
 
         setLoading(true);
 
         try {
-            const { data } = await fetchAPI('/auth/users/changeDescription', {
+            const { data } = await fetchAPI('/auth/users/changeNotes', {
                 method: 'POST',
                 body: JSON.stringify({ userID, newDescription }),
             });
@@ -65,7 +65,7 @@ export default function ChangeDescription() {
             setTimeout(() => navigate("/frontPage"), 1500);
 
         } catch (err) {
-            console.error(" Błąd przy zmianie opisu:", err);
+            console.error(" Błąd przy zmianie notatki:", err);
             setError(err.message || "Wystąpił błąd połączenia z serwerem.");
             setLoading(false);
         }
@@ -464,12 +464,12 @@ export default function ChangeDescription() {
                 <div className="breadcrumb">
                     <a href="/frontPage">Dashboard</a>
                     <span>›</span>
-                    <span>Zmiana opisu</span>
+                    <span>Zmiana notatki</span>
                 </div>
 
                 <div className="change-description-header">
                     <h2>
-                        Zmiana opisu użytkownika
+                        Zmiana notatek użytkownika
                     </h2>
                     <p>Opowiedz społeczności o sobie i swojej przygodzie z HEMA</p>
                 </div>
@@ -477,7 +477,7 @@ export default function ChangeDescription() {
                 {success ? (
                     <div className="success-message">
                         <div>
-                            <strong>Opis został pomyślnie zaktualizowany!</strong>
+                            <strong>Pomyślnie zaktualizowano!</strong>
                             <p style={{ margin: '4px 0 0 0', fontSize: '13px' }}>
                                 Przekierowanie do panelu...
                             </p>
@@ -488,14 +488,14 @@ export default function ChangeDescription() {
                         <div className="current-description-box">
                             <h3>
                                 <span><FaFileAlt style={{ marginRight: '5px' }}/></span>
-                                Twój obecny opis:
+                                Twoje obecne notatki:
                             </h3>
                             <div className="current-description-text">
                                 {currentDescription}
                             </div>
                         </div>
 
-                        <div className="info-box">
+{/*                        <div className="info-box">
                             <strong><FaLightbulb style={{ marginRight: '5px' }}/> Co warto zawrzeć w opisie:</strong>
                             <ul>
                                 <li>Jak zaczęła się Twoja przygoda z HEMA</li>
@@ -503,12 +503,12 @@ export default function ChangeDescription() {
                                 <li>Twoje ulubione techniki i style walki</li>
                                 <li>Co Cię inspiruje w szermierce historycznej</li>
                             </ul>
-                        </div>
+                        </div>  */}
 
                         <form className="change-description-form" onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="newDescription">
-                                    <span><FaEdit style={{ marginRight: '5px' }}/> Nowy opis</span>
+                                    <span><FaEdit style={{ marginRight: '5px' }}/> Nowe notatki</span>
                                     <span className={`char-counter ${charRemaining < 100 ? 'warning' : ''} ${charRemaining < 0 ? 'danger' : ''}`}>
                                         {charCount} / {MAX_LENGTH} znaków
                                         {charRemaining < 0 && ` (${Math.abs(charRemaining)} za dużo)`}
@@ -559,7 +559,7 @@ export default function ChangeDescription() {
                                         </>
                                     ) : (
                                         <>
-                                            <FaSave style={{ marginRight: '5px' }}/> Zapisz nowy opis
+                                            <FaSave style={{ marginRight: '5px' }}/> Zapisz nowe notatki
                                         </>
                                     )}
                                 </button>

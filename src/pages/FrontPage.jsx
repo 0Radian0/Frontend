@@ -112,8 +112,8 @@ export default function FrontPage() {
                             <Link to="/changePassword" className="action-button">
                                 <FaLock style={{ marginRight: '6px' }} /> Zmiana hasła
                             </Link>
-                            <Link to="/changeDescription" className="action-button">
-                                <FaEdit style={{ marginRight: '6px' }} /> Zmiana opisu
+                            <Link to="/changeNotes" className="action-button">
+                                <FaEdit style={{ marginRight: '6px' }} /> Notatki
                             </Link>
                             <Link to="/changeData" className="action-button">
                                 <FaUser style={{ marginRight: '6px' }} /> Zmiana danych
