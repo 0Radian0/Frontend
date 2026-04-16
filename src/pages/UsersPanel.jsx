@@ -22,7 +22,6 @@ export default function UsersPanel() {
 
     const sortColumnsMap = {
         regDate: "registrationDate",
-        descp: "description",
         lastLog: "lastLog",
         deactivated: "deactivated",
         payStatus: "paymentActive",
@@ -498,20 +497,6 @@ export default function UsersPanel() {
     color: #4caf50;
 }
 
-.user-description {
-    margin-top: 10px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.description-text {
-    font-size: 13px;
-    color: #555;
-    line-height: 1.6;
-    margin-top: 8px;
-}
-
 /* 
    USER ACTIONS
     */
@@ -979,13 +964,6 @@ export default function UsersPanel() {
                                             </div>
                                         </div>
                                     </div>
-
-                                    {user.description && (
-                                        <div className="user-description">
-                                            <div className="detail-label"><FaCreditCard color='grey' style={{ marginRight: 5 }} /> Opis:</div>
-                                            <div className="description-text">{user.description}</div>
-                                        </div>
-                                    )}
                                 </div>
 
                                 <div className="user-actions">

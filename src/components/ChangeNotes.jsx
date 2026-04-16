@@ -51,7 +51,7 @@ export default function ChangeNotes() {
         setLoading(true);
 
         try {
-            const { data } = await fetchAPI('/auth/users/changeNotes', {
+            const { data } = await fetchAPI('/auth/users/changeDescription', {
                 method: 'POST',
                 body: JSON.stringify({ userID, newDescription }),
             });
@@ -471,7 +471,6 @@ export default function ChangeNotes() {
                     <h2>
                         Zmiana notatek użytkownika
                     </h2>
-                    <p>Opowiedz społeczności o sobie i swojej przygodzie z HEMA</p>
                 </div>
 
                 {success ? (
@@ -520,7 +519,7 @@ export default function ChangeNotes() {
                                         name="newDescription"
                                         value={newDescription}
                                         onChange={(e) => setNewDescription(e.target.value)}
-                                        placeholder="Napisz kilka słów o sobie... Jak zaczęła się Twoja przygoda z HEMA? Co Cię najbardziej inspiruje?"
+                                        placeholder="Napisz kilka słów o tym nad czym chcesz ćwiczyć, pytania do trenerów, komu porachować kości i po prostu rzeczy które mogą wypaść ci z głowy"
                                         disabled={loading}
                                         maxLength={MAX_LENGTH}
                                         className={newDescription.trim() ? 'has-content' : ''}

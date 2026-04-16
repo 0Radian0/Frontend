@@ -115,10 +115,11 @@ export default function TrainingsPanel() {
     }, [filter, sortBy, order, userTrainingFilter]);
 
     const checkParams = (d, t) => {
-        if (new Date(d) < new Date()) {
-            alert("Data treningu nie może być z przeszłości!");
-            return false;
-        }
+    const inputDate = new Date(d);  // datetime-local daje czas lokalny
+    if (inputDate < new Date()) {
+        alert("Data treningu nie może być z przeszłości!");
+        return false;
+    }
         if (!t || t.trim() === "") {
             alert("Trening musi się gdzieś odbyć");
             return false;
@@ -204,13 +205,16 @@ export default function TrainingsPanel() {
     };
 
     // Funkcja sprawdzająca czy trening jest z przeszłości (wczoraj i wcześniej)
-    const isTrainingPast = (trainingDate) => {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0); // Ustaw na początek dzisiejszego dnia
-        const training = new Date(trainingDate);
-        training.setHours(0, 0, 0, 0); // Ustaw na początek dnia treningu
-        return training < today; // True jeśli trening jest przed dzisiejszym dniem
-    };
+   const isTrainingPast = (trainingDate) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    // Wyciągnij samą datę ze stringa żeby uniknąć konwersji strefy
+    const datePart = typeof trainingDate === 'string' 
+        ? trainingDate.slice(0, 10) 
+        : new Date(trainingDate).toISOString().slice(0, 10);
+    const training = new Date(datePart + 'T00:00:00');
+    return training < today;
+};
 
     const handleSign = async (trainingID, trainingDate) => {
         if (!userID) {
@@ -682,7 +686,7 @@ export default function TrainingsPanel() {
                                     <div className="training-date">
                                         <FaCalendarAlt style={{ marginRight: '5px' }} />  {new Date(el.trainingDate).toLocaleDateString('pl-PL')}
                                         <div style={{ fontSize: '14px', fontWeight: '400', color: '#666', marginTop: '4px' }}>
-                                            <FaClock style={{ marginRight: '5px' }} />  {new Date(el.trainingDate).toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' })}
+                                            <FaClock style={{ marginRight: '5px' }} />  {el.trainingDate.slice(11, 16)}
                                         </div>
                                     </div>
                                     <span className={`training-badge ${isTrainingPast(el.trainingDate) ? 'past' : 'upcoming'}`}>
