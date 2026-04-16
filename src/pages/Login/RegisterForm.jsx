@@ -21,6 +21,10 @@ export default function RegisterForm() {
     e.preventDefault();
     setError("");
     setSuccessMessage("");
+
+    const trimmedFirstName = formData.firstName.trim(); 
+    const trimmedLastName = formData.lastName.trim(); 
+
     const nameRegex = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:\s[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+){0,2}$/;
     const surnameRegex = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+(?:[-\s][A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+)?$/;
 
@@ -47,8 +51,8 @@ export default function RegisterForm() {
 
     const payload = {
       email: formData.email,
-      name: formData.firstName,
-      surname: formData.lastName,
+      name: trimmedFirstName,
+      surname: trimmedLastName,
       password: formData.password
     };
 
