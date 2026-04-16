@@ -82,7 +82,7 @@ export default function FrontPage() {
                     </div>
 
                     {/* Szczegóły treningu */}
-                    <div className="info-card training-card">
+                    <div className="info-card training-details-card">
                         <h3> Szczegóły Treningu</h3>
                         {selectedTraining ? (
                             <div className="training-details">

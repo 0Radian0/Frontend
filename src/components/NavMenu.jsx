@@ -181,7 +181,7 @@ export default function Navbar() {
                   to="/frontPage"
                   style={location.pathname === "/frontPage" ? { background: '#f8f8f8' } : {}}
                 >
-                  Panel startowy
+                  Strona Główna
                 </Link>
               </li>
             )}
@@ -190,7 +190,7 @@ export default function Navbar() {
             {isLoggedIn && location.pathname !== "/trainingsPanel" && (
               <li className="nav-item">
                 <Link className="nav-link" to="/trainingsPanel">
-                  Panel treningów
+                  Treningi
                 </Link>
               </li>
             )}
