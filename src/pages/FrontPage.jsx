@@ -15,7 +15,7 @@ export default function FrontPage() {
     const description =
         rawDescription && rawDescription !== "undefined" && rawDescription.trim() !== ""
             ? rawDescription
-            : "Brak opisu użytkownika :(";
+            : "Brak notatek";
 
     const userID = Number(localStorage.getItem("userID"));
 
@@ -82,7 +82,7 @@ export default function FrontPage() {
                     </div>
 
                     {/* Szczegóły treningu */}
-                    <div className="info-card">
+                    <div className="info-card training-card">
                         <h3> Szczegóły Treningu</h3>
                         {selectedTraining ? (
                             <div className="training-details">
@@ -123,7 +123,7 @@ export default function FrontPage() {
 
                     {/* Opis użytkownika */}
                     <div className="info-card">
-                        <h3><FaStickyNote style={{ marginRight: '6px' }} /> O Mnie</h3>
+                        <h3><FaStickyNote style={{ marginRight: '6px' }} /> Notatki</h3>
                         <div className="user-description-content">
                             {description}
                         </div>

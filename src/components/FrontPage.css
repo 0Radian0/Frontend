@@ -254,6 +254,10 @@
         font-size: 18px;
     }
 
+    .training-card {
+        display: none;
+    }
+
     .action-buttons {
         grid-template-columns: 1fr;
     }
