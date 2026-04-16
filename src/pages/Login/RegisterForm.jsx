@@ -32,11 +32,11 @@ export default function RegisterForm() {
       setError("Musisz zaakceptować regulamin");
       return;
     }
-    if (!nameRegex.test(formData.firstName)) {
+    if (!nameRegex.test(trimmedFirstName)) {
       setError("Imię musi zaczynać się wielką literą");
       return;
     }
-    if (!surnameRegex.test(formData.lastName)) {
+    if (!surnameRegex.test(trimmedLastName)) {
       setError("Nazwisko musi zaczynać się wielką literą");
       return;
     }
