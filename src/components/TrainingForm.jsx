@@ -6,13 +6,20 @@ export default function TrainingForm({ training }) {
     const [trainingDetails, setTrainingDetails] = useState("");
 
     useEffect(() => {
-        // Sprawdzenie czy trening istnieje i wypełnienie danymi
-        if (training) {
-            setTrainingDate(training.trainingDate ? new Date(training.trainingDate).toISOString().slice(0, 16) : "");
-            setTrainingPlace(training.trainingPlace || "");
-            setTrainingDetails(training.trainingDetails || "");
+    if (training) {
+        if (training.trainingDate) {
+            const date = new Date(training.trainingDate);
+            const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+                .toISOString()
+                .slice(0, 16);
+            setTrainingDate(local);
+        } else {
+            setTrainingDate("");
         }
-    }, [training]);
+        setTrainingPlace(training.trainingPlace || "");
+        setTrainingDetails(training.trainingDetails || "");
+    }
+}, [training]);
 
     return (
         <>
