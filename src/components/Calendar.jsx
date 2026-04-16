@@ -11,6 +11,10 @@ export default function TrainingsCalendar({ onDateSelect }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const parseLocalDate = (dateStr) => {
+  return new Date(dateStr.replace('Z', '').replace(/[+-]\d{2}:\d{2}$/, ''));
+};
+
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
@@ -37,7 +41,7 @@ export default function TrainingsCalendar({ onDateSelect }) {
     setSelectedDate(date);
 
     const filtered = trainings.filter((t) => {
-      const trainingDate = new Date(t.trainingDate);
+      const trainingDate = parseLocalDate(t.trainingDate);
       return (
         trainingDate.getFullYear() === date.getFullYear() &&
         trainingDate.getMonth() === date.getMonth() &&
@@ -47,13 +51,13 @@ export default function TrainingsCalendar({ onDateSelect }) {
 
     setSelectedTrainings(filtered);
 
-    // WAŻNE: Wywołaj callback dla FrontPage
+    // Wywołaj callback dla FrontPage
     if (onDateSelect && filtered.length > 0) {
       const firstTraining = filtered[0];
       onDateSelect({
         title: `Trening - ${firstTraining.trainingPlace}`,
         date: date.toLocaleDateString('pl-PL'),
-        time: new Date(firstTraining.trainingDate).toLocaleTimeString("pl-PL", {
+        time: parseLocalDate(firstTraining.trainingDate).toLocaleTimeString("pl-PL", {
           hour: "2-digit",
           minute: "2-digit",
         }),
@@ -310,7 +314,7 @@ export default function TrainingsCalendar({ onDateSelect }) {
                       </p>
                       <p>
                         <strong> Godzina:</strong>{" "}
-                        {new Date(t.trainingDate).toLocaleTimeString("pl-PL", {
+                        {parseLocalDate(t.trainingDate).toLocaleTimeString("pl-PL", {
                           hour: "2-digit",
                           minute: "2-digit",
                         })}
