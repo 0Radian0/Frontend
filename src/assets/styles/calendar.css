@@ -1,131 +1,196 @@
-/* =========================================
-   React Calendar – Modern Minimal
-   ========================================= */
-
+/* ============================================
+   REACT-CALENDAR OVERRIDE - Minimalistyczny styl
+   ============================================ */
 .react-calendar {
-    background-color: #0e1f1e;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px;
-    padding: 14px;
-    color: #e5f2f1;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: 'Inter', system-ui, sans-serif;
+  width: 100%;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: white;
 }
 
-/* ======= Nawigacja ======= */
 .react-calendar__navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+  display: flex;
+  height: 50px;
+  margin-bottom: 20px;
+  background: transparent;
 }
 
 .react-calendar__navigation button {
-    background: transparent;
-    color: #e5f2f1;
-    border: none;
-    font-size: 0.95rem;
-    cursor: pointer;
-    padding: 6px 10px;
-    border-radius: 8px;
-    transition: background 0.2s ease;
+  min-width: 44px;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  border: none;
+  transition: all 0.2s ease;
 }
 
-.react-calendar__navigation button:hover {
-    background: rgba(255,255,255,0.08);
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #f5f5f5;
+  border-radius: 8px;
 }
 
-/* ======= Dni tygodnia ======= */
+.react-calendar__navigation button:disabled {
+  background-color: transparent;
+  color: #ccc;
+}
+
 .react-calendar__month-view__weekdays {
-    text-transform: uppercase;
-    color: #9fb8b6;
-    font-weight: 500;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    text-align: center;
-    margin-bottom: 6px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 10px;
 }
 
-/* ======= Siatka dni ======= */
-.react-calendar__month-view__days {
-    display: grid !important;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
+.react-calendar__month-view__weekdays__weekday {
+  padding: 10px;
 }
 
-/* ======= Kafelki ======= */
+.react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none;
+}
+
 .react-calendar__tile {
-    background: transparent;
-    color: #e5f2f1;
-    border-radius: 10px;
-    padding: 10px 0;
-    min-height: 48px;
-    transition: background 0.2s ease, transform 0.15s ease;
+  max-width: 100%;
+  padding: 15px 6px;
+  background: transparent;
+  text-align: center;
+  line-height: 1.5;
+  font-size: 14px;
+  color: #333;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-.react-calendar__tile:hover {
-    background: rgba(255,255,255,0.06);
-    transform: translateY(-1px);
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #f5f5f5;
 }
 
-/* Dzisiaj */
 .react-calendar__tile--now {
-    background: rgba(255,255,255,0.12);
-    color: #ffffff;
-    font-weight: 600;
+  background: #e3f2fd;
+  font-weight: 600;
+  color: #1976d2;
 }
 
-/* ======= Dni z treningiem ======= */
-.has-training {
-    background: rgba(31, 183, 166, 0.25) !important;
-    color: #ffffff !important;
-    font-weight: 600;
-    box-shadow: inset 0 0 0 1px #1fb7a6;
+.react-calendar__tile--now:enabled:hover,
+.react-calendar__tile--now:enabled:focus {
+  background: #bbdefb;
 }
 
-.has-training:hover {
-    background: rgba(31, 183, 166, 0.35) !important;
+.react-calendar__tile--active {
+  background: #333;
+  color: white;
+  font-weight: 600;
 }
 
-/* ======= Widoki roczne ======= */
-.react-calendar__year-view__months,
-.react-calendar__decade-view__years,
-.react-calendar__century-view__decades {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #555;
 }
 
-/* ======= Szczegóły treningów ======= */
-
-.training-details {
-    margin-top: 28px;
-    background: #132b29;
-    padding: 22px;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.08);
+/* Dni z treningiem */
+.react-calendar__tile.has-training::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #4caf50;
+  border-radius: 50%;
 }
 
-.training-details h3 {
-    color: #e5f2f1;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 18px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 8px;
+.react-calendar__tile.has-training {
+  font-weight: 600;
 }
 
-.training-item {
-    background: rgba(255,255,255,0.04);
-    margin: 14px 0;
-    padding: 14px 16px;
-    border-radius: 12px;
-    border-left: 4px solid #1fb7a6;
-    transition: background 0.2s ease, transform 0.15s ease;
+.react-calendar__tile--active.has-training::after {
+  background: white;
 }
 
-.training-item:hover {
-    background: rgba(255,255,255,0.08);
-    transform: translateY(-1px);
+/* Minione treningi — szara kropka */
+.react-calendar__tile.has-training--past::after {
+  background: #bbb;
+}
+
+.react-calendar__tile--active.has-training--past::after {
+  background: white;
+}
+
+/* Dni poza bieżącym miesiącem */
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #ccc;
+}
+
+/* ============================================
+   SZCZEGÓŁY TRENINGU POD KALENDARZEM
+   ============================================ */
+.calendar-training-details {
+  margin-top: 25px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border-left: 4px solid #333;
+}
+
+.calendar-training-details h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.training-list-item {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.training-list-item:last-child {
+  margin-bottom: 0;
+}
+
+.training-list-item p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.training-list-item strong {
+  color: #333;
+  font-weight: 600;
+}
+
+.no-training-message {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+  background: white;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
+}
+
+/* Loading & Error */
+.calendar-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.calendar-error {
+  padding: 20px;
+  background: #fee;
+  color: #c33;
+  border-radius: 8px;
+  border: 1px solid #fcc;
 }
