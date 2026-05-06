@@ -94,13 +94,13 @@
 
 /* ======= DNI Z TRENINGIEM ======= */
 .react-calendar__tile.has-training {
-  background: #4caf50;
+  background: #155724;
   color: #fff;
   font-weight: 600;
 }
 
 .react-calendar__tile.has-training:hover {
-  background: #43a047;
+  background: #155724;
 }
 
 /* kropka (opcjonalnie) */
@@ -133,7 +133,7 @@
   padding: 18px;
   background: #f9f9f9;
   border-radius: 12px;
-  border-left: 4px solid #4caf50;
+  border-left: 4px solid #155724;
 }
 
 .calendar-training-details h4 {
