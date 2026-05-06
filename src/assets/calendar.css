@@ -116,12 +116,12 @@
 }
 
 /* Minione treningi — szara kropka */
-.react-calendar__tile.has-training.has-training--past::after {
+.react-calendar__tile.has-training--past::after {
   background: #bbb;
 }
 
-.react-calendar__tile--active.has-training.has-training--past::after {
-  background: rgb(102, 100, 100);
+.react-calendar__tile--active.has-training--past::after {
+  background: white;
 }
 
 /* Dni poza bieżącym miesiącem */
