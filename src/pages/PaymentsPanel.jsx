@@ -24,6 +24,8 @@ export default function PaymentsPanel() {
     const [statusTab, setStatusTab] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const [filtersOpen, setFiltersOpen] = useState(false);
+
     const rank = localStorage.getItem("rankID");
     const id = localStorage.getItem("userID");
     const isAdmin = Number(rank) === 1;
@@ -368,6 +370,47 @@ export default function PaymentsPanel() {
         gap: 8px;
     }
 
+    .filters-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.filters-toggle:hover {
+    color: #667eea;
+}
+
+.filters-toggle-left {
+    display: flex;
+    align-items: center;
+}
+
+.filters-toggle-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.filters-summary {
+    font-size: 13px;
+    font-weight: 400;
+    color: #888;
+}
+
+.filters-body {
+    margin-top: 20px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+}
+
     .filter-group label {
         font-size: 13px;
         font-weight: 600;
@@ -662,49 +705,77 @@ export default function PaymentsPanel() {
 
                 {/* FILTRY */}
                 <div className="filters-container">
-                    <div className="filters-grid">
-                        <div className="filter-group">
-                            <label><FaCreditCard style={{ marginRight: 5 }} /> Filtruj płatności</label>
-                            <select value={filter} onChange={e => setFilter(e.target.value)}>
-                                <option value="all">Wszystkie płatności</option>
-                                <option value="paid">Opłacone</option>
-                                <option value="notPaid">Nieopłacone</option>
-                                <option value="notPaidAfterDueTime">Po terminie</option>
-                            </select>
-                        </div>
+    <button
+        className="filters-toggle"
+        onClick={() => setFiltersOpen(prev => !prev)}
+        aria-expanded={filtersOpen}
+    >
+        <span className="filters-toggle-left">
+            <FaCreditCard style={{ marginRight: '8px' }} />
+            Filtry i sortowanie
+        </span>
+        <span className="filters-toggle-meta">
+            {!filtersOpen && (
+                <span className="filters-summary">
+                    {filter === 'all' ? 'Wszystkie' : filter === 'paid' ? 'Opłacone' : filter === 'notPaid' ? 'Nieopłacone' : 'Po terminie'}
+                    {isAdmin && userToShowHistory !== 'all' ? ' · ' + (usersList.find(u => String(u.userID) === String(userToShowHistory))?.name || 'Użytkownik') : ''}
+                    {' · '}{sortBy === 'paymentDate' ? 'Data płatności' : sortBy === 'dueDate' ? 'Termin' : 'Kwota'} {order === 'ASC' ? '↑' : '↓'}
+                </span>
+            )}
+            {filtersOpen
+                ? <FaChevronDown style={{ marginLeft: '8px' }} />
+                : <FaChevronRight style={{ marginLeft: '8px' }} />
+            }
+        </span>
+    </button>
 
-                        <div className="filter-group">
-                            <label><FaSyncAlt style={{ marginRight: 5 }} /> Sortuj po</label>
-                            <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
-                                <option value="paymentDate">Data płatności</option>
-                                <option value="dueDate">Termin</option>
-                                <option value="amount">Kwota</option>
-                            </select>
-                        </div>
-
-                        <div className="filter-group">
-                            <label><FaSortAmountUp style={{ marginRight: 5 }} /> Kolejność</label>
-                            <select value={order} onChange={e => setOrder(e.target.value)}>
-                                <option value="ASC">Rosnąco</option>
-                                <option value="DESC">Malejąco</option>
-                            </select>
-                        </div>
-
-                        {isAdmin && (
-                            <div className="filter-group">
-                                <label><FaUser style={{ marginRight: 5 }} /> Użytkownik</label>
-                                <select value={userToShowHistory} onChange={e => setUserToShowHistory(e.target.value)}>
-                                    <option value="all">Wszyscy</option>
-                                    {usersList.map(u => (
-                                        <option key={u.userID} value={u.userID}>
-                                            {u.name} {u.surname}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
-                    </div>
+    {filtersOpen && (
+        <div className="filters-body">
+            <div className="filters-grid">
+                <div className="filter-group">
+                    <label><FaCreditCard style={{ marginRight: 5 }} /> Filtruj płatności</label>
+                    <select value={filter} onChange={e => setFilter(e.target.value)}>
+                        <option value="all">Wszystkie płatności</option>
+                        <option value="paid">Opłacone</option>
+                        <option value="notPaid">Nieopłacone</option>
+                        <option value="notPaidAfterDueTime">Po terminie</option>
+                    </select>
                 </div>
+
+                <div className="filter-group">
+                    <label><FaSyncAlt style={{ marginRight: 5 }} /> Sortuj po</label>
+                    <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+                        <option value="paymentDate">Data płatności</option>
+                        <option value="dueDate">Termin</option>
+                        <option value="amount">Kwota</option>
+                    </select>
+                </div>
+
+                <div className="filter-group">
+                    <label><FaSortAmountUp style={{ marginRight: 5 }} /> Kolejność</label>
+                    <select value={order} onChange={e => setOrder(e.target.value)}>
+                        <option value="ASC">Rosnąco</option>
+                        <option value="DESC">Malejąco</option>
+                    </select>
+                </div>
+
+                {isAdmin && (
+                    <div className="filter-group">
+                        <label><FaUser style={{ marginRight: 5 }} /> Użytkownik</label>
+                        <select value={userToShowHistory} onChange={e => setUserToShowHistory(e.target.value)}>
+                            <option value="all">Wszyscy</option>
+                            {usersList.map(u => (
+                                <option key={u.userID} value={u.userID}>
+                                    {u.name} {u.surname}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
+            </div>
+        </div>
+    )}
+</div>
 
                 {/* TABELA PŁATNOŚCI */}
                 <div className="payments-table-container">
