@@ -23,6 +23,8 @@ export default function TrainingsPanel() {
     const [loading, setLoading] = useState(false);
     const [viewMode, setViewMode] = useState('cards'); // 'cards' or 'table'
 
+    const [filtersOpen, setFiltersOpen] = useState(false);
+
     const rank = localStorage.getItem("rankID");
     const userID = localStorage.getItem("userID");
     const isAdmin = Number(rank) < 3;
@@ -285,30 +287,6 @@ export default function TrainingsPanel() {
                     padding: 0 20px;
                 }
 
-                /* NAGŁÓWEK */
-                .panel-header {
-                    background: white;
-                    padding: 30px;
-                    border-radius: 16px;
-                    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-                    margin-bottom: 30px;
-                }
-
-                .panel-header h1 {
-                    font-size: 32px;
-                    font-weight: 700;
-                    color: #333;
-                    margin-bottom: 10px;
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                }
-
-                .panel-header p {
-                    color: #666;
-                    font-size: 15px;
-                }
-
                 /* FILTRY */
                 .filters-container {
                     background: white;
@@ -323,6 +301,47 @@ export default function TrainingsPanel() {
                     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
                     gap: 20px;
                 }
+
+                .filters-toggle {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 0;
+                font-size: 15px;
+                font-weight: 600;
+                color: #333;
+            }
+                        
+            .filters-toggle:hover {
+                color: #667eea;
+            }
+                        
+            .filters-toggle-left {
+                display: flex;
+                align-items: center;
+            }
+                        
+            .filters-toggle-meta {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+            }
+                        
+            .filters-summary {
+                font-size: 13px;
+                font-weight: 400;
+                color: #888;
+            }
+                        
+            .filters-body {
+                margin-top: 20px;
+                border-top: 1px solid #f0f0f0;
+                padding-top: 20px;
+            }
 
                 .filter-group {
                     display: flex;
@@ -615,57 +634,74 @@ export default function TrainingsPanel() {
                 }</style>
 
             <div className="trainings-panel-container">
-                <div className="panel-header">
-                    <h1>
-                        
-                        Panel Treningów
-                    </h1>
-                    <p>Zarządzaj treningami, zapisuj się i sprawdzaj uczestników</p>
-                </div>
+            
 
                 <div className="filters-container">
-                    <div className="filters-grid">
-                        <div className="filter-group">
-                            <label><FaCalendarAlt style={{ marginRight: '5px' }} /> Filtruj treningi</label>
-                            <select value={filter} onChange={e => setFilter(e.target.value)}>
-                                <option value="all">Wszystkie treningi</option>
-                                <option value="new">Przyszłe treningi</option>
-                                <option value="withDescription">Z opisem</option>
-                                <option value="newWithDescription">Przyszłe z opisem</option>
-                                <option value="newWithoutDescription">Bez opisu</option>
-                            </select>
-                        </div>
-
-                        <div className="filter-group">
-                            <label><FaUser style={{ marginRight: '5px' }} />  Moje treningi</label>
-                            <select value={userTrainingFilter} onChange={e => setUserTrainingFilter(e.target.value)}>
-                                <option value="all">Wszystkie treningi</option>
-                                <option value="userTrainings">Tylko moje zapisy</option>
-                            </select>
-                        </div>
-
-                        <div className="filter-group">
-                            <label><FaSyncAlt style={{ marginRight: '5px' }} /> Sortuj po</label>
-                            <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
-                                <option value="trainingDate">Data</option>
-                                <option value="trainingPlace">Miejsce</option>
-                                <option value="trainingDetails">Szczegóły</option>
-                            </select>
-                        </div>
-
-                        <div className="filter-group">
-                            <label><FaSortAmountUp style={{ marginRight: '5px' }} /> Kolejność</label>
-                            <select value={order} onChange={e => setOrder(e.target.value)}>
-                                <option value="ASC">Rosnąco</option>
-                                <option value="DESC">Malejąco</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="view-toggle">
+                    <button
+                        className="filters-toggle"
+                        onClick={() => setFiltersOpen(prev => !prev)}
+                        aria-expanded={filtersOpen}
+                    >
+                        <span className="filters-toggle-left">
+                            <FaCog style={{ marginRight: '8px' }} />
+                            Filtry i sortowanie
+                        </span>
+                        <span className="filters-toggle-meta">
+                            {!filtersOpen && (
+                                <span className="filters-summary">
+                                    {filter === 'all' ? 'Wszystkie' : filter === 'new' ? 'Przyszłe' : filter === 'withDescription' ? 'Z opisem' : filter === 'newWithDescription' ? 'Przyszłe z opisem' : 'Bez opisu'}
+                                    {userTrainingFilter === 'userTrainings' ? ' · Moje' : ''}
+                                    {' · '}{sortBy === 'trainingDate' ? 'Data' : sortBy === 'trainingPlace' ? 'Miejsce' : 'Szczegóły'} {order === 'ASC' ? '↑' : '↓'}
+                                </span>
+                            )}
+                            {filtersOpen
+                                ? <FaChevronDown style={{ marginLeft: '8px' }} />
+                                : <FaChevronRight style={{ marginLeft: '8px' }} />
+                            }
+                        </span>
+                    </button>
                         
-                        
-                    </div>
+                    {filtersOpen && (
+                        <div className="filters-body">
+                            <div className="filters-grid">
+                                <div className="filter-group">
+                                    <label><FaCalendarAlt style={{ marginRight: '5px' }} /> Filtruj treningi</label>
+                                    <select value={filter} onChange={e => setFilter(e.target.value)}>
+                                        <option value="all">Wszystkie treningi</option>
+                                        <option value="new">Przyszłe treningi</option>
+                                        <option value="withDescription">Z opisem</option>
+                                        <option value="newWithDescription">Przyszłe z opisem</option>
+                                        <option value="newWithoutDescription">Bez opisu</option>
+                                    </select>
+                                </div>
+                    
+                                <div className="filter-group">
+                                    <label><FaUser style={{ marginRight: '5px' }} /> Moje treningi</label>
+                                    <select value={userTrainingFilter} onChange={e => setUserTrainingFilter(e.target.value)}>
+                                        <option value="all">Wszystkie treningi</option>
+                                        <option value="userTrainings">Tylko moje zapisy</option>
+                                    </select>
+                                </div>
+                    
+                                <div className="filter-group">
+                                    <label><FaSyncAlt style={{ marginRight: '5px' }} /> Sortuj po</label>
+                                    <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+                                        <option value="trainingDate">Data</option>
+                                        <option value="trainingPlace">Miejsce</option>
+                                        <option value="trainingDetails">Szczegóły</option>
+                                    </select>
+                                </div>
+                    
+                                <div className="filter-group">
+                                    <label><FaSortAmountUp style={{ marginRight: '5px' }} /> Kolejność</label>
+                                    <select value={order} onChange={e => setOrder(e.target.value)}>
+                                        <option value="ASC">Rosnąco</option>
+                                        <option value="DESC">Malejąco</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {loading ? (

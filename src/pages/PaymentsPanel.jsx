@@ -311,32 +311,7 @@ export default function PaymentsPanel() {
         padding: 0 20px;
     }
 
-    /* 
-    HEADER
-     */
-    .panel-header {
-        background: white;
-        padding: 30px;
-        border-radius: 16px;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-        margin-bottom: 30px;
-    }
-
-    .panel-header h1 {
-        font-size: 32px;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .panel-header p {
-        color: #666;
-        font-size: 15px;
-    }
-
+    
     /* 
     PAYMENT STATUS CARD
      */
@@ -666,10 +641,7 @@ export default function PaymentsPanel() {
 
             <div className="payments-panel-container">
                 {/* HEADER */}
-                <div className="panel-header">
-                    <h1><span><FaCreditCard style={{ marginRight: 5 }} /></span> Panel Płatności</h1>
-                    <p>Zarządzaj płatnościami i składkami członkowskimi</p>
-                </div>
+                
 
                 {/* STATUS CARD - tylko dla użytkownika */}
                 {!isAdmin && (
