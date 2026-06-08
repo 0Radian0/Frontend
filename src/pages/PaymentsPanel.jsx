@@ -4,7 +4,7 @@ import { fetchAPI } from "../config/api";
 import { FaCheck, FaEnvelope, FaTimes, FaPlus, FaExclamationTriangle, 
     FaClock, FaTrash, FaEdit, FaCog, FaUser, FaUsers, FaCalendarAlt, 
     FaMoneyBillWave, FaChartBar, FaCreditCard, FaScroll, FaSyncAlt, 
-    FaSortAmountUp, FaSave} from 'react-icons/fa';
+    FaSortAmountUp, FaSave, FaChevronDown, FaChevronRight} from 'react-icons/fa';
 
 
 export default function PaymentsPanel() {
