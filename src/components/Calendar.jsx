@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
+import { useNavigate } from "react-router-dom";
 import { fetchAPI } from "../config/api";
 import 'react-calendar/dist/Calendar.css';
 import "../assets/styles/calendar.css";
@@ -10,6 +11,8 @@ export default function TrainingsCalendar({ onDateSelect }) {
   const [selectedTrainings, setSelectedTrainings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   const parseLocalDate = (dateStr) => {
     return new Date(dateStr.replace('Z', '').replace(/[+-]\d{2}:\d{2}$/, ''));
@@ -60,7 +63,6 @@ export default function TrainingsCalendar({ onDateSelect }) {
 
         setTrainings(data);
 
-        // Po załadowaniu danych — pokaż treningi dla dzisiaj
         const today = new Date();
         const todayTrainings = filterTrainingsForDate(today, data);
         setSelectedTrainings(todayTrainings);
@@ -136,23 +138,32 @@ export default function TrainingsCalendar({ onDateSelect }) {
                   Brak treningów tego dnia
                 </div>
               ) : (
-                selectedTrainings.map((t) => (
-                  <div key={t.trainingID} className="training-list-item">
-                    <p>
-                      <strong>Miejsce:</strong> {t.trainingPlace}
-                    </p>
-                    <p>
-                      <strong>Godzina:</strong>{" "}
-                      {parseLocalDate(t.trainingDate).toLocaleTimeString("pl-PL", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
-                    <p>
-                      <strong>Opis:</strong> {t.trainingDetails || "Standardowy trening"}
-                    </p>
-                  </div>
-                ))
+                <>
+                  {selectedTrainings.map((t) => (
+                    <div key={t.trainingID} className="training-list-item">
+                      <p>
+                        <strong>Miejsce:</strong> {t.trainingPlace}
+                      </p>
+                      <p>
+                        <strong>Godzina:</strong>{" "}
+                        {parseLocalDate(t.trainingDate).toLocaleTimeString("pl-PL", {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </p>
+                      <p>
+                        <strong>Opis:</strong> {t.trainingDetails || "Standardowy trening"}
+                      </p>
+                    </div>
+                  ))}
+
+                  <button
+                    className="btn-sign-up-training"
+                    onClick={() => navigate("/trainings")}
+                  >
+                    Zapisz się na trening
+                  </button>
+                </>
               )}
             </div>
           )}

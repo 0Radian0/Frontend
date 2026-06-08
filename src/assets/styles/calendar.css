@@ -103,7 +103,7 @@
   background: #155724;
 }
 
-/* kropka (opcjonalnie) */
+/* kropka */
 .react-calendar__tile.has-training::after {
   content: '';
   position: absolute;
@@ -163,4 +163,30 @@
   background: #fff;
   border-radius: 8px;
   border: 1px dashed #ddd;
+}
+
+/* ======= PRZYCISK ZAPISZ SIĘ ======= */
+.btn-sign-up-training {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background-color: #155724;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  letter-spacing: 0.3px;
+}
+
+.btn-sign-up-training:hover {
+  background-color: #0f3d1a;
+}
+
+.btn-sign-up-training:active {
+  transform: scale(0.98);
+  background-color: #0a2a12;
 }
