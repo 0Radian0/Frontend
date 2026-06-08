@@ -159,7 +159,7 @@ export default function TrainingsCalendar({ onDateSelect }) {
 
                   <button
                     className="btn-sign-up-training"
-                    onClick={() => navigate("/trainings")}
+                    onClick={() => navigate("trainingsPanel")}
                   >
                     Zapisz się na trening
                   </button>
