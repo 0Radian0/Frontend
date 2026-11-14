@@ -6,7 +6,7 @@ import {
     FaCalendarAlt, FaClock, FaMoneyBillWave, FaCreditCard,
     FaStickyNote, FaKey, FaLock, FaCheck, FaTrash,
     FaExclamationTriangle, FaUser, FaUsers, FaTimes,
-    FaTable, FaIdCard 
+    FaTable, FaIdCard, FaToolbox
 } from 'react-icons/fa';
 
 
@@ -174,7 +174,7 @@ export default function UsersPanel() {
         }
     };
 
-    // 6. POPRAWIONE: Zmiana statusu płatności
+    // 6. Zmiana statusu płatności
     const handleChangePaymentStatus = async (userID, paymentStatus) => {
         const newStatus = paymentStatus === 1 ? 0 : 1;
 
@@ -201,6 +201,29 @@ export default function UsersPanel() {
             alert(err.message || "Błąd serwera. Nie udało się zmienić statusu płatności");
         }
     };
+
+    // Zmiana grupy sprzętowej
+const handleChangeEquipmentStatus = async (userID, currentStatus) => {
+    const newStatus = currentStatus === 1 ? 0 : 1;
+
+    if (!window.confirm(`Czy na pewno chcesz przypisać użytkownika do grupy: ${newStatus === 1 ? "z własnym sprzętem" : "bez sprzętu"}?`)) return;
+
+    try {
+        const { data } = await fetchAPI('/auth/users/changeEquipmentStatus', {
+            method: 'POST',
+            body: JSON.stringify({
+                userID: Number(userID),
+                hasOwnEquipment: newStatus
+            })
+        });
+
+        alert(data.message || "Grupa sprzętowa użytkownika została zmieniona");
+        await fetchUsers();
+    } catch (err) {
+        console.error("Błąd przy zmianie grupy sprzętowej:", err);
+        alert(err.message || "Błąd serwera. Nie udało się zmienić grupy sprzętowej");
+    }
+};
 
     // 7. useEffect - automatyczne odświeżanie przy zmianie filtrów
     useEffect(() => {
@@ -935,6 +958,15 @@ export default function UsersPanel() {
                                             </div>
                                         </div>
                                     </div>
+                                    <div className="detail-item">
+                                        <span className="detail-icon"><FaToolbox color='grey' style={{ marginRight: 5 }} /></span>
+                                        <div>
+                                            <div className="detail-label">Sprzęt</div>
+                                            <div className="detail-value">
+                                                {user.hasOwnEquipment === 1 ? 'Z własnym sprzętem' : 'Bez sprzętu'}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div className="user-actions">
@@ -981,6 +1013,13 @@ export default function UsersPanel() {
                                             >
                                                 <FaTrash style={{ marginRight: 5 }} /> Usuń
                                             </button>
+                                            <button
+                                                className="btn btn-sm btn-secondary"
+                                                onClick={() => handleChangeEquipmentStatus(user.userID, user.hasOwnEquipment)}
+                                            >
+                                                <FaToolbox style={{ marginRight: 5 }} />
+                                                {user.hasOwnEquipment === 1 ? 'Ustaw: bez sprzętu' : 'Ustaw: z własnym sprzętem'}
+                                            </button>
                                         </>
                                     )}
                                 </div>
@@ -998,6 +1037,7 @@ export default function UsersPanel() {
                                     <th>Ostatnie log.</th>
                                     <th>Status</th>
                                     <th>Płatności</th>
+                                    <th>Sprzęt</th>
                                     <th>Do zapłaty</th>
                                     <th>Akcje</th>
                                 </tr>
@@ -1027,6 +1067,12 @@ export default function UsersPanel() {
                                                 {user.sumToPay || 0} zł
                                             </span>
                                         </td>
+                                        {/* 14.11.26 update 1.0*/}
+                                        <td>
+                                            <span className={`payment-badge ${user.hasOwnEquipment === 1 ? 'active' : 'inactive'}`}>
+                                                {user.hasOwnEquipment === 1 ? 'Własny' : 'Brak'}
+                                            </span>
+                                        </td>
                                         <td>
                                             <div className="table-actions">
                                                 <button className="btn-icon" onClick={() => setchangingRanksUserID(user.userID)} title="Uprawnienia"><FaUserTie style={{ marginRight: 5 }} /></button>
@@ -1037,6 +1083,9 @@ export default function UsersPanel() {
                                                         : <><FaLock style={{ marginRight: 5 }} /></>}
                                                 </button>
                                                 <button className="btn-icon" onClick={() => handleChangePaymentStatus(user.userID, user.paymentActive)} title="Płatności"><FaCreditCard color='black' style={{ marginRight: 5 }} /></button>
+                                                <button className="btn-icon" onClick={() => handleChangeEquipmentStatus(user.userID, user.hasOwnEquipment)} title={user.hasOwnEquipment === 1 ? 'Ustaw: bez sprzętu' : 'Ustaw: z własnym sprzętem'}>
+                                                    <FaToolbox color='black' style={{ marginRight: 5 }} /> {/* 14.11.26 update*/}
+                                                </button>
                                                 <button className="btn-icon btn-danger" onClick={() => handleDelete(user.userID)} title="Usuń"><FaTrash color='black' style={{ marginRight: 5 }} /></button>
                                             </div>
                                         </td>

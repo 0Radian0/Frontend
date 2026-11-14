@@ -4,6 +4,7 @@ export default function TrainingForm({ training }) {
     const [trainingDate, setTrainingDate] = useState("");
     const [trainingPlace, setTrainingPlace] = useState("");
     const [trainingDetails, setTrainingDetails] = useState("");
+    const [maxNoEquipment, setMaxNoEquipment] = useState("12"); //14.11.26 update 1.1
 
     useEffect(() => {
     if (training) {
@@ -18,7 +19,8 @@ export default function TrainingForm({ training }) {
         }
         setTrainingPlace(training.trainingPlace || "");
         setTrainingDetails(training.trainingDetails || "");
-    }
+        setMaxNoEquipment(training.maxNoEquipment ?? ""); //14.11.26 update 1.1
+    } 
 }, [training]);
 
     return (
@@ -54,6 +56,17 @@ export default function TrainingForm({ training }) {
                     value={trainingDetails}
                     onChange={e => setTrainingDetails(e.target.value)}
                 ></textarea>
+            </div>
+            <div>
+                <label>Limit osób bez sprzętu (puste = bez limitu): </label>
+                <input
+                    type="number"
+                    name="maxNoEquipment"
+                    min="0"
+                    step="1"
+                    value={maxNoEquipment}
+                    onChange={e => setMaxNoEquipment(e.target.value)}
+                />
             </div>
         </>
     );

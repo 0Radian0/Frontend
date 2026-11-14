@@ -154,16 +154,17 @@ export default function TrainingsPanel() {
 
     const handleAdd = async (e) => {
         e.preventDefault();
-        const { trainingDate, trainingPlace, trainingDetails } = e.target;
+        const { trainingDate, trainingPlace, trainingDetails, maxNoEquipment } = e.target;  //14.11.26 update 1.1
         if (!checkParams(trainingDate.value, trainingPlace.value)) return;
 
         try {
             const { data } = await fetchAPI('/trainings/addTraining', {
                 method: 'POST',
-                body: JSON.stringify({
+                body: JSON.stringify({          //14.11.26 update 1.1
                     date: trainingDate.value,
                     place: trainingPlace.value,
-                    details: trainingDetails.value
+                    details: trainingDetails.value,
+                    maxNoEquipment: maxNoEquipment.value === "" ? null : Number(maxNoEquipment.value)
                 })
             });
 
@@ -181,7 +182,7 @@ export default function TrainingsPanel() {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        const { trainingDate, trainingPlace, trainingDetails } = e.target;
+        const { trainingDate, trainingPlace, trainingDetails, maxNoEquipment } = e.target; //14.11.26 update 1.1
         if (!checkParams(trainingDate.value, trainingPlace.value)) return;
 
         try {
@@ -191,7 +192,8 @@ export default function TrainingsPanel() {
                     id: editTraining.trainingID,
                     date: trainingDate.value,
                     place: trainingPlace.value,
-                    details: trainingDetails.value
+                    details: trainingDetails.value,
+                    maxNoEquipment: maxNoEquipment.value === "" ? null : Number(maxNoEquipment.value)
                 })
             });
 
@@ -745,6 +747,15 @@ export default function TrainingsPanel() {
                                             </div>
                                         </div>
                                     )}
+                                    <div className="training-info-item">        {/*14.11.26 update 1.1*/}
+                                        <span><FaUser style={{ marginRight: '5px' }} /></span>
+                                        <div>
+                                            <strong>Miejsca dla osób bez sprzętu:</strong>{' '}
+                                            {el.maxNoEquipment === null || el.maxNoEquipment === undefined
+                                                ? 'bez limitu'
+                                                : `${el.noEquipmentCount} / ${el.maxNoEquipment}`}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div className="training-actions">
@@ -796,6 +807,7 @@ export default function TrainingsPanel() {
                                                 {participants.map(p => (
                                                     <li key={p.userID}>
                                                         <FaUser style={{ marginRight: '5px' }} /> {p.name} {p.surname}
+                                                    {p.hasOwnEquipment === 1 && <span style={{ color: '#999', fontSize: '12px' }}> (własny sprzęt)</span>}
                                                     </li>
                                                 ))}
                                             </ul>
